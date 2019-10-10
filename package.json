@@ -1,0 +1,19 @@
+{
+  "name": "github",
+  "version": "1.0.0",
+  "description": "github dekstop client using electronjs and react",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/amoghwagh/github-desktop-client.git"
+  },
+  "author": "Amogh,Soumya,Lomash",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/amoghwagh/github-desktop-client/issues"
+  },
+  "homepage": "https://gitlab.com/amoghwagh/github-desktop-client#readme"
+}
