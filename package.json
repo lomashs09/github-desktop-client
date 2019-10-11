@@ -5,7 +5,9 @@
   "dependencies": {
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "electron": "^6.0.12",
+    "electron-is-dev": "^1.1.0"
   },
   "main": "public/electron.js",
   "scripts": {
@@ -34,9 +36,7 @@
     "@rescripts/cli": "0.0.12",
     "@rescripts/rescript-env": "0.0.10",
     "concurrently": "^5.0.0",
-    "electron": "^6.0.12",
     "electron-builder": "^21.2.0",
-    "electron-is-dev": "^1.1.0",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-airbnb-base": "^14.0.0",
