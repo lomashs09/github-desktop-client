@@ -3,6 +3,14 @@ const electron = require('electron');
 const { app } = electron;
 const { BrowserWindow } = electron;
 const { Menu } = electron;
+const { ipcMain } = electron;
+
+// Load remote component that contains the dialog dependency
+// const remote = require('remote');
+
+// Load remote compnent that contains the dialog dependency
+const { dialog } = electron;
+const fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
 
 const path = require('path');
 const isDev = require('electron-is-dev');
@@ -137,6 +145,22 @@ function createWindow() {
   // Insert the menu
   Menu.setApplicationMenu(mainMenu);
 }
+
+// Open Dialogue Box for add local Repository
+ipcMain.on('add local repo', (event, arg) => {
+  if (arg === 'ADD_REPO') {
+    dialog.showOpenDialog(
+      {
+        title: 'Select a folder',
+        properties: ['openDirectory']
+      },
+      folderPaths => {
+        // folderPaths is an array that contains all the selected paths
+        event.reply('folderPath', folderPaths);
+      }
+    );
+  }
+});
 
 app.on('ready', createWindow);
 

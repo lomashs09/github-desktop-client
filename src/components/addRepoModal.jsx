@@ -3,7 +3,21 @@
 
 import React, { Component } from 'react';
 
+import { ipcRenderer } from 'electron';
+
 export default class AddRepoModal extends Component {
+  state = {
+    path: 'click on choose to add path...'
+  };
+
+  componentDidMount() {
+    ipcRenderer.on('folderPath', (event, arg) => {
+      this.setState({
+        path: arg
+      });
+    });
+  }
+
   render() {
     return (
       <div id="modal1" className={`modal + ${this.props.modalDisplayClass}`}>
@@ -11,9 +25,14 @@ export default class AddRepoModal extends Component {
           <h4>ADD LOCAL REPOSITORY</h4>
           <h6>Local Path</h6>
           <ul className="collection">
-            <li className="collection-item path-location">Alvin</li>
+            <li className="collection-item path-location">{this.state.path}</li>
           </ul>
-          <a className="waves-effect waves-light btn-small grey lighten-2 black-text align-right">
+          <a
+            className="waves-effect waves-light btn-small grey lighten-2 black-text align-right"
+            onClick={() => {
+              ipcRenderer.send('add local repo', 'ADD_REPO');
+            }}
+          >
             Choose...
           </a>
         </div>
@@ -26,6 +45,15 @@ export default class AddRepoModal extends Component {
             }}
           >
             CLOSE
+          </a>
+          <a
+            className="add-repo waves-effect waves-green btn-flat blue darken-2 white-text"
+            onClick={() => {
+              this.props.toggleOverlay();
+              this.props.toggleModalClass();
+            }}
+          >
+            ADD REPOSITORY
           </a>
         </div>
       </div>
