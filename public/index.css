@@ -33,3 +33,11 @@ html {
   z-index: 1003;
   display: block;
 }
+
+.modal-content h4 {
+  margin-bottom: 0.5em;
+}
+
+.modal-content .collection {
+  margin: 2em 0;
+}

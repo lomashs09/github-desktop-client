@@ -1,5 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
+import AddRepoModal from './addRepoModal.jsx';
 
 class HomePage extends Component {
   state = {
@@ -33,6 +34,11 @@ class HomePage extends Component {
         <section className="title container">
           <h3>Let's get started!</h3>
           <p>Add a repository to GitHub Desktop to start collaborating</p>
+          <AddRepoModal
+            toggleOverlay={this.toggleOverlay}
+            toggleModalClass={this.toggleModalClass}
+            modalDisplayClass={this.state.modalDisplayClass}
+          />
           <a className="git-actions-button waves-effect waves-light btn-large grey lighten-2 black-text">
             <i className="material-icons left">collections_bookmark</i>
             <span className="button-text clone-text">Clone a Repository from the Internet...</span>
@@ -47,7 +53,13 @@ class HomePage extends Component {
             </span>
           </a>
           <br />
-          <a className="git-actions-button waves-effect waves-light btn-large grey lighten-2 black-text">
+          <a
+            className="git-actions-button waves-effect waves-light btn-large grey lighten-2 black-text"
+            onClick={() => {
+              this.toggleModalClass();
+              this.toggleOverlay();
+            }}
+          >
             <i className="material-icons left">folder</i>
             <span className="button-text add-text">
               {' '}
@@ -55,21 +67,13 @@ class HomePage extends Component {
             </span>
           </a>
         </section>
-        <section className="addRepoModal">
-          <React.Fragment>
-            <addRepoModal
-              toggleOverlay={this.toggleOverlay}
-              toggleModalClass={this.toggleModalClass}
-            />
-            <div
-              className={`modal-overlay  + ${this.state.modalOverlayClass}`}
-              onClick={() => {
-                this.toggleOverlay();
-                this.toggleModalClass();
-              }}
-            />
-          </React.Fragment>
-        </section>
+        <div
+          className={`modal-overlay  + ${this.state.modalOverlayClass}`}
+          onClick={() => {
+            this.toggleOverlay();
+            this.toggleModalClass();
+          }}
+        />
       </React.Fragment>
     );
   }
