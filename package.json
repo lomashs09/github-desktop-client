@@ -1,19 +1,53 @@
 {
-  "name": "github",
-  "version": "1.0.0",
-  "description": "github dekstop client using electronjs and react",
-  "main": "main.js",
+  "name": "github-desktop-client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-scripts": "3.2.0"
+  },
+  "main": "public/electron.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://gitlab.com/amoghwagh/github-desktop-client.git"
+  "eslintConfig": {
+    "extends": "react-app"
   },
-  "author": "Amogh,Soumya,Lomash",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://gitlab.com/amoghwagh/github-desktop-client/issues"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
-  "homepage": "https://gitlab.com/amoghwagh/github-desktop-client#readme"
+  "devDependencies": {
+    "@rescripts/cli": "0.0.12",
+    "@rescripts/rescript-env": "0.0.10",
+    "concurrently": "^5.0.0",
+    "electron": "^6.0.12",
+    "electron-builder": "^21.2.0",
+    "electron-is-dev": "^1.1.0",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-erb": "0.0.2",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "prettier": "^1.18.2",
+    "wait-on": "^3.3.0"
+  }
 }
