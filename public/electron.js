@@ -2,6 +2,15 @@ const electron = require('electron');
 
 const { app } = electron;
 const { BrowserWindow } = electron;
+const { Menu } = electron;
+const { ipcMain } = electron;
+
+// Load remote component that contains the dialog dependency
+// const remote = require('remote');
+
+// Load remote compnent that contains the dialog dependency
+const { dialog } = electron;
+const fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
 
 const path = require('path');
 const isDev = require('electron-is-dev');
@@ -9,17 +18,149 @@ const isDev = require('electron-is-dev');
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 900, height: 680 });
+  mainWindow = new BrowserWindow({
+    width: 900,
+    height: 680,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  });
   mainWindow.loadURL(
     isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`
   );
-  if (isDev) {
-    // Open the DevTools.
-    // BrowserWindow.addDevToolsExtension('<location to your react chrome extension>');
-    mainWindow.webContents.openDevTools();
-  }
+
   mainWindow.on('closed', () => (mainWindow = null));
+
+  const mainMenuTemplate = [
+    {
+      label: app.name,
+      submenu: [
+        { role: 'about' },
+        { type: 'separator' },
+        { role: 'services' },
+        { type: 'separator' },
+        { role: 'hide' },
+        { role: 'hideothers' },
+        { role: 'unhide' },
+        { type: 'separator' },
+        { role: 'quit' }
+      ]
+    },
+    {
+      label: 'File',
+      submenu: [
+        {
+          label: 'New Repository...'
+        },
+        { type: 'separator' },
+        { label: 'Add Local Repository...' },
+        { type: 'separator' },
+        { label: 'Clone Repository...' }
+      ]
+    },
+    {
+      label: 'Edit',
+      submenu: [
+        { label: 'Undo' },
+        { type: 'separator' },
+        { label: 'Redo' },
+        { type: 'separator' },
+        { label: 'Cut' },
+        { type: 'separator' },
+        { label: 'Copy' },
+        { type: 'separator' },
+        { label: 'Paste' },
+        { type: 'separator' },
+        { label: 'Select All' },
+        { type: 'separator' },
+        { label: 'Find' }
+      ]
+    },
+    {
+      label: 'View',
+      submenu: [
+        { label: 'Show changes' },
+        { type: 'separator' },
+        { label: 'Show history' },
+        { type: 'separator' },
+        { label: 'Show Repository List' },
+        { type: 'separator' },
+        { label: 'Show Branches List' }
+      ]
+    },
+    {
+      label: 'Repository',
+      submenu: [
+        { label: 'Pull' },
+        { type: 'separator' },
+        { label: 'Push' },
+        { type: 'separator' },
+        { label: 'Remove' },
+        { type: 'separator' },
+        { label: 'View on GitHub' }
+      ]
+    },
+    {
+      label: 'Branch',
+      submenu: [
+        { label: 'New Branch...' },
+        { type: 'separator' },
+        { label: 'Rename...' },
+        { type: 'separator' },
+        { label: 'Delete...' },
+        { type: 'separator' },
+        { label: 'Discard All Changes...' },
+        { type: 'separator' },
+        { label: 'Compare to branch' },
+        { type: 'separator' },
+        { label: 'Merge into Current Branch...' },
+        { type: 'separator' },
+        { label: 'Rebase Current Branch...' }
+      ]
+    }
+  ];
+
+  // If it is a developer then add Developer tools
+  if (isDev) {
+    mainMenuTemplate.push({
+      label: 'Developer Tools',
+      submenu: [
+        {
+          label: 'Toggle DevTools',
+          accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
+          click(item, focusedWindow) {
+            focusedWindow.toggleDevTools();
+          }
+        },
+        {
+          role: 'Reload'
+        }
+      ]
+    });
+  }
+
+  // Build Menu from template
+  const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+
+  // Insert the menu
+  Menu.setApplicationMenu(mainMenu);
 }
+
+// Open Dialogue Box for add local Repository
+ipcMain.on('add local repo', (event, arg) => {
+  if (arg === 'ADD_REPO') {
+    dialog.showOpenDialog(
+      {
+        title: 'Select a folder',
+        properties: ['openDirectory']
+      },
+      folderPaths => {
+        // folderPaths is an array that contains all the selected paths
+        event.reply('folderPath', folderPaths);
+      }
+    );
+  }
+});
 
 app.on('ready', createWindow);
 

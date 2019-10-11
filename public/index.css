@@ -1,0 +1,43 @@
+html {
+  background: url('./assets//GitHub_Clone_BackgroundImg.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container {
+  width: 85%;
+  margin: auto;
+}
+
+.git-actions-button {
+  margin: 1.5em;
+  margin-left: 0;
+  width: 70%;
+}
+
+.git-actions-button .button-text {
+  text-align: left;
+  text-transform: none;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
+    sans-serif;
+  font-weight: 500;
+}
+
+.modal-overlay-on {
+  z-index: 1002;
+  display: block;
+  opacity: 0.5;
+}
+
+.modal-show {
+  z-index: 1003;
+  display: block;
+}
+
+.modal-content h4 {
+  margin-bottom: 0.5em;
+}
+
+.modal-content .collection {
+  margin: 2em 0;
+}
