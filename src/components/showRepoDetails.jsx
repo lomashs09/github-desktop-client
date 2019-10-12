@@ -29,6 +29,7 @@ async componentDidMount(){
       <React.Fragment>
         <div id='repo-details' className={`${this.props.repoDetailsDisplayClass}`}>
             <h3>Repository Details</h3>
+            <h4>Commit Messages:</h4>
             {/* <h6>Show changed files, commit history, commit messages, etc...</h6> */}
             {/* <p>{this.state.commitMessage[0]}</p> */}
             {/* {console.log(this.state.commitMessage[0].all)} */}
@@ -36,7 +37,7 @@ async componentDidMount(){
               {/* {console.log(this.state.commitMessage)} */}
             {/* {this.state.commitMessage.map((message) => <p>{message}</p>)} */}
 
-            
+
             {this.state.commitMessage.map((messages) => <p>{messages[0]}</p>)}
             {this.state.commitMessage.map((messages) => <p>{messages[1]}</p>)}
             {this.state.commitMessage.map((messages) => <p>{messages[2]}</p>)}
