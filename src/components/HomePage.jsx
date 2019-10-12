@@ -6,7 +6,8 @@ class HomePage extends Component {
   state = {
     modalOverlayClass: '',
     modalDisplayClass: '',
-    repoDetailsDisplayClass: 'repo-details-hide'
+    repoDetailsDisplayClass: 'repo-details-hide',
+    addNewRepoFilePath: ''
   };
 
   toggleOverlay = () => {
@@ -29,10 +30,11 @@ class HomePage extends Component {
         });
   };
 
-  setRepoDetailsDisplayClass = () => {
+  setRepoDetailsDisplayClass = (filepath) => {
     this.state.repoDetailsDisplayClass === 'repo-details-hide'
       ? this.setState({
-        repoDetailsDisplayClass: 'repo-details-show'
+        repoDetailsDisplayClass: 'repo-details-show',
+        addNewRepoFilePath: filepath
         })
       : this.setState({
         repoDetailsDisplayClass: 'repo-details-hide'
@@ -90,9 +92,11 @@ class HomePage extends Component {
       </React.Fragment>
     
     );} else {
+      // console.log(this.state);
       return (
         <ShowRepoDetails
         repoDetailsDisplayClass={this.state.repoDetailsDisplayClass}
+        addNewRepoFilePath={this.state.addNewRepoFilePath}
         />
       );
     }
