@@ -5,12 +5,15 @@ class showRepoDetails extends Component {
   state = {
     commitMessage: ['Loading data']
   };
-async componentDidMount(){
+
+componentDidMount(){
   // const messages =git.log().log((err, log) => log).log('0.11.0', '0.12.0', (err, log) => console.log(log));
   // this.setState({commitMessage: [messages]})
-
-
-
+  console.log('Clonning a Repo')
+  console.log(this.props.repoToClone)
+  git.silent(true)
+  .clone(this.props.repoToCloneUrl)
+  .then(() => console.log('finished'))
   git.log((err, log) => this.setState({commitMessage:[log.all.map((commit) => commit.message)]}))
 
   // git.log((err, log) => this.setState({commitMessage:log.all.map((commit) => commit.message)}))
@@ -25,6 +28,7 @@ async componentDidMount(){
     .log('0.11.0', '0.12.0', (err, log) => console.log(log));
  */
   render() {
+    console.log(this.props.repoToCloneUrl)
     return (
       <React.Fragment>
         <div id='repo-details' className={`${this.props.repoDetailsDisplayClass}`}>
@@ -37,11 +41,11 @@ async componentDidMount(){
               {/* {console.log(this.state.commitMessage)} */}
             {/* {this.state.commitMessage.map((message) => <p>{message}</p>)} */}
 
-
+            {console.log([this.state.commitMessage[0]])}
             {this.state.commitMessage.map((messages) => <p>{messages[0]}</p>)}
             {this.state.commitMessage.map((messages) => <p>{messages[1]}</p>)}
             {this.state.commitMessage.map((messages) => <p>{messages[2]}</p>)}
-
+            {this.state.commitMessage.map((messages) => <p>{messages[2]}</p>)}
             </div>
             
         </div>

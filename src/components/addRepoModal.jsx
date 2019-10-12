@@ -6,9 +6,12 @@ import { ipcRenderer, shell } from 'electron';
 
 export default class AddRepoModal extends Component {
   state = {
-    path: 'click on choose to add path...'
+    path: 'click on choose to add path...',
   };
-
+onChange = (e) =>{
+  this.props.repoToClonePath(e.target.value)
+  // this.props.repoToCloneUrl.setState({repoToCloneUrl:e.target.value})
+}
   componentDidMount() {
     ipcRenderer.on('folderPath', (event, arg) => {
       this.setState({
@@ -19,6 +22,7 @@ export default class AddRepoModal extends Component {
   }
 
   render() {
+    if(this.props.selectedModal == 'new-repo'){
     return (
       <div id="modal1" className={`modal + ${this.props.modalDisplayClass}`}>
         <div className="modal-content white">
@@ -63,4 +67,43 @@ export default class AddRepoModal extends Component {
       </div>
     );
   }
+  else if (this.props.selectedModal == 'clone-repo'){
+    return (
+      <div id="modal1" className={`modal + ${this.props.modalDisplayClass}`}>
+        <div className="modal-content white">
+          <h4>CLONE REPOSITORY</h4>
+          <h6>Add Url</h6>
+          <ul className="collection">
+          <form >
+          <input onChange = {this.onChange} placeholder="Enter the Url to Clone..." id="repo-url" type="text" class="validate" />
+        </form>
+          </ul>
+        </div>
+        <div className="modal-footer">
+          <a
+            className="modal-close waves-effect waves-green btn-flat"
+            onClick={() => {
+              this.props.toggleOverlay();
+              this.props.toggleModalClass();
+            }}
+          >
+            CLOSE
+          </a>
+          <a
+            className="add-repo waves-effect waves-green btn-flat blue darken-2 white-text"
+            onClick={() => {
+              this.props.toggleOverlay();
+              this.props.toggleModalClass();
+              this.props.setRepoDetailsDisplayClass();
+              // shell.openItem(this.state.path[0]);
+               // Opens the chosen folder/file in a new window
+            }}
+          >
+            CLONE REPOSITORY
+          </a>
+        </div>
+      </div>
+    );
+  }
+}
 }

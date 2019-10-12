@@ -1,0 +1,5 @@
+  console.log('Clonning a Repo')
+  console.log(this.props.repoToClone)
+  git.silent(true)
+  .clone(this.props.repoToCloneUrl)
+  .then(() => console.log('finished'))
