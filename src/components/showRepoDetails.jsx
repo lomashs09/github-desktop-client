@@ -2,38 +2,46 @@
 import React, { Component } from 'react';
 class showRepoDetails extends Component {
   state = {
-    commitMessage: ['Loading data']
+    commitHistory: ['Loading data']
   };
  async componentDidMount() {
   const git = require('simple-git')(this.props.addNewRepoFilePath)
-  console.log('Clonning a Repo')
-  console.log(this.props.repoToClone)
-  git.silent(true)
-  .clone(this.props.repoToCloneUrl)
-  .then(() => console.log('finished'))
+//   console.log('Clonning a Repo')
+//   console.log(this.props.repoToClone)
+//   git.silent(true)
+//   .clone(this.props.repoToCloneUrl)
+//   .then(() => console.log('finished'))
   
 //   git.log( async (err, log) => commitHistory = await log)
-// git.log((err, log) => console.log(log));
-  git.log((err, log) => this.setState({commitMessage:[log.all.map((commit) => commit.message)]}))
+//   git.log((err, log) => log.all.map((commit) => console.log(commit)));
+  git.log((err, log) => this.setState({commitHistory:[...log.all.map((commit) => commit)]}))
 }
   render() {
-    if(this.state.commitMessage[0] === 'Loading data') {
+    if(this.state.commitHistory[0] === 'Loading data') {
         return (
             <React.Fragment>
-                <p>{this.state.commitMessage}</p>
+                <p>{this.state.commitHistory[0]}</p>
             </React.Fragment>
         );
 
     } else {
+        console.log(this.state);
         return (
             <React.Fragment>
               <div id='repo-details' className={`${this.props.repoDetailsDisplayClass}`}>
-                  <h4>Commit Messages:</h4>
+                  <h4>Commit Details:</h4>
                   <div className = 'commit-messages'>
-                  {this.state.commitMessage[0].map((message) => <p>{message}</p>)}
-      
-                </div>
-                  
+                    {this.state.commitHistory.map((commit) => 
+                         <div className='commit-message'>
+                            <p>SHA: {commit.hash}</p>
+                            <p>Message: {commit.message}</p>
+                            <p>Author: {commit.author_name}</p>
+                            <p>Author Email: {commit.author_email}</p>
+                            <p>Timestamp: {commit.date}</p>
+                            <p>-----------------------------------------------------------------------------</p>
+                         </div>
+                    )}
+                    </div> 
               </div>
             </React.Fragment>
           );
