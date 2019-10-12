@@ -2,8 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
 import React, { Component } from 'react';
-
-import { ipcRenderer } from 'electron';
+import { ipcRenderer, shell } from 'electron';
 
 export default class AddRepoModal extends Component {
   state = {
@@ -51,6 +50,8 @@ export default class AddRepoModal extends Component {
             onClick={() => {
               this.props.toggleOverlay();
               this.props.toggleModalClass();
+              this.props.setRepoDetailsDisplayClass();
+              // shell.openItem(this.state.path[0]); // Opens the chosen folder/file in a new window
             }}
           >
             ADD REPOSITORY
