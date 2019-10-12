@@ -5,12 +5,13 @@ class showRepoDetails extends Component {
     commitMessage: ['Loading data']
   };
  async componentDidMount() {
+  const git = require('simple-git')(this.props.addNewRepoFilePath)
   console.log('Clonning a Repo')
   console.log(this.props.repoToClone)
   git.silent(true)
   .clone(this.props.repoToCloneUrl)
   .then(() => console.log('finished'))
-  const git = require('simple-git')(this.props.addNewRepoFilePath)
+  
 //   git.log( async (err, log) => commitHistory = await log)
 // git.log((err, log) => console.log(log));
   git.log((err, log) => this.setState({commitMessage:[log.all.map((commit) => commit.message)]}))

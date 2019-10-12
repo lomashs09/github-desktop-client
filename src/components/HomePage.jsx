@@ -8,7 +8,7 @@ class HomePage extends Component {
     modalDisplayClass: '',
     repoDetailsDisplayClass: 'repo-details-hide',
     selectedModal:'new-repo',
-    repoToCloneUrl:''
+    repoToCloneUrl:'',
     addNewRepoFilePath: ''
   };
 
