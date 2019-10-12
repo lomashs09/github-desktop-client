@@ -18,7 +18,7 @@ onChange = (e) =>{
         path: arg
       });
     });
-    console.log(this.state.path)
+    // console.log(this.state.path)
   }
 
   render() {
@@ -55,8 +55,9 @@ onChange = (e) =>{
             onClick={() => {
               this.props.toggleOverlay();
               this.props.toggleModalClass();
-              this.props.setRepoDetailsDisplayClass();
-              console.log(this.state.path[0]);
+              this.props.setRepoDetailsDisplayClass(this.state.path[0]);
+              // console.log(this.state.path[0]);
+
               // shell.openItem(this.state.path[0]);
                // Opens the chosen folder/file in a new window
             }}

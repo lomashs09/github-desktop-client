@@ -9,6 +9,7 @@ class HomePage extends Component {
     repoDetailsDisplayClass: 'repo-details-hide',
     selectedModal:'new-repo',
     repoToCloneUrl:''
+    addNewRepoFilePath: ''
   };
 
   toggleOverlay = () => {
@@ -32,10 +33,11 @@ class HomePage extends Component {
         });
   };
 
-  setRepoDetailsDisplayClass = () => {
+  setRepoDetailsDisplayClass = (filepath) => {
     this.state.repoDetailsDisplayClass === 'repo-details-hide'
       ? this.setState({
-        repoDetailsDisplayClass: 'repo-details-show'
+        repoDetailsDisplayClass: 'repo-details-show',
+        addNewRepoFilePath: filepath
         })
       : this.setState({
         repoDetailsDisplayClass: 'repo-details-hide'
@@ -112,10 +114,12 @@ class HomePage extends Component {
       </React.Fragment>
     
     );} else {
+      // console.log(this.state);
       return (
         <ShowRepoDetails
         repoDetailsDisplayClass={this.state.repoDetailsDisplayClass}
         repoToCloneUrl = {this.state.repoToCloneUrl}
+        addNewRepoFilePath={this.state.addNewRepoFilePath}
         />
       );
     }
