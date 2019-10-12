@@ -49,3 +49,9 @@ html {
 .repo-details-hide {
   display: none;
 }
+.commit-messages{
+  display: flex;
+  flex-direction: column;
+  padding:2rem;
+  
+}

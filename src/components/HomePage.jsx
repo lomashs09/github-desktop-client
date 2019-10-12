@@ -1,7 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import AddRepoModal from './addRepoModal.jsx';
-
+import ShowRepoDetails from './showRepoDetails';
 class HomePage extends Component {
   state = {
     modalOverlayClass: '',

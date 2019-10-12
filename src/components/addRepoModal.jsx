@@ -52,7 +52,9 @@ export default class AddRepoModal extends Component {
               this.props.toggleOverlay();
               this.props.toggleModalClass();
               this.props.setRepoDetailsDisplayClass();
-              // shell.openItem(this.state.path[0]); // Opens the chosen folder/file in a new window
+              console.log(this.state.path[0]);
+              // shell.openItem(this.state.path[0]);
+               // Opens the chosen folder/file in a new window
             }}
           >
             ADD REPOSITORY
