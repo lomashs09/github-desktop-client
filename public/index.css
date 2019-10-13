@@ -56,3 +56,8 @@ html {
   font-size: 1rem;
   font-weight: bold;
 }
+
+#repo-details {
+  display:flex;
+  flex-direction: row;
+}
