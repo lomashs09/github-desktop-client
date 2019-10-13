@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^5.5.0",
+    "diff2html": "^2.12.1",
     "electron": "^6.0.12",
     "electron-is-dev": "^1.1.0",
     "react": "^16.10.2",
