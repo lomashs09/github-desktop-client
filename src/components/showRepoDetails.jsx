@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 class showRepoDetails extends Component {
   state = {
-    commitHistory: ['Loading data']
+    commitHistory: ['Loading data'],
   };
  async componentDidMount() {
   const git = require('simple-git')(this.props.addNewRepoFilePath)
@@ -12,9 +12,21 @@ class showRepoDetails extends Component {
 //   .clone(this.props.repoToCloneUrl)
 //   .then(() => console.log('finished'))
   
-//   git.log( async (err, log) => commitHistory = await log)
-//   git.log((err, log) => log.all.map((commit) => console.log(commit)));
-  git.log((err, log) => this.setState({commitHistory:[...log.all.map((commit) => commit)]}))
+    // git.diffSummary((err, diffSummary) => console.log(diffSummary));
+    // git.diff((err, diff) => console.log(diff));
+
+    git.branch((err,branches) => console.log(branches));
+
+    git.status((err, status) => console.log(status));
+
+    // git.log((err, log) => log.all.map((commit) => console.log(commit.hash)))
+
+
+  git.log((err, log) => this.setState({
+      commitHistory:[...log.all.map((commit) => commit)],
+    }))
+    // git.log((err, log) => log.all.map((commit) => git.raw(['show', commit.hash], (err, result) => this.setState({changedFiles: this.state.changedFiles.push(result)}))))
+    // // git.raw(['show',])
 }
   render() {
     if(this.state.commitHistory[0] === 'Loading data') {
@@ -25,7 +37,20 @@ class showRepoDetails extends Component {
         );
 
     } else {
-        console.log(this.state);
+        const git = require('simple-git')(this.props.addNewRepoFilePath)
+        // let hashArr = this.state.commitHistory.map((commit) => commit.hash);
+        // git.show([...hashArr])
+        // console.log(hashArr);
+            // require('simple-git')().raw(['diff'], (err, result) => {
+    //     console.log(err)
+    //     console.log(result)
+    // })
+
+        this.state.commitHistory.map((commit) => {
+            git.raw(['show', commit.hash], (err,result) => {
+                console.log(result)
+            })
+        })
         return (
             <React.Fragment>
               <div id='repo-details' className={`${this.props.repoDetailsDisplayClass}`}>
@@ -41,9 +66,9 @@ class showRepoDetails extends Component {
                             <p>-----------------------------------------------------------------------------</p>
                          </div>
                     )}
-                    </div> 
-              </div>
-            </React.Fragment>
+                    </div>
+                </div>
+          </React.Fragment>
           );
     }
   }
