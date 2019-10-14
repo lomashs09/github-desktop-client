@@ -105,6 +105,46 @@ onChange = (e) =>{
         </div>
       </div>
     );
+  }else{
+    return (
+      <div id="modal1" className={`modal + ${this.props.modalDisplayClass}`}>
+        <div className="modal-content white">
+          <h4>CREATE A NEW REPOSITORY</h4>
+          
+          <ul className="collection">
+          <form >
+          <label for ='name'>Name</label>
+          <input placeholder="Enter the repo Name..." id="repo-url" type="text" class="validate" />
+          <label>Description</label>
+          <input placeholder="Enter the repo Description..." id="repo-url" type="text" class="validate" />
+        </form>
+          </ul>
+        </div>
+        <div className="modal-footer">
+          <a
+            className="modal-close waves-effect waves-green btn-flat"
+            onClick={() => {
+              this.props.toggleOverlay();
+              this.props.toggleModalClass();
+            }}
+          >
+            CLOSE
+          </a>
+          <a
+            className="add-repo waves-effect waves-green btn-flat blue darken-2 white-text"
+            onClick={() => {
+              this.props.toggleOverlay();
+              this.props.toggleModalClass();
+              this.props.setRepoDetailsDisplayClass();
+              // shell.openItem(this.state.path[0]);
+               // Opens the chosen folder/file in a new window
+            }}
+          >
+            CREATE
+          </a>
+        </div>
+      </div>
+    )
   }
 }
 }

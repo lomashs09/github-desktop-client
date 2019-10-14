@@ -106,7 +106,6 @@ class HomePage extends Component {
     <div
       className={`modal-overlay  + ${this.state.modalOverlayClass}`}
       onClick={() => {
-        this.setState({selectedModal:'exist-repo'})
         this.toggleOverlay();
         this.toggleModalClass();
       }}
