@@ -106,7 +106,6 @@ class HomePage extends Component {
     <div
       className={`modal-overlay  + ${this.state.modalOverlayClass}`}
       onClick={() => {
-        this.setState({selectedModal:'exist-repo'})
         this.toggleOverlay();
         this.toggleModalClass();
       }}
@@ -117,6 +116,7 @@ class HomePage extends Component {
       // console.log(this.state);
       return (
         <ShowRepoDetails
+        selectedModal = {this.state.selectedModal}
         repoDetailsDisplayClass={this.state.repoDetailsDisplayClass}
         repoToCloneUrl = {this.state.repoToCloneUrl}
         addNewRepoFilePath={this.state.addNewRepoFilePath}
