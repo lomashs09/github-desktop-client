@@ -1,6 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import AddRepoModal from './addRepoModal.jsx';
+import ShowDetails from './ShowDetails';
 import ShowRepoDetails from './showRepoDetails';
 class HomePage extends Component {
   state = {
@@ -119,7 +120,7 @@ class HomePage extends Component {
       );
     } else {
       return (
-        <ShowRepoDetails
+        <ShowDetails
           selectedModal={this.state.selectedModal}
           repoDetailsDisplayClass={this.state.repoDetailsDisplayClass}
           repoToCloneUrl={this.state.repoToCloneUrl}

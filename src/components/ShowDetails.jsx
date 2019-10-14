@@ -1,10 +1,9 @@
-/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
+import Header from './Header';
 import ShowCommitDetails from './showCommitDetails';
 import ShowFileChanges from './showFileChanges';
-var filePath;
 
-class showRepoDetails extends Component {
+export default class Show extends Component {
   state = {
     commitHistory: ['Loading data'],
     changedFiles: ['Loading data']
@@ -48,27 +47,20 @@ class showRepoDetails extends Component {
   }
 
   render() {
-    if (this.state.commitHistory[0] === 'Loading data') {
-      return (
-        <React.Fragment>
-          <p>{this.state.commitHistory[0]}</p>
-        </React.Fragment>
-      );
-    } else {
-      return (
-        <React.Fragment>
-          <div id="repo-details" className={`${this.props.repoDetailsDisplayClass}`}>
-            <ShowCommitDetails
-              className="commit-messages"
-              commitHistory={this.state}
-              getSelectedCommit={this.getSelectedCommit}
-            />
-            <ShowFileChanges className="commit-messages" changedFiles={this.state.changedFiles} />
+    return (
+      <>
+        <Header />
+        <section className="show-details">
+          <div className="commits-history">Commit History</div>
+          <div className="commit-details">
+            <div className="commit-message-overview">Commit Message Overview</div>
+            <div className="display-changes">
+              <div className="file-changes">File Changes</div>
+              <div className="show-changes">Show Changes</div>
+            </div>
           </div>
-        </React.Fragment>
-      );
-    }
+        </section>
+      </>
+    );
   }
 }
-
-export default showRepoDetails;
