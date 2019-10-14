@@ -64,50 +64,6 @@ class showRepoDetails extends Component {
           </React.Fragment>
           );
     }
-
-
-
-
-
-
-
-
-
-    // } else {
-    //     const git = require('simple-git')(this.props.addNewRepoFilePath)
-    //     // let hashArr = this.state.commitHistory.map((commit) => commit.hash);
-    //     // git.show([...hashArr])
-    //     // console.log(hashArr);
-    //         // require('simple-git')().raw(['diff'], (err, result) => {
-    // //     console.log(err)
-    // //     console.log(result)
-    // // })
-
-    //     this.state.commitHistory.map((commit) => {
-    //         git.raw(['show', commit.hash], (err,result) => {
-    //             console.log(result)
-    //         })
-    //     })
-    //     return (
-    //         <React.Fragment>
-    //           <div id='repo-details' className={`${this.props.repoDetailsDisplayClass}`}>
-    //               <h4>Commit Details:</h4>
-    //               <div className = 'commit-messages'>
-    //                 {this.state.commitHistory.map((commit) => 
-    //                      <div className='commit-message'>
-    //                         <p>SHA: {commit.hash}</p>
-    //                         <p>Message: {commit.message}</p>
-    //                         <p>Author: {commit.author_name}</p>
-    //                         <p>Author Email: {commit.author_email}</p>
-    //                         <p>Timestamp: {commit.date}</p>
-    //                         <p>-----------------------------------------------------------------------------</p>
-    //                      </div>
-    //                 )}
-    //                 </div>
-    //             </div>
-    //       </React.Fragment>
-    //       );
-    // }
   }
 }
 
