@@ -80,6 +80,40 @@ html {
   flex-direction: row;
 }
 
+.show-details {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+.commits-history {
+  background-color: red;
+  width: 22.5%;
+  height: 80rem;
+}
+
+.commit-details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.commit-message-overview {
+  background-color: green;
+  width: 100%;
+  height: 5em;
+}
+
+.display-changes {
+  display: flex;
+  height: 100%;
+}
+
+.file-changes {
+  background-color: aqua;
+  height: 100%;
+  width: 20%;
+}
+
 .diff-to-html {
   display: flex;
   flex-direction: row;

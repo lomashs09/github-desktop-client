@@ -4,8 +4,8 @@ export default class Header extends Component {
   render() {
     return (
       <nav>
-        <div className="nav-wrapper grey darken-4">
-          <a href="#" className="brand-logo right">
+        <div className="nav-wrapper black">
+          <a href="./" className="brand-logo right">
             <img className="logo" src="/assets/logo.png" />
             <span className="logo-text">GitHub</span>
           </a>
@@ -14,7 +14,7 @@ export default class Header extends Component {
               <a>Current Repository</a>
             </li>
             <li>
-              <a>CurrenBranch</a>
+              <a>Current Branch</a>
             </li>
             <li>
               <a>Publish Repository</a>
