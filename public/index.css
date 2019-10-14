@@ -60,4 +60,14 @@ html {
 #repo-details {
   display:flex;
   flex-direction: row;
-} 
+}
+
+.diff-to-html {
+  display: flex;
+  flex-direction: row;
+}
+
+.d2h-files-diff {
+  display: flex;
+  flex-direction: row;
+}
