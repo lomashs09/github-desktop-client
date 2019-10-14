@@ -29,10 +29,11 @@ export default class AddRepoModal extends Component {
 
     ipcRenderer.on('newFile', (event, arg) => {
       const git = gitP(arg);
-      git.init();
-      if (this.state.addReadmeCheckboxState)
-        ipcRenderer.send('Repo', { name: 'CREATE_README', path: arg });
-      //   this.props.setRepoDetailsDisplayClass(arg);
+      git.init().then(() => {
+        if (this.state.addReadmeCheckboxState)
+          ipcRenderer.send('Repo', { name: 'CREATE_README', path: arg });
+        this.props.setRepoDetailsDisplayClass(arg);
+      });
     });
   }
 
