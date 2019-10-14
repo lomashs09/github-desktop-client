@@ -146,8 +146,8 @@ function createWindow() {
   Menu.setApplicationMenu(mainMenu);
 }
 
-// Open Dialogue Box for add local Repository
-ipcMain.on('add local repo', (event, arg) => {
+// Open Dialogue Box for add and create local Repository
+ipcMain.on('Repo', async (event, arg) => {
   if (arg === 'ADD_REPO') {
     dialog.showOpenDialog(
       {
@@ -159,6 +159,24 @@ ipcMain.on('add local repo', (event, arg) => {
         event.reply('folderPath', folderPaths);
       }
     );
+  } else if (arg.name === 'CREATE_README') {
+    const path = `${arg.path}/README.md`;
+    fs.writeFileSync(path, '', err => {
+      if (err) {
+        alert('ERROR! Failed to Create README.md');
+      }
+    });
+  } else if (arg.type === 'CREATE_REPO') {
+    try {
+      const finalPath = `${arg.path}/${arg.repoName}`;
+      fs.mkdirSync(finalPath);
+      event.reply('newFile', finalPath);
+    } catch (err) {
+      dialog.showMessageBox({
+        type: 'info',
+        message: 'Error! Failed to create folder'
+      });
+    }
   }
 });
 

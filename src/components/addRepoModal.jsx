@@ -2,15 +2,23 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
 import React, { Component } from 'react';
-import { ipcRenderer, shell } from 'electron';
+import { ipcRenderer } from 'electron';
+import gitP from 'simple-git/promise';
 
 export default class AddRepoModal extends Component {
   state = {
-    path: 'click on choose to add path...'
+    path: 'Click on choose to add path...',
+    newRepoName: '',
+    addReadmeCheckboxState: false
   };
   onChange = e => {
     this.props.repoToClonePath(e.target.value);
-    // this.props.repoToCloneUrl.setState({repoToCloneUrl:e.target.value})
+  };
+
+  setNewRepoName = e => {
+    this.setState({
+      newRepoName: e.target.value
+    });
   };
   componentDidMount() {
     ipcRenderer.on('folderPath', (event, arg) => {
@@ -18,9 +26,23 @@ export default class AddRepoModal extends Component {
         path: arg
       });
     });
-    // console.log(this.state.path)
+
+    ipcRenderer.on('newFile', (event, arg) => {
+      const git = gitP(arg);
+      git.init();
+      if (this.state.addReadmeCheckboxState)
+        ipcRenderer.send('Repo', { name: 'CREATE_README', path: arg });
+      //   this.props.setRepoDetailsDisplayClass(arg);
+    });
   }
 
+  createGitFolder = () => {
+    ipcRenderer.send('Repo', {
+      type: 'CREATE_REPO',
+      path: this.state.path[0],
+      repoName: this.state.newRepoName
+    });
+  };
   render() {
     if (this.props.selectedModal == 'new-repo') {
       return (
@@ -34,7 +56,7 @@ export default class AddRepoModal extends Component {
             <a
               className="waves-effect waves-light btn-small grey lighten-2 black-text align-right"
               onClick={() => {
-                ipcRenderer.send('add local repo', 'ADD_REPO');
+                ipcRenderer.send('Repo', 'ADD_REPO');
               }}
             >
               Choose...
@@ -56,10 +78,6 @@ export default class AddRepoModal extends Component {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
                 this.props.setRepoDetailsDisplayClass(this.state.path[0]);
-                // console.log(this.state.path[0]);
-
-                // shell.openItem(this.state.path[0]);
-                // Opens the chosen folder/file in a new window
               }}
             >
               ADD REPOSITORY
@@ -101,8 +119,6 @@ export default class AddRepoModal extends Component {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
                 this.props.setRepoDetailsDisplayClass();
-                // shell.openItem(this.state.path[0]);
-                // Opens the chosen folder/file in a new window
               }}
             >
               CLONE REPOSITORY
@@ -116,25 +132,55 @@ export default class AddRepoModal extends Component {
           <div className="modal-content white">
             <h4>CREATE A NEW REPOSITORY</h4>
 
-            <ul className="collection">
-              <form>
-                <label for="name">Name</label>
-                <input
-                  placeholder="Enter the repo Name..."
-                  id="repo-url"
-                  type="text"
-                  class="validate"
-                />
-                <label>Description</label>
-                <input
-                  placeholder="Enter the repo Description..."
-                  id="repo-url"
-                  type="text"
-                  class="validate"
-                />
-              </form>
-            </ul>
+            <form>
+              <label for="name">Name</label>
+              <input
+                placeholder="Enter the repo Name..."
+                id="repo-url"
+                type="text"
+                class="validate"
+                onChange={this.setNewRepoName}
+                required
+              />
+              <br />
+              <label>Description</label>
+              <input
+                placeholder="Enter the repo Description..."
+                id="repo-url"
+                type="text"
+                class="validate"
+                required
+              />
+
+              <span>Local Path:</span>
+              <ul className="collection">
+                <li className="collection-item path-location">{this.state.path}</li>
+              </ul>
+              <a
+                className="waves-effect waves-light btn-small grey lighten-2 black-text align-right create-repo-choose"
+                onClick={() => {
+                  ipcRenderer.send('Repo', 'ADD_REPO');
+                }}
+              >
+                Choose...
+              </a>
+              <p>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={this.state.addReadmeCheckboxState}
+                    onClick={() => {
+                      this.setState({
+                        addReadmeCheckboxState: !this.state.addReadmeCheckboxState
+                      });
+                    }}
+                  />
+                  <span class="black-text">Initialize this repository with a README</span>
+                </label>
+              </p>
+            </form>
           </div>
+
           <div className="modal-footer">
             <a
               className="modal-close waves-effect waves-green btn-flat"
@@ -147,12 +193,10 @@ export default class AddRepoModal extends Component {
             </a>
             <a
               className="add-repo waves-effect waves-green btn-flat blue darken-2 white-text"
-              onClick={() => {
+              onClick={async () => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
-                this.props.setRepoDetailsDisplayClass();
-                // shell.openItem(this.state.path[0]);
-                // Opens the chosen folder/file in a new window
+                this.createGitFolder();
               }}
             >
               CREATE

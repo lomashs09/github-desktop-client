@@ -13,7 +13,6 @@ class HomePage extends Component {
   };
 
   toggleOverlay = () => {
-    console.log(this.state.selectedModal);
     this.state.modalOverlayClass === ''
       ? this.setState({
           modalOverlayClass: `modal-overlay-on`
@@ -62,6 +61,8 @@ class HomePage extends Component {
               modalDisplayClass={this.state.modalDisplayClass}
               setRepoDetailsDisplayClass={this.setRepoDetailsDisplayClass}
               repoToClonePath={this.repoToClonePath}
+              createNewRepoFilePath={this.createNewRepoFilePath}
+              setNewRepoDetails={this.setNewRepoDetails}
             />
             <a
               className="git-actions-button waves-effect waves-light btn-large grey lighten-2 black-text"
