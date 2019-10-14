@@ -23,7 +23,7 @@ class showRepoDetails extends Component {
  async componentDidMount() {
    if(this.props.selectedModal ==='clone-repo'){
     const git = require('simple-git')
-    console.log('Clonning a Repo')
+    console.log('Cloning a Repo')
     await git().silent(true)
     .clone(this.props.repoToCloneUrl)
     .then(() => console.log('finished'))
