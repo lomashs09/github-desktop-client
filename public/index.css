@@ -68,16 +68,6 @@ html {
 #repo-details {
   display: flex;
   flex-direction: row;
-<<<<<<< HEAD
-}
-
-.diff-to-html {
-  display: flex;
-  flex-direction: row;
-}
-||||||| merged common ancestors
-} 
-=======
 }
 
 .diff-to-html {
@@ -89,4 +79,3 @@ html {
   display: flex;
   flex-direction: row;
 }
->>>>>>> 165badaf80ecf9d4e280706d530d06a72ad81433
