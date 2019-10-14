@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import ShowCommitDetails from './showCommitDetails';
 import ShowFileChanges from './showFileChanges';
 var filePath;
-// if(this.props.selecteModal =)
 
 class showRepoDetails extends Component {
   state = {
@@ -41,24 +40,11 @@ class showRepoDetails extends Component {
       : (filePath = this.props.addNewRepoFilePath);
     const git = require('simple-git')(filePath);
 
-    // git.diffSummary((err, diffSummary) => console.log(diffSummary));
-    // git.diff((err, diff) => console.log(diff));
-
-    // git.branch((err,branches) => console.log(branches));
-
-    // git.status((err, status) => console.log(status));
-
-    // git.log((err, log) => log.all.map((commit) => console.log(commit.hash)))
-
     git.log((err, log) => {
       this.setState({
         commitHistory: [...log.all.map(commit => commit)]
-        //   selectedCommit: [log.all[0].hash]
       });
     });
-
-    // git.log((err, log) => log.all.map((commit) => git.raw(['show', commit.hash], (err, result) => this.setState({changedFiles: this.state.changedFiles.push(result)}))))
-    // // git.raw(['show',])
   }
   render() {
     if (this.state.commitHistory[0] === 'Loading data') {

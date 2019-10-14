@@ -118,7 +118,6 @@ class HomePage extends Component {
         </React.Fragment>
       );
     } else {
-      // console.log(this.state);
       return (
         <ShowRepoDetails
           selectedModal={this.state.selectedModal}
