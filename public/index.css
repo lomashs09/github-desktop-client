@@ -49,15 +49,20 @@ html {
 .repo-details-hide {
   display: none;
 }
-.commit-messages{
+.commit-messages {
   display: flex;
   flex-direction: column;
-  padding:2rem;
+  padding: 2rem;
   font-size: 1rem;
   font-weight: bold;
 }
 
 #repo-details {
-  display:flex;
+  display: flex;
   flex-direction: row;
-} 
+}
+
+.diff-to-html {
+  display: flex;
+  flex-direction: row;
+}
