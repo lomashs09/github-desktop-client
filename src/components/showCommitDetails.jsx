@@ -16,12 +16,30 @@ class showCommitDetails extends Component {
             <div className="commit-message">
               {/* <p>SHA: {commit.hash}</p> */}
               <button onClick={this.props.getSelectedCommit.bind(this, commit.hash)}>
-                SHA: {commit.hash}
+                SHA: 
+{' '}
+{commit.hash}
               </button>
-              <p>Message: {commit.message}</p>
-              <p>Author: {commit.author_name}</p>
-              <p>Author Email: {commit.author_email}</p>
-              <p>Timestamp: {commit.date}</p>
+              <p>
+Message:
+{' '}
+{commit.message}
+</p>
+              <p>
+Author:
+{' '}
+{commit.author_name}
+</p>
+              <p>
+Author Email:
+{' '}
+{commit.author_email}
+</p>
+              <p>
+Timestamp:
+{' '}
+{commit.date}
+</p>
               <p>-----------------------------------------------------------------------------</p>
             </div>
           ))}
