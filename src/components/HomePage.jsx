@@ -116,6 +116,7 @@ class HomePage extends Component {
       // console.log(this.state);
       return (
         <ShowRepoDetails
+        selectedModal = {this.state.selectedModal}
         repoDetailsDisplayClass={this.state.repoDetailsDisplayClass}
         repoToCloneUrl = {this.state.repoToCloneUrl}
         addNewRepoFilePath={this.state.addNewRepoFilePath}
