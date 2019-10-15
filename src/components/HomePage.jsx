@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import AddRepoModal from './addRepoModal.jsx';
 import ShowDetails from './ShowDetails';
-import ShowRepoDetails from './showRepoDetails';
 class HomePage extends Component {
   state = {
     modalOverlayClass: '',

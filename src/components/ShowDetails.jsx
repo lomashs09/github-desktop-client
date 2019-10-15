@@ -4,7 +4,6 @@ import CommitHistory from './CommitHistory';
 import CommitMessageOverview from './CommitMessageOverview';
 import DisplayChanges from './DisplayChanges';
 
-import ShowCommitDetails from './showCommitDetails';
 import ShowFileChanges from './showFileChanges';
 var filePath;
 
@@ -79,7 +78,10 @@ export default class Show extends Component {
                 <CommitMessageOverview selectedCommit={this.state.selectedCommit} />
               </div>
               <div className="display-changes">
-                <DisplayChanges />
+                <DisplayChanges
+                  className="commit-messages"
+                  changedFiles={this.state.changedFiles}
+                />
               </div>
             </div>
           </section>

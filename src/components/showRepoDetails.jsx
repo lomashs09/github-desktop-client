@@ -1,6 +1,5 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-import ShowCommitDetails from './showCommitDetails';
 import ShowFileChanges from './showFileChanges';
 var filePath;
 
