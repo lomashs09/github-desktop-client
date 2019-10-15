@@ -13,7 +13,6 @@ class HomePage extends Component {
   };
 
   toggleOverlay = () => {
-    console.log(this.state.selectedModal)
     this.state.modalOverlayClass === ''
       ? this.setState({
           modalOverlayClass: `modal-overlay-on`
@@ -52,6 +51,7 @@ class HomePage extends Component {
     if(this.state.repoDetailsDisplayClass === 'repo-details-hide') { 
     return (
       <React.Fragment>
+        
       <section className="title container">
       <h3>Let's get started!</h3>
       <p>Add a repository to GitHub Desktop to start collaborating</p>
@@ -113,7 +113,6 @@ class HomePage extends Component {
       </React.Fragment>
     
     );} else {
-      // console.log(this.state);
       return (
         <ShowRepoDetails
         selectedModal = {this.state.selectedModal}

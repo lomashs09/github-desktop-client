@@ -76,7 +76,7 @@ onChange = (e) =>{
           <h6>Add Url</h6>
           <ul className="collection">
           <form >
-          <input onChange = {this.onChange} placeholder="Enter the Url to Clone..." id="repo-url" type="text" class="validate" />
+          <input onChange = {this.onChange} placeholder="Enter the Url to Clone..." id="repo-url" type="text" className="validate" />
         </form>
           </ul>
         </div>
