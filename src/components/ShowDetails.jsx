@@ -48,12 +48,12 @@ export default class Show extends Component {
     const git = require('simple-git')(filePath);
 
     git.log((err, log) => {
-      if(log === null) {
-        this.setState({ commitHistory: ['No commits yet']})
+      if (log === null) {
+        this.setState({ commitHistory: ['No commits yet'] });
       } else {
         this.setState({
-        commitHistory: [...log.all.map(commit => commit)]
-      });
+          commitHistory: [...log.all.map(commit => commit)]
+        });
       }
     });
   }
