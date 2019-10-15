@@ -4,6 +4,10 @@ import Commits from './Commits';
 export class CommitHistory extends Component {
   render() {
     const { history } = this.props;
+    console.log(history);
+    if (history === 'No commits yet') {
+      return <Commits history={history} />;
+    }
     return (
       <>
         {history.map(commit => (

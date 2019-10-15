@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 export class Commits extends Component {
   render() {
+    console.log(this.props.history);
+    if (this.props.history === 'No commits yet') {
+      return <p />;
+    }
     return (
       <div>
         <div

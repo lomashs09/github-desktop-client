@@ -4,7 +4,6 @@ import CommitHistory from './CommitHistory';
 import CommitMessageOverview from './CommitMessageOverview';
 import DisplayChanges from './DisplayChanges';
 
-import ShowFileChanges from './showFileChanges';
 var filePath;
 
 export default class Show extends Component {
@@ -49,9 +48,13 @@ export default class Show extends Component {
     const git = require('simple-git')(filePath);
 
     git.log((err, log) => {
-      this.setState({
+      if(log === null) {
+        this.setState({ commitHistory: ['No commits yet']})
+      } else {
+        this.setState({
         commitHistory: [...log.all.map(commit => commit)]
       });
+      }
     });
   }
 
