@@ -12,7 +12,7 @@ class showFileChanges extends Component {
       <React.Fragment>
         <div>
          <h4>File Changes</h4>
-          <p className='diff-to-html' dangerouslySetInnerHTML={{__html: this.outputHtml}} />
+          <p className='diff-to-html' dangerouslySetInnerHTML={{__html: this.outputHtml}} /> 
         </div>
       </React.Fragment>
     );
