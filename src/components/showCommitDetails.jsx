@@ -14,7 +14,6 @@ class showCommitDetails extends Component {
           <h4>Commit Details:</h4>
           {commitHistory.map(commit => (
             <div className="commit-message">
-              {/* <p>SHA: {commit.hash}</p> */}
               <button onClick={this.props.getSelectedCommit.bind(this, commit.hash)}>
                 SHA: 
 {' '}
