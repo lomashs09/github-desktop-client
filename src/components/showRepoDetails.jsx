@@ -46,6 +46,7 @@ class showRepoDetails extends Component {
   git.log((err, log) =>{
     this.setState({
       commitHistory: [...log.all.map((commit) => commit)],
+      filePath:filePath
     })})
 
 
@@ -59,7 +60,8 @@ class showRepoDetails extends Component {
     // git.log((err, log) => log.all.map((commit) => console.log(commit.hash)))
     git.log((err, log) => {
       this.setState({
-        commitHistory: [...log.all.map(commit => commit)]
+        commitHistory: [...log.all.map(commit => commit)],
+        filePath:filePath
         //   selectedCommit: [log.all[0].hash]
       });
     });
@@ -68,7 +70,7 @@ class showRepoDetails extends Component {
     // git.log((err, log) => log.all.map((commit) => git.raw(['show', commit.hash], (err, result) => this.setState({changedFiles: this.state.changedFiles.push(result)}))))
     // // git.raw(['show',])
   render() {
-    if (this.state.commitHistory[0] === 'Loading data') {
+    if (this.state.commitHistory[0] === 'Loading data'){
       return (
         <React.Fragment>
           <p>{this.state.commitHistory[0]}</p>

@@ -1,7 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import AddRepoModal from './addRepoModal.jsx';
-import ShowRepoDetails from './showRepoDetails';
+import ShowDetails from './ShowDetails';
 class HomePage extends Component {
   state = {
     modalOverlayClass: '',
@@ -119,7 +119,7 @@ class HomePage extends Component {
       );
     } else {
       return (
-        <ShowRepoDetails
+        <ShowDetails
           selectedModal={this.state.selectedModal}
           repoDetailsDisplayClass={this.state.repoDetailsDisplayClass}
           repoToCloneUrl={this.state.repoToCloneUrl}

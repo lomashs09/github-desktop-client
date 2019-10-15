@@ -5,9 +5,6 @@ const { BrowserWindow } = electron;
 const { Menu } = electron;
 const { ipcMain } = electron;
 
-// Load remote component that contains the dialog dependency
-// const remote = require('remote');
-
 // Load remote compnent that contains the dialog dependency
 const { dialog } = electron;
 const fs = require('fs'); // Load the File System to execute our common tasks (CRUD)

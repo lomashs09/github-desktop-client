@@ -9,6 +9,16 @@ html {
   margin: auto;
 }
 
+.logo {
+  height: 2em;
+  width: auto;
+}
+
+.logo-text {
+  position: relative;
+  top: -0.6em;
+}
+
 .git-actions-button {
   margin: 1.5em;
   margin-left: 0;
@@ -70,12 +80,91 @@ html {
   flex-direction: row;
 }
 
+.show-details {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+.commits-history {
+  width: 22.5%;
+  max-height: 59.5rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  border: 0.001em solid #333;
+  box-shadow: 5px 0 5px -5px #333;
+}
+
+.commits-history .card-panel {
+  padding: 0.65em;
+}
+
+.commit-details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.commit-message-overview {
+  width: 100%;
+  height: 6em;
+  border: 0.001em solid #333;
+  box-shadow: 0 5px 5px -5px #333;
+}
+
+.commit-message-title {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  font-size: 1.5em;
+  margin: 0.3em;
+}
+
+.commit-sub-details {
+  display: flex;
+  width: 32.5em;
+  justify-content: space-between;
+  margin: 0.3em;
+}
+
+.commit-sub-details .material-icons {
+  font-size: 1.2em;
+  margin: 0.2em;
+  position: relative;
+  top: 0.2em;
+}
+
+.display-changes {
+  display: flex;
+  height: 100%;
+}
+
+.file-changes {
+  height: 100%;
+  width: 20%;
+  border: 0.001em solid #333;
+  box-shadow: 5px 0 5px -5px #333;
+}
+
 .diff-to-html {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  max-height: 40rem;
+  overflow-y: scroll;
+}
+
+.d2h-wrapper {
+  font-size: 0.75rem;
+  width: 100%;
 }
 
 .d2h-files-diff {
   display: flex;
   flex-direction: row;
+}
+
+.d2h-file-list-wrapper {
+  width: 10em;
+  margin-right: 6rem;
+  margin-left: 1em;
 }
