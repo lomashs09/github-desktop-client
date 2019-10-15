@@ -39,7 +39,15 @@ html {
 }
 
 .modal-content .collection {
-  margin: 2em 0;
+  margin: 1em 0;
+}
+
+.modal-content label {
+  color: black;
+}
+
+.modal-content ::placeholder {
+  color: darkgrey;
 }
 
 .repo-details-show {
@@ -49,16 +57,16 @@ html {
 .repo-details-hide {
   display: none;
 }
-.commit-messages{
+.commit-messages {
   display: flex;
   flex-direction: column;
-  padding:2rem;
+  padding: 2rem;
   font-size: 1rem;
   font-weight: bold;
 }
 
 #repo-details {
-  display:flex;
+  display: flex;
   flex-direction: row;
 }
 
