@@ -92,6 +92,15 @@ export class BranchModal extends Component {
           >
             CLOSE
           </a>
+          <a
+            className="modal-close waves-effect waves-green btn-flat"
+            onClick={() => {
+              this.props.toggleOverlay();
+              this.props.toggleModalClass();
+            }}
+          >
+            OK
+          </a>
         </div>
       </div>
     );

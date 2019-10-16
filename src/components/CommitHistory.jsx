@@ -26,7 +26,7 @@ export class CommitHistory extends Component {
     git.branchLocal((err, branches) => this.setState({ branches: branches.all }));
   }
   render() {
-    let history = this.state.commits;
+    const history = this.state.commits;
     const filePath = this.state.filePath;
     if (history[0] === 'Loading data...') {
       return <div>Loading Data</div>;

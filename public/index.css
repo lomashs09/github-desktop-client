@@ -60,20 +60,6 @@ html {
   color: darkgrey;
 }
 
-.choose-branch {
-  display: block;
-}
-
-.new-branch-text {
-  position: relative;
-  top: 0.5em;
-  margin: 0 1em;
-}
-
-.branch-name-input {
-  margin: 0 1em;
-}
-
 .repo-details-show {
   display: block;
 }
