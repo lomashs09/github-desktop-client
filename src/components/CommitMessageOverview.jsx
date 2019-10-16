@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 export class CommitMessageOverview extends Component {
   render() {
+    // eslint-disable-next-line react/destructuring-assignment
     const commit = this.props.selectedCommit[0];
 
     if (commit === 'Loading data...') {

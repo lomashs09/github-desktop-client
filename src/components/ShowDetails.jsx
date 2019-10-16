@@ -13,7 +13,8 @@ export default class Show extends Component {
     modalDisplayClass: '',
     commitHistory: ['Loading data...'],
     changedFiles: ['Loading data...'],
-    selectedCommit: ['Loading data...']
+    selectedCommit: ['Loading data...'],
+    filePath:''
   };
 
   toggleOverlay = () => {
@@ -48,7 +49,7 @@ export default class Show extends Component {
     const clickedCommit = this.state.commitHistory.filter(commit => commitHash === commit.hash);
     const git = require('simple-git')(filePath);
     git.raw(['show', commitHash], (err, result) =>
-      this.setState({ changedFiles: [result], selectedCommit: clickedCommit })
+      this.setState({ changedFiles: [result], selectedCommit: clickedCommit,filePath:filePath })
     );
   };
 
@@ -75,14 +76,15 @@ export default class Show extends Component {
         this.setState({ commitHistory: ['No commits yet'] });
       } else {
         this.setState({
-          commitHistory: [...log.all.map(commit => commit)]
+          commitHistory: [...log.all.map(commit => commit)],
+          filePath:filePath
         });
       }
     });
   }
 
   render() {
-    if (this.state.commitHistory[0] === 'Loading data') {
+      if (this.state.commitHistory[0] === 'Loading data') {
       return (
         <React.Fragment>
           <p>{this.state.commitHistory[0]}</p>
@@ -100,12 +102,17 @@ export default class Show extends Component {
             toggleOverlay={this.toggleOverlay}
             toggleModalClass={this.toggleModalClass}
             modalDisplayClass={this.state.modalDisplayClass}
+            history={this.state.commitHistory}
+            getSelectedCommit={this.getSelectedCommit}
+            filePath={this.state.filePath}
           />
           <section className="show-details">
             <div className="commits-history">
               <CommitHistory
+                filePath={this.state.filePath}
                 history={this.state.commitHistory}
                 getSelectedCommit={this.getSelectedCommit}
+                filePath={this.state.filePath}
               />
             </div>
             <div className="commit-details">
