@@ -90,6 +90,7 @@ export class BranchModal extends Component {
             onClick={() => {
               this.props.toggleOverlay();
               this.props.toggleModalClass();
+              
             }}
           >
             CLOSE
@@ -99,6 +100,7 @@ export class BranchModal extends Component {
             onClick={() => {
               this.props.toggleOverlay();
               this.props.toggleModalClass();
+              this.props.updateCommits(this.state.commits)
             }}
           >
             OK

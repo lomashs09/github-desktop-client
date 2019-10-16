@@ -51,7 +51,10 @@ export default class Show extends Component {
       this.setState({ changedFiles: [result], selectedCommit: clickedCommit,filePath:filePath })
     );
   };
-
+  updateCommits = (newCommits) =>{
+    this.setState({commitHistory:newCommits})
+    console.log(this.state.commitHistory)
+  }
   async componentDidMount() {
     if (this.props.selectedModal === 'clone-repo') {
       const git = require('simple-git');
@@ -104,6 +107,7 @@ export default class Show extends Component {
             history={this.state.commitHistory}
             getSelectedCommit={this.getSelectedCommit}
             filePath={this.state.filePath}
+            updateCommits = {this.updateCommits}
           />
           <section className="show-details">
             <div className="commits-history">
@@ -112,6 +116,7 @@ export default class Show extends Component {
                 history={this.state.commitHistory}
                 getSelectedCommit={this.getSelectedCommit}
                 filePath={this.state.filePath}
+                onChange = {this.onChange}
               />
             </div>
             <div className="commit-details">

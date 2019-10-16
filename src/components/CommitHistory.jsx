@@ -21,7 +21,7 @@ export class CommitHistory extends Component {
   };
   async componentWillReceiveProps(nextprops) {
     if(this.state.commits===''){
-      console.log('comit history is empty for now')
+      console.log(nextprops.history)
       await this.setState({ filePath: nextprops.filePath, commits:nextprops.history });
     }
     filePath = this.state.filePath;
@@ -29,6 +29,8 @@ export class CommitHistory extends Component {
     git.branchLocal((err, branches) => this.setState({ branches: branches.all }));
   }
   render() {
+
+    {console.log('its in commithistory')}
     const history = this.state.commits;
     const filePath = this.state.filePath;
     if (history[0] === 'Loading data...') {
@@ -52,9 +54,7 @@ export class CommitHistory extends Component {
           </div>
           {history.map(commit => (
             <Commits
-              // filePath = {this.state.filePath}
               selectedBranch ={this.state.selectedBranch}
-              // displayCommits = {this.displayCommits}
               name={commit.message}
               hash={commit.hash}
               getSelectedCommit={this.props.getSelectedCommit}
