@@ -3,19 +3,43 @@ import Header from './Header';
 import CommitHistory from './CommitHistory';
 import CommitMessageOverview from './CommitMessageOverview';
 import DisplayChanges from './DisplayChanges';
+import BranchModal from './BranchModal';
 
 var filePath;
 
 export default class Show extends Component {
   state = {
+    modalOverlayClass: '',
+    modalDisplayClass: '',
     commitHistory: ['Loading data...'],
     changedFiles: ['Loading data...'],
     selectedCommit: ['Loading data...'],
     filePath:''
   };
 
+  toggleOverlay = () => {
+    this.state.modalOverlayClass === ''
+      ? this.setState({
+          modalOverlayClass: `modal-overlay-on`
+        })
+      : this.setState({
+          modalOverlayClass: ''
+        });
+  };
+
+  toggleModalClass = () => {
+    this.state.modalDisplayClass === ''
+      ? this.setState({
+          modalDisplayClass: 'modal-show'
+        })
+      : this.setState({
+          modalDisplayClass: ''
+        });
+  };
+
   getSelectedCommit = commitHash => {
     let filename;
+    let filePath;
     this.props.repoToCloneUrl === undefined
       ? (filename = '')
       : (filename = this.props.repoToCloneUrl.split('/').pop());
@@ -69,14 +93,25 @@ export default class Show extends Component {
     } else {
       return (
         <section className={`${this.props.repoDetailsDisplayClass}`}>
-          <Header />
-          
+          <Header
+            toggleOverlay={this.toggleOverlay}
+            toggleModalClass={this.toggleModalClass}
+            modalDisplayClass={this.state.modalDisplayClass}
+          />
+          <BranchModal
+            toggleOverlay={this.toggleOverlay}
+            toggleModalClass={this.toggleModalClass}
+            modalDisplayClass={this.state.modalDisplayClass}
+            history={this.state.commitHistory}
+            getSelectedCommit={this.getSelectedCommit}
+            filePath={this.state.filePath}
+          />
           <section className="show-details">
             <div className="commits-history">
               <CommitHistory
-                filePath={this.state.filePath}
                 history={this.state.commitHistory}
                 getSelectedCommit={this.getSelectedCommit}
+                filePath={this.state.filePath}
               />
             </div>
             <div className="commit-details">
@@ -90,6 +125,13 @@ export default class Show extends Component {
                 />
               </div>
             </div>
+            <div
+              className={`modal-overlay  + ${this.state.modalOverlayClass}`}
+              onClick={() => {
+                this.toggleOverlay();
+                this.toggleModalClass();
+              }}
+            />
           </section>
         </section>
       );
