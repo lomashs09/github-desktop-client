@@ -10,7 +10,6 @@ class showRepoDetails extends Component {
     changedFiles : ['Loading data'],
     filePath:''
   };
-
   getSelectedCommit = commitHash => {
     let filename;
     this.props.repoToCloneUrl ===undefined ? filename = '': filename =  this.props.repoToCloneUrl.split('/').pop();

@@ -28,7 +28,6 @@ class showCommitDetails extends Component {
   }
 
   render() {
-    console.log(this.state.commits)
     const commitHistory = this.state.commits;
     console.log(commitHistory);
     return (

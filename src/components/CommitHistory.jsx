@@ -53,7 +53,7 @@ export class CommitHistory extends Component {
         </>
       );
     }
-  }
+}
 }
 
 export default CommitHistory;
