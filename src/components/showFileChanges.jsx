@@ -1,7 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-import {Diff2Html} from 'diff2html';
-
+import { Diff2Html } from 'diff2html';
 
 class showFileChanges extends Component {
     render() {

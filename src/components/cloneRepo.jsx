@@ -16,7 +16,6 @@ export default class AddRepoModal extends Component {
         path: arg
       });
     });
-    console.log(this.state.path)
   }
 
   render() {
