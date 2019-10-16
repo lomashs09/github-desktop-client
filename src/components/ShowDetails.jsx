@@ -48,17 +48,6 @@ export default class Show extends Component {
       ? (filePath = `./${filename}`)
       : (filePath = this.props.addNewRepoFilePath);
     const git = require('simple-git')(filePath);
-
-    
-    // git.status((err, status) => console.log(status));
-    // git.status((err, status) => console.log(status.created)); // Files created
-    // git.status((err, status) => console.log(status.current)); // Current branch
-    // git.status((err, status) => console.log(status.deleted)); // Files deleted
-    // git.status((err, status) => console.log(status.modified)); // Files modified
-    // git.status((err, status) => console.log(status.not_added)); // Files not added to staging area --> Uncheck
-    // git.status((err, status) => console.log(status.renamed)); // Files renamed
-    // git.status((err, status) => console.log(status.staged)); // Files added to staging area --> Check
-
 //----------------------------Conditionally run this if user clicks on 'History'-----------------------
     // git.log((err, log) => {
     //   if (log === null) {
@@ -73,7 +62,8 @@ export default class Show extends Component {
 
 //----------------------------Conditionally run this if user clicks on 'History'-----------------------
 
-    git.status((err, status) => this.setState({ gitStatus: status}))
+    git.status((err, status) => this.setState({ gitStatus: status }))
+    git.raw(['diff'], (err, result) => this.setState({ changedFiles: [result] }));  
   }
 
   render() {
@@ -119,17 +109,17 @@ export default class Show extends Component {
                 status={this.state.gitStatus}
               />
             </div>
-            {/* <div className="commit-details">
-              <div className="commit-message-overview">
+            <div className="commit-details">
+              {/* <div className="commit-message-overview">
                 <CommitMessageOverview selectedCommit={this.state.selectedCommit} />
-              </div>
+              </div> */}
               <div className="display-changes">
                 <DisplayChanges
                   className="commit-messages"
                   changedFiles={this.state.changedFiles}
                 />
               </div>
-            </div> */}
+            </div>
           </section>
         </section>
       );
