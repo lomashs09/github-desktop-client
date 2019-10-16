@@ -13,8 +13,6 @@ export default class Header extends Component {
             <li>
               <a>Current Repository</a>
             </li>
-            <li>
-              <a>Current Branch</a></li>
             <li
               onClick={() => {
                 this.props.toggleOverlay();

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+// eslint-disable-next-line react/prefer-stateless-function
 export class Commits extends Component {
   render() {
     if (this.props.history === 'No commits yet') {

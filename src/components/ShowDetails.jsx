@@ -102,6 +102,9 @@ export default class Show extends Component {
             toggleOverlay={this.toggleOverlay}
             toggleModalClass={this.toggleModalClass}
             modalDisplayClass={this.state.modalDisplayClass}
+            history={this.state.commitHistory}
+            getSelectedCommit={this.getSelectedCommit}
+            filePath={this.state.filePath}
           />
           <section className="show-details">
             <div className="commits-history">
@@ -109,6 +112,7 @@ export default class Show extends Component {
                 filePath={this.state.filePath}
                 history={this.state.commitHistory}
                 getSelectedCommit={this.getSelectedCommit}
+                filePath={this.state.filePath}
               />
             </div>
             <div className="commit-details">

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Commits from './Commits';
-
+var filePath;
 export class CommitHistory extends Component {
   state = {
     branches: [],
@@ -8,7 +8,7 @@ export class CommitHistory extends Component {
     commits: '',
     filePath: ''
   };
-  onChange = async e => {
+  onChange = async (e) => {
     if (this.props.filePath) {
       const git = require('simple-git')(this.state.filePath);
       await this.setState({ selectedBranch: e.target.value });
@@ -19,9 +19,9 @@ export class CommitHistory extends Component {
       });
     }
   };
-
   async componentWillReceiveProps(nextprops) {
     await this.setState({ filePath: nextprops.filePath, commits: nextprops.history });
+    filePath = this.state.filePath;
     const git = require('simple-git')(this.state.filePath);
     git.branchLocal((err, branches) => this.setState({ branches: branches.all }));
   }
@@ -37,7 +37,11 @@ export class CommitHistory extends Component {
         <>
           <div>
             <label>Select Branch</label>
+
             <select onChange={this.onChange} class="browser-default">
+            <option value="" disabled selected>
+              Choose your branch
+            </option>
               {this.state.branches.map(branch => (
                 <option>{branch}</option>
               ))}
@@ -45,6 +49,10 @@ export class CommitHistory extends Component {
           </div>
           {history.map(commit => (
             <Commits
+            onChange = {this.onChange}
+              // filePath = {this.state.filePath}
+              selectedBranch ={this.state.selectedBranch}
+              // displayCommits = {this.displayCommits}
               name={commit.message}
               hash={commit.hash}
               getSelectedCommit={this.props.getSelectedCommit}
