@@ -35,7 +35,7 @@ export class BranchModal extends Component {
     const git = require('simple-git')(filePath);
     git.checkoutBranch(this.state.newBranch, 'master', (err, results) => {
       if (err) {
-        console.log(err);
+        console.log('The following error Ocurred:',err);
       } else {
         this.setState({ successMessage: 'Branch created successfully' });
         var joined = this.state.branches.concat(this.state.newBranch);
