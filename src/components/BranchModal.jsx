@@ -100,7 +100,7 @@ export class BranchModal extends Component {
             onClick={() => {
               this.props.toggleOverlay();
               this.props.toggleModalClass();
-              this.props.updateCommits(this.state.commits)
+              this.props.updateCommits(this.state.selectedBranch)
             }}
           >
             OK

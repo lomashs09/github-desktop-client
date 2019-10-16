@@ -3,67 +3,123 @@ import Commits from './Commits';
 var filePath;
 export class CommitHistory extends Component {
   state = {
+    toggle: true,
     branches: [],
     selectedBranch: 'master',
     commits: '',
     filePath: ''
   };
-  onChange = async (e) => {
-    if (this.props.filePath) {
-      const git = require('simple-git')(this.state.filePath);
-      await this.setState({ selectedBranch: e.target.value });
-      await git.checkout(this.state.selectedBranch).then(() => {
-        git.log(async (err, results) => {
-          await this.setState({ commits: results.all });
+
+  onChange = async (e, changedBranch) => {
+    if (changedBranch) {
+      if (this.props.filePath) {
+        const git = require('simple-git')(this.state.filePath);
+        await this.setState({ selectedBranch: changedBranch });
+        await git.checkout(this.state.selectedBranch).then(() => {
+          git.log(async (err, results) => {
+            await this.setState({ commits: results.all });
+          });
         });
-      });
+      }
+    } else {
+      if (this.props.filePath) {
+        const git = require('simple-git')(this.state.filePath);
+        await this.setState({ selectedBranch: e.target.value });
+        await git.checkout(this.state.selectedBranch).then(() => {
+          git.log(async (err, results) => {
+            await this.setState({ commits: results.all });
+          });
+        });
+      }
     }
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.selectedBranch !== prevProps.selectedBranch) {
+      this.onChange(this, this.props.selectedBranch);
+    }
+  }
+
   async componentWillReceiveProps(nextprops) {
-    if(this.state.commits===''){
-      console.log(nextprops.history)
-      await this.setState({ filePath: nextprops.filePath, commits:nextprops.history });
+    if (this.state.commits === '') {
+      console.log(nextprops.history);
+      await this.setState({ filePath: nextprops.filePath, commits: nextprops.history });
     }
     filePath = this.state.filePath;
     const git = require('simple-git')(this.state.filePath);
     git.branchLocal((err, branches) => this.setState({ branches: branches.all }));
   }
+  
   render() {
-
-    {console.log('its in commithistory')}
-    const history = this.state.commits;
-    const filePath = this.state.filePath;
-    if (history[0] === 'Loading data...') {
-      return <div>Loading Data</div>;
-    } else if (history === 'No commits yet' || filePath === '') {
-      return <Commits history={history} />;
+    if (this.props.selectedBranch) {
+      const history = this.state.commits;
+      const filePath = this.state.filePath;
+      if (history[0] === 'Loading data...') {
+        console.log('');
+        return <div>Loading Data</div>;
+      } else if (history === 'No commits yet' || filePath === '') {
+        return <Commits history={history} />;
+      } else {
+        return (
+          <>
+            <div>
+              <label>Select Branch</label>
+              <select onChange={this.onChange} class="browser-default">
+                <option value="" disabled selected>
+                  Choose your branch
+                </option>
+                {this.state.branches.map(branch => (
+                  <option>{branch}</option>
+                ))}
+              </select>
+            </div>
+            {history.map(commit => (
+              <Commits
+                selectedBranch={this.state.selectedBranch}
+                name={commit.message}
+                hash={commit.hash}
+                getSelectedCommit={this.props.getSelectedCommit}
+              />
+            ))}
+          </>
+        );
+      }
     } else {
-      return (
-        <>
-          <div>
-            <label>Select Branch</label>
+      const history = this.state.commits;
+      const filePath = this.state.filePath;
 
-            <select onChange={this.onChange} class="browser-default">
-            <option value="" disabled selected>
-              Choose your branch
-            </option>
-              {this.state.branches.map(branch => (
-                <option>{branch}</option>
-              ))}
-            </select>
-          </div>
-          {history.map(commit => (
-            <Commits
-              selectedBranch ={this.state.selectedBranch}
-              name={commit.message}
-              hash={commit.hash}
-              getSelectedCommit={this.props.getSelectedCommit}
-            />
-          ))}
-        </>
-      );
+      if (history[0] === 'Loading data...') {
+        console.log('');
+        return <div>Loading Data</div>;
+      } else if (history === 'No commits yet' || filePath === '') {
+        return <Commits history={history} />;
+      } else {
+        return (
+          <>
+            <div>
+              <label>Select Branch</label>
+              <select onChange={this.onChange} class="browser-default">
+                <option value="" disabled selected>
+                  Choose your branch
+                </option>
+                {this.state.branches.map(branch => (
+                  <option>{branch}</option>
+                ))}
+              </select>
+            </div>
+            {history.map(commit => (
+              <Commits
+                selectedBranch={this.state.selectedBranch}
+                name={commit.message}
+                hash={commit.hash}
+                getSelectedCommit={this.props.getSelectedCommit}
+              />
+            ))}
+          </>
+        );
+      }
     }
-}
+  }
 }
 
 export default CommitHistory;
