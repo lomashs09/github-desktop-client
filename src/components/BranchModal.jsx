@@ -8,7 +8,6 @@ export class BranchModal extends Component {
     selectedBranch: '',
     commits: '',
     filePath: '',
-    latestHash: '',
     newBranch: ''
   };
   onInputChange = e => {
