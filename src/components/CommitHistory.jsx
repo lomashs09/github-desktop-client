@@ -4,7 +4,7 @@ var filePath;
 export class CommitHistory extends Component {
   state = {
     branches: [],
-    selectedBranch: '',
+    selectedBranch: 'master',
     commits: '',
     filePath: ''
   };
@@ -20,7 +20,10 @@ export class CommitHistory extends Component {
     }
   };
   async componentWillReceiveProps(nextprops) {
-    await this.setState({ filePath: nextprops.filePath, commits: nextprops.history });
+    if(this.state.commits===''){
+      console.log('comit history is empty for now')
+      await this.setState({ filePath: nextprops.filePath, commits:nextprops.history });
+    }
     filePath = this.state.filePath;
     const git = require('simple-git')(this.state.filePath);
     git.branchLocal((err, branches) => this.setState({ branches: branches.all }));
@@ -49,7 +52,6 @@ export class CommitHistory extends Component {
           </div>
           {history.map(commit => (
             <Commits
-            onChange = {this.onChange}
               // filePath = {this.state.filePath}
               selectedBranch ={this.state.selectedBranch}
               // displayCommits = {this.displayCommits}

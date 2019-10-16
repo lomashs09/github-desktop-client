@@ -39,7 +39,6 @@ export default class Show extends Component {
 
   getSelectedCommit = commitHash => {
     let filename;
-    let filePath;
     this.props.repoToCloneUrl === undefined
       ? (filename = '')
       : (filename = this.props.repoToCloneUrl.split('/').pop());
