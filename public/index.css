@@ -117,6 +117,8 @@ html {
   flex-direction: column;
   min-width: 80%;
   width: 100%;
+  max-width: 50rem;
+  overflow-y: scroll;
 }
 
 .commit-message-overview {
@@ -169,6 +171,8 @@ html {
 .d2h-wrapper {
   font-size: 0.75rem;
   width: 100%;
+  max-height: 49rem;
+  overflow-y: scroll;
 }
 
 .d2h-files-diff {
@@ -180,4 +184,8 @@ html {
   width: 20%;
   margin-right: 6rem;
   margin-left: 1em;
+}
+
+.d2h-code-side-linenumber {
+  position: relative !important;
 }
