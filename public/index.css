@@ -60,6 +60,18 @@ html {
   color: darkgrey;
 }
 
+.new-branch-text {
+  margin: 0 1em;
+}
+
+.branch-name-input {
+  margin: 0 1em;
+}
+
+.choose-branch {
+  display: block;
+}
+
 .repo-details-show {
   display: block;
 }
@@ -156,6 +168,14 @@ html {
 .d2h-wrapper {
   font-size: 0.75rem;
   width: 100%;
+}
+
+.d2h-wrapper .d2h-ins {
+  background-color: #97f295;
+}
+
+.d2h-wrapper .d2h-del {
+  background-color: #ffb6ba;
 }
 
 .d2h-files-diff {
