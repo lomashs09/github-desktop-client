@@ -1,17 +1,47 @@
 import React, { Component } from 'react';
-// import Commits from './Commits';
+import ChangedFile from './ChangedFile';
 
 export class CreateCommits extends Component {
       
     render() {
     const status = this.props.status;
-    console.log(status.created);
-    console.log(`We're in creation now : ${status.created}`);
+    console.log(status);
     return (
       <>
-      { status.created.length === 0 ? <p></p> : status.created.map((newFile) => <p>{newFile}[+]</p>)}
-      { status.modified.length === 0 ? <p></p> : status.modified.map((modifiedFile) => <p>{modifiedFile}[M]</p>)}
-      { status.deleted.length === 0 ? <p></p> : status.deleted.map((deletedFile) => <p>{deletedFile}[-]</p>)}
+      { status.not_added.length === 0 ? '' : status.not_added.map((newFile) => 
+      <ChangedFile 
+        fileName={newFile}
+        getSelectedChangedFile={this.props.getSelectedChangedFile}
+        modificationType={'add'}
+      />
+    //   <div className='changedFiles-staging-area'>
+    //     <input type='checkbox'></input>
+    //     <p onClick={this.props.getSelectedChangedFile.bind(this, newFile, 'add')}>{newFile}[+]</p>
+    //   </div>
+      )}
+      { status.modified.length === 0 ? '' : status.modified.map((modifiedFile) => 
+        //     <div className='changedFiles-staging-area'>
+        //     <input type='checkbox'></input>
+        //     {/* <p>{modifiedFile}[M]</p> */}
+        //     <p onClick={this.props.getSelectedChangedFile.bind(this, modifiedFile, 'modify')}>{modifiedFile}[M]</p>
+        //   </div>
+        <ChangedFile 
+            fileName={modifiedFile}
+            getSelectedChangedFile={this.props.getSelectedChangedFile}
+            modificationType={'modify'}
+        />
+      )}
+      { status.deleted.length === 0 ? '' : status.deleted.map((deletedFile) => 
+    //   <div className='changedFiles-staging-area'>
+    //         <input type='checkbox'></input>
+    //         <p onClick={this.props.getSelectedChangedFile.bind(this, deletedFile, 'delete')}>{deletedFile}[-]</p>
+    //       </div>
+            <ChangedFile 
+                fileName={deletedFile}
+                getSelectedChangedFile={this.props.getSelectedChangedFile}
+                modificationType={'delete'}
+            />
+      )}
       </>
     );
   }

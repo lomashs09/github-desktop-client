@@ -31,6 +31,13 @@ export default class Show extends Component {
     );
   };
 
+
+  getSelectedChangedFile = (fileName, modificationType) => {
+    console.log(fileName);
+    const git = require('simple-git')(this.props.addNewRepoFilePath);
+    modificationType === 'modify' ? git.raw(['diff'], (err, result) => this.setState({ changedFiles: [result] })) : git.raw(['diff', '--', '/dev/null', fileName], (err, result) => this.setState({ changedFiles: [result] }));
+  }
+
   async componentDidMount() {
     if (this.props.selectedModal === 'clone-repo') {
       const git = require('simple-git');
@@ -63,7 +70,7 @@ export default class Show extends Component {
 //----------------------------Conditionally run this if user clicks on 'History'-----------------------
 
     git.status((err, status) => this.setState({ gitStatus: status }))
-    git.raw(['diff'], (err, result) => this.setState({ changedFiles: [result] }));  
+    // git.raw(['diff'], (err, result) => this.setState({ changedFiles: [result] }));  
   }
 
   render() {
@@ -99,7 +106,6 @@ export default class Show extends Component {
         </section>
       );
     } else {
-      // console.log(this.state.gitStatus);
       return (
         <section className={`${this.props.repoDetailsDisplayClass}`}>
           <Header />
@@ -107,6 +113,7 @@ export default class Show extends Component {
             <div className="commits-history">
               <CreateCommits
                 status={this.state.gitStatus}
+                getSelectedChangedFile={this.getSelectedChangedFile}
               />
             </div>
             <div className="commit-details">
