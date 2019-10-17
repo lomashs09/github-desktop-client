@@ -184,13 +184,13 @@ ipcMain.on('Repo', async (event, arg) => {
         message: 'Error! Failed to create folder'
       });
     }
-  } else if (arg.type === 'OPEN_XCODE') {
+  } else if (arg.type === 'OPEN_EDITOR') {
     try {
-      await exec(`code ${arg.path}`);
+      await exec('$(git config --global code.editor) .');
     } catch (err) {
       dialog.showMessageBox({
         type: 'info',
-        message: 'Error! Failed to open xcode'
+        message: 'Error! Failed to open Editor'
       });
     }
   }
