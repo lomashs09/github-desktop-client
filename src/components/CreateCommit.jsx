@@ -20,7 +20,7 @@ export class CreateCommit extends Component {
           <div class="row">
             <div class="input-field col s12">
               <textarea id="textarea1" class="materialize-textarea" onChange={this.setCommitMessage}></textarea>
-              <label for="textarea1">Commit Message</label>
+              <label for="textarea1">Commit Message (Required)</label>
             </div>
           </div>
         </form>

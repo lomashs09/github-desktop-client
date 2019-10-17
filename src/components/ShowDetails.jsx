@@ -59,7 +59,6 @@ export default class Show extends Component {
 
 
   getSelectedChangedFile = (fileName, modificationType) => {
-    // console.log(fileName);
     const git = require('simple-git')(this.props.addNewRepoFilePath);
     modificationType === 'modify' ? git.raw(['diff'], (err, result) => this.setState({ changedFiles: [result] })) : git.raw(['diff', '--', '/dev/null', fileName], (err, result) => this.setState({ changedFiles: [result] }));
   }
@@ -67,7 +66,7 @@ export default class Show extends Component {
   makeCommit = (commitMessage) => {
     const git = require('simple-git')(this.props.addNewRepoFilePath);
     if(commitMessage === '') {
-      console.log('A non-empty commit message is required.');
+      alert("Commit message can't be empty");
     } else {
       git.commit(commitMessage, (err, res) => console.log(res));	
     }
@@ -115,11 +114,6 @@ export default class Show extends Component {
 
     git.status((err, status) => this.setState({ gitStatus: status }))
     console.log(this.state.gitStatus);
-    // let arrayOfChangedFiles = [];
-    // this.state.gitStatus.not_added.length === 0 ? '' : this.state.gitStatus.not_added.map((newFile) => arrayOfChangedFiles.push({newFile: false}));
-    // this.state.gitStatus.modified.length === 0 ? '' : this.state.gitStatus.modified.map((modifiedFile) => arrayOfChangedFiles.push({modifiedFile: false}));
-    // this.state.gitStatus.deleted.length === 0 ? '' : this.state.gitStatus.deleted.map((deletedFile) => arrayOfChangedFiles.push({deletedFile: false}));
-    // this.setState({ checkboxStatus: arrayOfChangedFiles});
   }
 
   render() {
