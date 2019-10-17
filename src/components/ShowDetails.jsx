@@ -5,6 +5,7 @@ import CommitMessageOverview from './CommitMessageOverview';
 import DisplayChanges from './DisplayChanges';
 import StagingAreaChanges from './StagingAreaChanges';
 import BranchModal from './BranchModal';
+import OpenEditorModal from './OpenEditorModal';
 
 var filePath;
 
@@ -155,7 +156,10 @@ export default class Show extends Component {
             modalDisplayClass={this.state.modalDisplayClass}
             modalToDisplay={this.modalToDisplay}
           />
-
+          <OpenEditorModal
+            toggleOverlay={this.toggleOverlay}
+            toggleModalClass={this.toggleModalClass}
+          />
           <BranchModal
             toggleOverlay={this.toggleOverlay}
             toggleModalClass={this.toggleModalClass}

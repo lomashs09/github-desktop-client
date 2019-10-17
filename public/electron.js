@@ -190,7 +190,7 @@ ipcMain.on('Repo', async (event, arg) => {
     } catch (err) {
       dialog.showMessageBox({
         type: 'info',
-        message: 'Error! Failed to open Editor'
+        message: 'Error! Failed to open in Editor'
       });
     }
   }
