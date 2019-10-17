@@ -17,7 +17,8 @@ export default class Show extends Component {
     selectedCommit: ['Loading data...'],
     showHistory: false,
     changesTriggered: 'green darken-2 white-text',
-    historyTriggered: 'white black-text'
+    historyTriggered: 'white black-text',
+    outputFormat: 'side-by-side'
   };
 
   toggleOverlay = () => {
@@ -64,6 +65,12 @@ export default class Show extends Component {
       });
       this.toggleTabs();
     }
+  };
+
+  changeOutputFormat = e => {
+    this.setState({
+      outputFormat: e.target.value
+    });
   };
 
   getSelectedCommit = commitHash => {
@@ -167,9 +174,22 @@ export default class Show extends Component {
                 </div>
               ) : null}
               <div className="display-changes">
+                <select
+                  className="select-output-format"
+                  onChange={e => {
+                    this.changeOutputFormat(e);
+                  }}
+                >
+                  <option value="side-by-side" selected>
+                    Side by Side
+                  </option>
+                  <option value="line-by-line">Line by Line</option>
+                </select>
+
                 <DisplayChanges
                   className="commit-messages"
                   changedFiles={this.state.changedFiles}
+                  outputFormat={this.state.outputFormat}
                 />
               </div>
             </div>

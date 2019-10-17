@@ -208,3 +208,13 @@ html {
 .d2h-code-side-linenumber {
   position: relative !important;
 }
+
+.d2h-code-linenumber {
+  position: relative !important;
+}
+
+.select-output-format {
+  display: block;
+  margin: 0.5em;
+  width: 15%;
+}
