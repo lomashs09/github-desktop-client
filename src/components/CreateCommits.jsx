@@ -15,7 +15,7 @@ export class CreateCommits extends Component {
         getSelectedChangedFile={this.props.getSelectedChangedFile}
         modificationType={'add'}
         addFilesToStagingArea={this.props.addFilesToStagingArea}
-        status={this.status}
+        status={this.props.status}
       />
       )}
       { status.modified.length === 0 ? '' : status.modified.map((modifiedFile) => 
@@ -24,7 +24,7 @@ export class CreateCommits extends Component {
             getSelectedChangedFile={this.props.getSelectedChangedFile}
             modificationType={'modify'}
             addFilesToStagingArea={this.props.addFilesToStagingArea}
-            status={this.status}
+            status={this.props.status}
             />
       )}
       { status.deleted.length === 0 ? '' : status.deleted.map((deletedFile) => 
@@ -33,7 +33,7 @@ export class CreateCommits extends Component {
                 getSelectedChangedFile={this.props.getSelectedChangedFile}
                 modificationType={'delete'}
                 addFilesToStagingArea={this.props.addFilesToStagingArea}
-                status={this.status}
+                status={this.props.status}
                 />
       )}
       <CreateCommit 
