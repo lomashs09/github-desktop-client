@@ -23,7 +23,7 @@ function createWindow() {
       nodeIntegration: true
     },
     resizable: false,
-    icon: './assets/logo.png'
+    icon: `${__dirname}/assets/electron-logo.png`
   });
   mainWindow.loadURL(
     isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`
