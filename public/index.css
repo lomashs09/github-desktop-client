@@ -195,8 +195,13 @@ html {
 .d2h-wrapper {
   font-size: 0.75rem;
   width: 100%;
-  max-height: 49rem;
+  max-height: 43rem;
   overflow-y: auto;
+}
+
+.d2h-wrapper td,
+th {
+  padding: 2px 2px;
 }
 
 .d2h-files-diff {
