@@ -42,6 +42,7 @@
     "@rescripts/rescript-env": "0.0.10",
     "concurrently": "^5.0.0",
     "electron-builder": "^21.2.0",
+    "electron-react-devtools": "^0.5.3",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-airbnb-base": "^14.0.0",

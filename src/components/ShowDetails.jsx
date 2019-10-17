@@ -3,6 +3,7 @@ import Header from './Header';
 import CommitHistory from './CommitHistory';
 import CommitMessageOverview from './CommitMessageOverview';
 import DisplayChanges from './DisplayChanges';
+import StagingAreaChanges from './StagingAreaChanges';
 import BranchModal from './BranchModal';
 
 var filePath;
@@ -14,6 +15,10 @@ export default class Show extends Component {
     commitHistory: ['Loading data...'],
     changedFiles: ['Loading data...'],
     selectedCommit: ['Loading data...'],
+    showHistory: false,
+    changesTriggered: 'green darken-2 white-text',
+    historyTriggered: 'white black-text',
+    outputFormat: 'side-by-side',
     filePath:'',
     selectedBranch:'',
     modal:''
@@ -40,6 +45,38 @@ export default class Show extends Component {
       : this.setState({
           modalDisplayClass: ''
         });
+  };
+
+  toggleTabs = () => {
+    this.setState({
+      showHistory: !this.state.showHistory
+    });
+  };
+
+  clickedChangesButton = () => {
+    if (this.state.changesTriggered === 'white black-text') {
+      this.setState({
+        changesTriggered: 'green darken-2 white-text',
+        historyTriggered: 'white black-text'
+      });
+      this.toggleTabs();
+    }
+  };
+
+  clickedHistoryButton = () => {
+    if (this.state.historyTriggered === 'white black-text') {
+      this.setState({
+        changesTriggered: 'white black-text',
+        historyTriggered: 'green darken-2 white-text'
+      });
+      this.toggleTabs();
+    }
+  };
+
+  changeOutputFormat = e => {
+    this.setState({
+      outputFormat: e.target.value
+    });
   };
 
   getSelectedCommit = commitHash => {
@@ -121,21 +158,58 @@ export default class Show extends Component {
           />
           <section className="show-details">
             <div className="commits-history">
-              <CommitHistory
-                selectedBranch={this.state.selectedBranch}
-                history={this.state.commitHistory}
-                getSelectedCommit={this.getSelectedCommit}
-                filePath={this.state.filePath}
-              />
+              <a
+                className={`waves-effect waves-light btn changes-button + ${this.state.changesTriggered}`}
+                onClick={() => {
+                  this.clickedChangesButton();
+                }}
+              >
+                Changes
+              </a>
+              <a
+                class={`waves-effect waves-light btn history-button + ${this.state.historyTriggered}`}
+                onClick={() => {
+                  this.clickedHistoryButton();
+                }}
+              >
+                History
+              </a>
+              {this.state.showHistory ? (
+                <CommitHistory
+                  history={this.state.commitHistory}
+                  getSelectedCommit={this.getSelectedCommit}
+                  filePath={this.state.filePath}
+                  selectedBranch={this.state.selectedBranch}
+                />
+              ) : (
+                <div className="commits-staging-area">
+                  <StagingAreaChanges />
+                </div>
+              )}
             </div>
             <div className="commit-details">
-              <div className="commit-message-overview">
-                <CommitMessageOverview selectedCommit={this.state.selectedCommit} />
-              </div>
+              {this.state.showHistory ? (
+                <div className="commit-message-overview">
+                  <CommitMessageOverview selectedCommit={this.state.selectedCommit} />
+                </div>
+              ) : null}
               <div className="display-changes">
+                <select
+                  className="select-output-format"
+                  onChange={e => {
+                    this.changeOutputFormat(e);
+                  }}
+                >
+                  <option value="side-by-side" selected>
+                    Side by Side
+                  </option>
+                  <option value="line-by-line">Line by Line</option>
+                </select>
+
                 <DisplayChanges
                   className="commit-messages"
                   changedFiles={this.state.changedFiles}
+                  outputFormat={this.state.outputFormat}
                 />
               </div>
             </div>

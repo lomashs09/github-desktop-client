@@ -40,11 +40,20 @@ export class CommitHistory extends Component {
     }
   }
 
-  async componentWillReceiveProps(nextprops) {
-    if (this.state.commits === '') {
-      console.log(nextprops.history);
-      await this.setState({ filePath: nextprops.filePath, commits: nextprops.history });
-    }
+  // async componentWillReceiveProps(nextprops) {
+  //   if (this.state.commits === '') {
+  //     console.log(nextprops.history);
+  //     await this.setState({ filePath: nextprops.filePath, commits: nextprops.history });
+  //   }
+  componentDidMount() {
+    this.setState({ filePath: this.props.filePath, commits: this.props.history });
+    filePath = this.state.filePath;
+    const git = require('simple-git')(this.state.filePath);
+    git.branchLocal((err, branches) => this.setState({ branches: branches.all }));
+  }
+
+  componentWillReceiveProps(nextprops) {
+    this.setState({ filePath: nextprops.filePath, commits: nextprops.history });
     filePath = this.state.filePath;
     const git = require('simple-git')(this.state.filePath);
     git.branchLocal((err, branches) => this.setState({ branches: branches.all }));
@@ -109,6 +118,7 @@ export class CommitHistory extends Component {
             </div>
             {history.map(commit => (
               <Commits
+                onChange={this.onChange}
                 selectedBranch={this.state.selectedBranch}
                 name={commit.message}
                 hash={commit.hash}
