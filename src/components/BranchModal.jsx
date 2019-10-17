@@ -23,10 +23,11 @@ export class BranchModal extends Component {
           this.setState({successMessage:'Please Add Remote Before Push'})
         }
     });
+    this.setState({successMessage:'pushing...'})
     git.push(['-u', 'origin', this.state.selectedBranch],(err,results)=>{
       this.setState({successMessage:'pushed succesfully !'})
-      if(err){
-      console.log(err)
+      if(!err){
+      console.log(results)
     }})
   }
   onInputChange = e => {
@@ -129,7 +130,7 @@ export class BranchModal extends Component {
         <div className="modal-content white">
           <h4>Publish</h4>
         </div>
-        <span className="new-branch-text">Before Pushing Set the Origin using SSH</span><br />
+        <span className="new-branch-text">Before Pushing Set the Remote using SSH</span><br /><br />
         {' '}
         <div className="input-field col s8 branch-name-input center-align">
           <a
@@ -167,7 +168,7 @@ export class BranchModal extends Component {
             onClick={() => {
               this.props.toggleOverlay();
               this.props.toggleModalClass();
-              this.props.updateCommits(this.state.selectedBranch)
+              // this.props.updateCommits(this.state.selectedBranch)
             }}
           >
             OK
