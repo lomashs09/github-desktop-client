@@ -13,6 +13,16 @@ export class BranchModal extends Component {
   pushRepo =()=>{
     console.log('branch:',this.state.selectedBranch)
     let git = require('simple-git')(filePath);
+  git
+    .listRemote(['--get-url'], (err, data) => {
+        if (!err) {
+            console.log('Remote url for repository at ' + __dirname + ':');
+            console.log(data);
+        }
+        else{
+          this.setState({successMessage:'Please Add Remote Before Push'})
+        }
+    });
     git.push(['-u', 'origin', this.state.selectedBranch],(err,results)=>{
       this.setState({successMessage:'pushed succesfully !'})
       if(err){
@@ -78,6 +88,7 @@ export class BranchModal extends Component {
           </a>
           <p>{this.state.successMessage}</p>
         </div>
+        <p>You can also push the Branches</p>
         <div className="input-field col s12">
           <select onChange={this.onChange} className="choose-branch">
             <option value="" disabled selected>
@@ -94,7 +105,6 @@ export class BranchModal extends Component {
             onClick={() => {
               this.props.toggleOverlay();
               this.props.toggleModalClass();
-              
             }}
           >
             CLOSE
@@ -119,8 +129,9 @@ export class BranchModal extends Component {
         <div className="modal-content white">
           <h4>Publish</h4>
         </div>
-        <span className="new-branch-text">Set the Origin using SSH</span>
-        <div className="input-field col s8 branch-name-input">
+        <span className="new-branch-text">Before Pushing Set the Origin using SSH</span><br />
+        {' '}
+        <div className="input-field col s8 branch-name-input center-align">
           <a
             onClick={this.pushRepo}
             className="waves-effect waves-light btn-small blue darken-2 white-text"
@@ -128,7 +139,7 @@ export class BranchModal extends Component {
             <i className="material-icons right">add_circle</i>
             Push
           </a>
-          <p>{this.state.successMessage}</p>
+          <p >{this.state.successMessage}</p>
         </div>
         <div className="input-field col s12">
           <select onChange={this.onChange} className="choose-branch">
