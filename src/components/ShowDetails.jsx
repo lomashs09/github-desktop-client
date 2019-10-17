@@ -244,7 +244,9 @@ export default class Show extends Component {
               className={`modal-overlay  + ${this.state.modalOverlayClass}`}
               onClick={() => {
                 this.toggleOverlay();
-                this.toggleModalClass();
+                this.state.modalDisplayClassEditor === ''
+                  ? this.toggleModalClass()
+                  : this.toggleModalClassEditor();
               }}
             />
           </section>
