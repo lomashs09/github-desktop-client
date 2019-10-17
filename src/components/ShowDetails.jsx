@@ -13,6 +13,7 @@ export default class Show extends Component {
   state = {
     modalOverlayClass: '',
     modalDisplayClass: '',
+    modalDisplayClassEditor: '',
     commitHistory: ['Loading data...'],
     changedFiles: ['Loading data...'],
     selectedCommit: ['Loading data...'],
@@ -26,6 +27,16 @@ export default class Show extends Component {
   };
   modalToDisplay = modalName => {
     this.setState({ modal: modalName });
+  };
+
+  toggleModalClassEditor = () => {
+    this.state.modalDisplayClassEditor === ''
+      ? this.setState({
+          modalDisplayClassEditor: 'modal-show'
+        })
+      : this.setState({
+          modalDisplayClassEditor: ''
+        });
   };
 
   toggleOverlay = () => {
@@ -155,10 +166,7 @@ export default class Show extends Component {
             toggleModalClass={this.toggleModalClass}
             modalDisplayClass={this.state.modalDisplayClass}
             modalToDisplay={this.modalToDisplay}
-          />
-          <OpenEditorModal
-            toggleOverlay={this.toggleOverlay}
-            toggleModalClass={this.toggleModalClass}
+            toggleModalClassEditor={this.toggleModalClassEditor}
           />
           <BranchModal
             toggleOverlay={this.toggleOverlay}
@@ -169,6 +177,11 @@ export default class Show extends Component {
             filePath={this.state.filePath}
             updateCommits={this.updateCommits}
             modal={this.state.modal}
+          />
+          <OpenEditorModal
+            toggleOverlayEditorModal={this.toggleOverlay}
+            toggleModalClassEditor={this.toggleModalClassEditor}
+            modalDisplayClassEditor={this.state.modalDisplayClassEditor}
           />
           <section className="show-details">
             <div className="commits-history">

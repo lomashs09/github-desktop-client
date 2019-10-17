@@ -187,6 +187,7 @@ ipcMain.on('Repo', async (event, arg) => {
   } else if (arg.type === 'OPEN_EDITOR') {
     try {
       await exec('$(git config --global code.editor) .');
+      event.reply('openedEditor',"opened")
     } catch (err) {
       dialog.showMessageBox({
         type: 'info',
