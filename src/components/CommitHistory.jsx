@@ -82,7 +82,7 @@ export class CommitHistory extends Component {
         return <Commits history={history} />;
       } else {
         return (
-          <>
+          <React.fragment>
             <div>
               <select onChange={this.onChange} class="browser-default">
                 <option value="" disabled selected>
@@ -101,7 +101,7 @@ export class CommitHistory extends Component {
                 getSelectedCommit={this.props.getSelectedCommit}
               />
             ))}
-          </>
+          </React.fragment>
         );
       }
     } else {
@@ -109,8 +109,21 @@ export class CommitHistory extends Component {
       const filePath = this.state.filePath;
 
       if (history[0] === 'Loading data...') {
-        console.log('');
-        return <div>Loading Data</div>;
+        return (
+          <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div>
+              <div class="gap-patch">
+                <div class="circle"></div>
+              </div>
+              <div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+        );
       } else if (history === 'No commits yet' || filePath === '') {
         return <Commits history={history} />;
       } else {

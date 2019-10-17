@@ -19,13 +19,13 @@ export default class Show extends Component {
     changesTriggered: 'green darken-2 white-text',
     historyTriggered: 'white black-text',
     outputFormat: 'side-by-side',
-    filePath:'',
-    selectedBranch:'',
-    modal:''
+    filePath: '',
+    selectedBranch: '',
+    modal: ''
   };
-  modalToDisplay = (modalName) =>{
-    this.setState({modal:modalName})
-  }
+  modalToDisplay = modalName => {
+    this.setState({ modal: modalName });
+  };
 
   toggleOverlay = () => {
     this.state.modalOverlayClass === ''
@@ -90,15 +90,15 @@ export default class Show extends Component {
     const clickedCommit = this.state.commitHistory.filter(commit => commitHash === commit.hash);
     const git = require('simple-git')(filePath);
     git.raw(['show', commitHash], (err, result) =>
-      this.setState({ changedFiles: [result], selectedCommit: clickedCommit,filePath:filePath })
+      this.setState({ changedFiles: [result], selectedCommit: clickedCommit, filePath: filePath })
     );
   };
 
   //Getting the branch from BranchModal and passing it to CommitHistory
-  updateCommits = (changedBranch) =>{
-  this.setState({selectedBranch:changedBranch})
-  }
-  
+  updateCommits = changedBranch => {
+    this.setState({ selectedBranch: changedBranch });
+  };
+
   async componentDidMount() {
     if (this.props.selectedModal === 'clone-repo') {
       const git = require('simple-git');
@@ -123,18 +123,28 @@ export default class Show extends Component {
       } else {
         this.setState({
           commitHistory: [...log.all.map(commit => commit)],
-          filePath:filePath
+          filePath: filePath
         });
       }
     });
   }
 
   render() {
-      if (this.state.commitHistory[0] === 'Loading data') {
+    if (this.state.commitHistory[0] === 'Loading data') {
       return (
-        <React.Fragment>
-          <p>{this.state.commitHistory[0]}</p>
-        </React.Fragment>
+        <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
       );
     } else {
       return (
@@ -143,7 +153,7 @@ export default class Show extends Component {
             toggleOverlay={this.toggleOverlay}
             toggleModalClass={this.toggleModalClass}
             modalDisplayClass={this.state.modalDisplayClass}
-            modalToDisplay = {this.modalToDisplay}
+            modalToDisplay={this.modalToDisplay}
           />
 
           <BranchModal
@@ -153,7 +163,7 @@ export default class Show extends Component {
             history={this.state.commitHistory}
             getSelectedCommit={this.getSelectedCommit}
             filePath={this.state.filePath}
-            updateCommits = {this.updateCommits}
+            updateCommits={this.updateCommits}
             modal={this.state.modal}
           />
           <section className="show-details">
