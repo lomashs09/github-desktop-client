@@ -43,6 +43,11 @@ html {
   z-index: 1003;
   display: block;
 }
+.modal-overlay-on-publish {
+  z-index: 1002;
+  display: block;
+  opacity: 0.5;
+}
 
 .modal-content h4 {
   margin-bottom: 0.5em;
@@ -98,9 +103,21 @@ html {
   position: relative;
 }
 .commits-history {
-  width: 22.5%;
+  width: 30%;
+  min-width: 20%;
   max-height: 59.5rem;
-  overflow-y: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  border: 0.001em solid #333;
+  box-shadow: 5px 0 5px -5px #333;
+}
+
+.commits-staging-area {
+  width: 30%;
+  min-width: 20%;
+  max-height: 59.5rem;
+  overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
   border: 0.001em solid #333;
@@ -111,10 +128,21 @@ html {
   padding: 0.65em;
 }
 
+.changes-button {
+  width: 50%;
+}
+
+.history-button {
+  width: 50%;
+}
+
 .commit-details {
   display: flex;
   flex-direction: column;
+  min-width: 80%;
   width: 100%;
+  max-width: 50rem;
+  overflow-y: auto;
 }
 
 .commit-message-overview {
@@ -146,8 +174,7 @@ html {
 }
 
 .display-changes {
-  display: flex;
-  height: 100%;
+  height: 60%;
 }
 
 .file-changes {
@@ -162,20 +189,14 @@ html {
   flex-direction: row;
   width: 100%;
   max-height: 40rem;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .d2h-wrapper {
   font-size: 0.75rem;
   width: 100%;
-}
-
-.d2h-wrapper .d2h-ins {
-  background-color: #97f295;
-}
-
-.d2h-wrapper .d2h-del {
-  background-color: #ffb6ba;
+  max-height: 49rem;
+  overflow-y: auto;
 }
 
 .d2h-files-diff {
@@ -184,7 +205,21 @@ html {
 }
 
 .d2h-file-list-wrapper {
-  width: 10em;
+  width: 20%;
   margin-right: 6rem;
   margin-left: 1em;
+}
+
+.d2h-code-side-linenumber {
+  position: relative !important;
+}
+
+.d2h-code-linenumber {
+  position: relative !important;
+}
+
+.select-output-format {
+  display: block;
+  margin: 0.5em;
+  width: 15%;
 }

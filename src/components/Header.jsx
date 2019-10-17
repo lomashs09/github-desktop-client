@@ -17,11 +17,18 @@ export default class Header extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
+                this.props.modalToDisplay('branch-modal')
               }}
             >
               <a>Branch</a>
             </li>
-            <li>
+            <li
+              onClick={() => {
+                this.props.toggleOverlay();
+                this.props.toggleModalClass();
+                this.props.modalToDisplay('publish-modal')
+              }}
+            >
               <a>Publish Repository</a>
             </li>
           </ul>

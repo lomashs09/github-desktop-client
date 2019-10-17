@@ -6,7 +6,7 @@ export class CommitMessageOverview extends Component {
     // eslint-disable-next-line react/destructuring-assignment
     const commit = this.props.selectedCommit[0];
 
-    if (commit === 'Loading data...') {
+    if (commit === 'Loading data...' || commit === undefined) {
       return <div />;
     }
     return (
