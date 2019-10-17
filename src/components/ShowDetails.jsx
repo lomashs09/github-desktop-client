@@ -123,7 +123,6 @@ export default class Show extends Component {
             <div className="commits-history">
               <CommitHistory
                 selectedBranch={this.state.selectedBranch}
-                filePath={this.state.filePath}
                 history={this.state.commitHistory}
                 getSelectedCommit={this.getSelectedCommit}
                 filePath={this.state.filePath}
