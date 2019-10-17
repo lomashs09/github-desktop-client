@@ -40,34 +40,29 @@ export class CommitHistory extends Component {
     }
   }
 
-  // async componentWillReceiveProps(nextprops) {
-  //   if (this.state.commits === '') {
-  //     console.log(nextprops.history);
-  //     await this.setState({ filePath: nextprops.filePath, commits: nextprops.history });
-  //   }
   componentDidMount() {
-    if(this.state.commits===''){
-    this.setState({ filePath: this.props.filePath, commits: this.props.history });
-    filePath = this.props.filePath;
-    const git = require('simple-git')(filePath);
-    git.branchLocal((err, branches) => this.setState({ branches: branches.all }));
+    if (this.state.commits === '') {
+      this.setState({ filePath: this.props.filePath, commits: this.props.history });
+      filePath = this.props.filePath;
+      const git = require('simple-git')(filePath);
+      git.branchLocal((err, branches) => this.setState({ branches: branches.all }));
+    }
   }
-}
 
   componentWillReceiveProps(nextprops) {
     if (this.state.commits === '') {
-    this.setState({ filePath: nextprops.filePath, commits: nextprops.history });
-    filePath = this.state.filePath;
+      this.setState({ filePath: nextprops.filePath, commits: nextprops.history });
+      filePath = this.state.filePath;
     }
     const git = require('simple-git')(this.state.filePath);
     git.branchLocal((err, branches) => this.setState({ branches: branches.all }));
   }
-  
+
   render() {
-    if (this.props.selectedBranch ||this.state.filePath==='') {
+    if (this.props.selectedBranch || this.state.filePath === '') {
       const history = this.state.commits;
       const filePath = this.state.filePath;
-      if (history[0] === 'Loading data...' || this.state.filePath==='') {
+      if (history[0] === 'Loading data...' || this.state.filePath === '') {
         console.log('');
         return <div>Loading Data</div>;
       } else if (history === 'No commits yet' || filePath === '') {
@@ -76,7 +71,6 @@ export class CommitHistory extends Component {
         return (
           <>
             <div>
-              <label>Select Branch</label>
               <select onChange={this.onChange} class="browser-default">
                 <option value="" disabled selected>
                   Choose your branch

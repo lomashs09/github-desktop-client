@@ -146,15 +146,15 @@ export default class Show extends Component {
       : (filePath = this.props.addNewRepoFilePath);
     const git = require('simple-git')(filePath);
 //----------------------------Conditionally run this if user clicks on 'History'-----------------------
-    // git.log((err, log) => {
-    //   if (log === null) {
-    //     this.setState({ commitHistory: ['No commits yet'] });
-    //   } else {
-    //     this.setState({
-    //       commitHistory: [...log.all.map(commit => commit)],
-    //     });
-    //   }
-    // });
+    git.log((err, log) => {
+      if (log === null) {
+        this.setState({ commitHistory: ['No commits yet'] });
+      } else {
+        this.setState({
+          commitHistory: [...log.all.map(commit => commit)],
+        });
+      }
+    });
 
 
 //----------------------------Conditionally run this if user clicks on 'History'-----------------------
@@ -165,13 +165,13 @@ export default class Show extends Component {
 
   render() {
     console.log(this.state.checkboxStatus);
-    if ((this.state.commitHistory[0] === 'Loading data...') && (this.state.gitStatus[0] === 'Loading data...')) {
+    if ((this.state.commitHistory[0] === 'Loading data...')) {
       return (
         <React.Fragment>
           <p>{this.state.commitHistory[0]}</p>
         </React.Fragment>
       );
-    } else if (this.state.gitStatus[0] === 'Loading data...') {
+    } else {
       return (
         <section className={`${this.props.repoDetailsDisplayClass}`}>
           <Header
@@ -257,33 +257,34 @@ export default class Show extends Component {
           </section>
         </section>
       );
-    } else {
-      return (
-        <section className={`${this.props.repoDetailsDisplayClass}`}>
-          <Header />
-          <section className="show-details">
-            <div className="commits-history">
-              <CreateCommits
-                status={this.state.gitStatus}
-                getSelectedChangedFile={this.getSelectedChangedFile}
-                addFilesToStagingArea={this.addFilesToStagingArea}
-                makeCommit={this.makeCommit}
-              />
-            </div>
-            <div className="commit-details">
-              {/* <div className="commit-message-overview">
-                <CommitMessageOverview selectedCommit={this.state.selectedCommit} />
-              </div> */}
-              <div className="display-changes">
-                <DisplayChanges
-                  className="commit-messages"
-                  changedFiles={this.state.changedFiles}
-                />
-              </div>
-            </div>
-          </section>
-        </section>
-      );
-    }
+    } 
+    // else {
+    //   return (
+    //     <section className={`${this.props.repoDetailsDisplayClass}`}>
+    //       <Header />
+    //       <section className="show-details">
+    //         <div className="commits-history">
+    //           <CreateCommits
+    //             status={this.state.gitStatus}
+    //             getSelectedChangedFile={this.getSelectedChangedFile}
+    //             addFilesToStagingArea={this.addFilesToStagingArea}
+    //             makeCommit={this.makeCommit}
+    //           />
+    //         </div>
+    //         <div className="commit-details">
+    //           {/* <div className="commit-message-overview">
+    //             <CommitMessageOverview selectedCommit={this.state.selectedCommit} />
+    //           </div> */}
+    //           <div className="display-changes">
+    //             <DisplayChanges
+    //               className="commit-messages"
+    //               changedFiles={this.state.changedFiles}
+    //             />
+    //           </div>
+    //         </div>
+    //       </section>
+    //     </section>
+    //   );
+    // }
   }
 }

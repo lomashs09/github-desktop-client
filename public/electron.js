@@ -15,12 +15,15 @@ const isDev = require('electron-is-dev');
 let mainWindow;
 
 function createWindow() {
+  const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
   mainWindow = new BrowserWindow({
-    width: 900,
-    height: 680,
+    width,
+    height,
     webPreferences: {
       nodeIntegration: true
-    }
+    },
+    resizable: false,
+    icon: `${__dirname}/assets/electron-logo.png`
   });
   mainWindow.loadURL(
     isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`
