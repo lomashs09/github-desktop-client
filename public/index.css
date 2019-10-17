@@ -43,6 +43,11 @@ html {
   z-index: 1003;
   display: block;
 }
+.modal-overlay-on-publish {
+  z-index: 1002;
+  display: block;
+  opacity: 0.5;
+}
 
 .modal-content h4 {
   margin-bottom: 0.5em;

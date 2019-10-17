@@ -15,8 +15,12 @@ export default class Show extends Component {
     changedFiles: ['Loading data...'],
     selectedCommit: ['Loading data...'],
     filePath:'',
-    selectedBranch:''
+    selectedBranch:'',
+    modal:''
   };
+  modalToDisplay = (modalName) =>{
+    this.setState({modal:modalName})
+  }
 
   toggleOverlay = () => {
     this.state.modalOverlayClass === ''
@@ -102,7 +106,9 @@ export default class Show extends Component {
             toggleOverlay={this.toggleOverlay}
             toggleModalClass={this.toggleModalClass}
             modalDisplayClass={this.state.modalDisplayClass}
+            modalToDisplay = {this.modalToDisplay}
           />
+
           <BranchModal
             toggleOverlay={this.toggleOverlay}
             toggleModalClass={this.toggleModalClass}
@@ -111,6 +117,7 @@ export default class Show extends Component {
             getSelectedCommit={this.getSelectedCommit}
             filePath={this.state.filePath}
             updateCommits = {this.updateCommits}
+            modal={this.state.modal}
           />
           <section className="show-details">
             <div className="commits-history">
