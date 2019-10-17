@@ -3,6 +3,7 @@ import Header from './Header';
 import CommitHistory from './CommitHistory';
 import CommitMessageOverview from './CommitMessageOverview';
 import DisplayChanges from './DisplayChanges';
+import StagingAreaChanges from './StagingAreaChanges';
 import BranchModal from './BranchModal';
 
 var filePath;
@@ -13,7 +14,10 @@ export default class Show extends Component {
     modalDisplayClass: '',
     commitHistory: ['Loading data...'],
     changedFiles: ['Loading data...'],
-    selectedCommit: ['Loading data...']
+    selectedCommit: ['Loading data...'],
+    showHistory: false,
+    changesTriggered: 'green darken-2 white-text',
+    historyTriggered: 'white black-text'
   };
 
   toggleOverlay = () => {
@@ -33,6 +37,22 @@ export default class Show extends Component {
         })
       : this.setState({
           modalDisplayClass: ''
+        });
+  };
+
+  toggleTabs = () => {
+    this.setState({
+      showHistory: !this.state.showHistory
+    });
+
+    this.state.changesTriggered === 'green darken-2 white-text'
+      ? this.setState({
+          changesTriggered: 'white black-text',
+          historyTriggered: 'green darken-2 white-text'
+        })
+      : this.setState({
+          changesTriggered: 'green darken-2 white-text',
+          historyTriggered: 'white black-text'
         });
   };
 
@@ -103,10 +123,32 @@ export default class Show extends Component {
           />
           <section className="show-details">
             <div className="commits-history">
-              <CommitHistory
-                history={this.state.commitHistory}
-                getSelectedCommit={this.getSelectedCommit}
-              />
+              <a
+                className={`waves-effect waves-light btn changes-button + ${this.state.changesTriggered}`}
+                onClick={() => {
+                  this.toggleTabs();
+                }}
+              >
+                Changes
+              </a>
+              <a
+                class={`waves-effect waves-light btn changes-button + ${this.state.historyTriggered}`}
+                onClick={() => {
+                  this.toggleTabs();
+                }}
+              >
+                History
+              </a>
+              {this.state.showHistory ? (
+                <CommitHistory
+                  history={this.state.commitHistory}
+                  getSelectedCommit={this.getSelectedCommit}
+                />
+              ) : (
+                <div className="commits-staging-area">
+                  <StagingAreaChanges />
+                </div>
+              )}
             </div>
             <div className="commit-details">
               <div className="commit-message-overview">

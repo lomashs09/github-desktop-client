@@ -108,8 +108,27 @@ html {
   box-shadow: 5px 0 5px -5px #333;
 }
 
+.commits-staging-area {
+  width: 30%;
+  min-width: 20%;
+  max-height: 59.5rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  border: 0.001em solid #333;
+  box-shadow: 5px 0 5px -5px #333;
+}
+
 .commits-history .card-panel {
   padding: 0.65em;
+}
+
+.changes-button {
+  width: 50%;
+}
+
+.history-button {
+  width: 50%;
 }
 
 .commit-details {
