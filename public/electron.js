@@ -15,16 +15,19 @@ const isDev = require('electron-is-dev');
 let mainWindow;
 
 function createWindow() {
-  const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
+  const display = electron.screen.getPrimaryDisplay();
+  const maxiSize = display.workAreaSize;
   mainWindow = new BrowserWindow({
-    width,
-    height,
     webPreferences: {
       nodeIntegration: true
     },
+    show: false,
     resizable: false,
+    height: maxiSize.height,
+    width: maxiSize.width,
     icon: `${__dirname}/assets/electron-logo.png`
   });
+  mainWindow.maximize();
   mainWindow.loadURL(
     isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`
   );
@@ -144,6 +147,7 @@ function createWindow() {
 
   // Insert the menu
   Menu.setApplicationMenu(mainMenu);
+  mainWindow.show();
 }
 
 // Open Dialogue Box for add and create local Repository

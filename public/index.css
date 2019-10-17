@@ -194,7 +194,8 @@ html {
 
 .d2h-wrapper {
   font-size: 0.75rem;
-  width: 100%;
+  width: 98.5%;
+  margin-left: 1.25em;
   max-height: 43rem;
   overflow-y: auto;
 }
