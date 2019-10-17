@@ -5,17 +5,19 @@ export class BranchModal extends Component {
   state = {
     successMessage: '',
     branches: [],
-    selectedBranch: '',
+    selectedBranch: 'master',
     commits: '',
     filePath: '',
     newBranch: ''
   };
   pushRepo =()=>{
-    
+    console.log('branch:',this.state.selectedBranch)
     let git = require('simple-git')(filePath);
-    git.push(['-u', 'origin', 'master'],(err,results)=>{
-      console.log('success',results)
-    })
+    git.push(['-u', 'origin', this.state.selectedBranch],(err,results)=>{
+      this.setState({successMessage:'pushed succesfully !'})
+      if(err){
+      console.log(err)
+    }})
   }
   onInputChange = e => {
     this.setState({ newBranch: e.target.value });
@@ -119,13 +121,6 @@ export class BranchModal extends Component {
         </div>
         <span className="new-branch-text">Set the Origin using SSH</span>
         <div className="input-field col s8 branch-name-input">
-          <input
-            onChange={this.onInputChange}
-            placeholder="Enter branch name"
-            id="first_name"
-            type="text"
-            className="validate"
-          />
           <a
             onClick={this.pushRepo}
             className="waves-effect waves-light btn-small blue darken-2 white-text"
