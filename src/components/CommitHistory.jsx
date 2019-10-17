@@ -132,7 +132,7 @@ export class CommitHistory extends Component {
             <div>
               <select onChange={this.onChange} class="browser-default">
                 <option value="" disabled selected>
-                  Choose your branch
+                  master
                 </option>
                 {this.state.branches.map(branch => (
                   <option>{branch}</option>

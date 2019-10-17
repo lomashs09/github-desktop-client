@@ -5,6 +5,9 @@ const { BrowserWindow } = electron;
 const { Menu } = electron;
 const { ipcMain } = electron;
 
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+
 // Load remote compnent that contains the dialog dependency
 const { dialog } = electron;
 const fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
@@ -179,6 +182,15 @@ ipcMain.on('Repo', async (event, arg) => {
       dialog.showMessageBox({
         type: 'info',
         message: 'Error! Failed to create folder'
+      });
+    }
+  } else if (arg.type === 'OPEN_XCODE') {
+    try {
+      await exec(`code ${arg.path}`);
+    } catch (err) {
+      dialog.showMessageBox({
+        type: 'info',
+        message: 'Error! Failed to open xcode'
       });
     }
   }
