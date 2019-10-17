@@ -103,8 +103,14 @@ html {
   position: relative;
 }
 .commits-history {
+<<<<<<< HEAD
   width: 30%;
   min-width: 20%;
+||||||| merged common ancestors
+  width: 22.5%;
+=======
+  width: 40%;
+>>>>>>> soumya
   max-height: 59.5rem;
   overflow-y: auto;
   overflow-x: hidden;
@@ -222,4 +228,11 @@ html {
   display: block;
   margin: 0.5em;
   width: 15%;
+}
+
+.checkbox-and-changed-file {
+  display: flex;
+  flex-direction: row;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
