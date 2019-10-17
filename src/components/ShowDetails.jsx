@@ -161,9 +161,11 @@ export default class Show extends Component {
               )}
             </div>
             <div className="commit-details">
-              <div className="commit-message-overview">
-                <CommitMessageOverview selectedCommit={this.state.selectedCommit} />
-              </div>
+              {this.state.showHistory ? (
+                <div className="commit-message-overview">
+                  <CommitMessageOverview selectedCommit={this.state.selectedCommit} />
+                </div>
+              ) : null}
               <div className="display-changes">
                 <DisplayChanges
                   className="commit-messages"
