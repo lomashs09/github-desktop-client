@@ -17,7 +17,8 @@ export default class Show extends Component {
     selectedCommit: ['Loading data...'],
     gitStatus: ['Loading data...'],
     selectedCommit: ['Loading data...'],
-    filePath:''
+    filePath:'',
+    checkboxStatus: []
   };
 
   toggleOverlay = () => {
@@ -58,9 +59,27 @@ export default class Show extends Component {
 
 
   getSelectedChangedFile = (fileName, modificationType) => {
-    console.log(fileName);
+    // console.log(fileName);
     const git = require('simple-git')(this.props.addNewRepoFilePath);
     modificationType === 'modify' ? git.raw(['diff'], (err, result) => this.setState({ changedFiles: [result] })) : git.raw(['diff', '--', '/dev/null', fileName], (err, result) => this.setState({ changedFiles: [result] }));
+  }
+
+  makeCommit = (commitMessage) => {
+    const git = require('simple-git')(this.props.addNewRepoFilePath);
+    if(commitMessage === '') {
+      console.log('A non-empty commit message is required.');
+    } else {
+      git.commit(commitMessage, (err, res) => console.log(res));	
+    }
+  }
+
+  addFilesToStagingArea = (fileName, isChecked) => {
+    const git = require('simple-git')(this.props.addNewRepoFilePath);
+    if(isChecked === true) {
+      git.add([fileName], (err, result) => console.log(result));	
+    } else {
+      git.reset([fileName], (err,result) => console.log(result));
+    }
   }
 
   async componentDidMount() {
@@ -95,10 +114,16 @@ export default class Show extends Component {
 //----------------------------Conditionally run this if user clicks on 'History'-----------------------
 
     git.status((err, status) => this.setState({ gitStatus: status }))
-    // git.raw(['diff'], (err, result) => this.setState({ changedFiles: [result] }));  
+    console.log(this.state.gitStatus);
+    // let arrayOfChangedFiles = [];
+    // this.state.gitStatus.not_added.length === 0 ? '' : this.state.gitStatus.not_added.map((newFile) => arrayOfChangedFiles.push({newFile: false}));
+    // this.state.gitStatus.modified.length === 0 ? '' : this.state.gitStatus.modified.map((modifiedFile) => arrayOfChangedFiles.push({modifiedFile: false}));
+    // this.state.gitStatus.deleted.length === 0 ? '' : this.state.gitStatus.deleted.map((deletedFile) => arrayOfChangedFiles.push({deletedFile: false}));
+    // this.setState({ checkboxStatus: arrayOfChangedFiles});
   }
 
   render() {
+    console.log(this.state.checkboxStatus);
     if ((this.state.commitHistory[0] === 'Loading data...') && (this.state.gitStatus[0] === 'Loading data...')) {
       return (
         <React.Fragment>
@@ -160,6 +185,8 @@ export default class Show extends Component {
               <CreateCommits
                 status={this.state.gitStatus}
                 getSelectedChangedFile={this.getSelectedChangedFile}
+                addFilesToStagingArea={this.addFilesToStagingArea}
+                makeCommit={this.makeCommit}
               />
             </div>
             <div className="commit-details">

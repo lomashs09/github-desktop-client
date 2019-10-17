@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ChangedFile from './ChangedFile';
+import CreateCommit from './CreateCommit';
 
 export class CreateCommits extends Component {
       
@@ -13,35 +14,31 @@ export class CreateCommits extends Component {
         fileName={newFile}
         getSelectedChangedFile={this.props.getSelectedChangedFile}
         modificationType={'add'}
+        addFilesToStagingArea={this.props.addFilesToStagingArea}
+        status={this.status}
       />
-    //   <div className='changedFiles-staging-area'>
-    //     <input type='checkbox'></input>
-    //     <p onClick={this.props.getSelectedChangedFile.bind(this, newFile, 'add')}>{newFile}[+]</p>
-    //   </div>
       )}
       { status.modified.length === 0 ? '' : status.modified.map((modifiedFile) => 
-        //     <div className='changedFiles-staging-area'>
-        //     <input type='checkbox'></input>
-        //     {/* <p>{modifiedFile}[M]</p> */}
-        //     <p onClick={this.props.getSelectedChangedFile.bind(this, modifiedFile, 'modify')}>{modifiedFile}[M]</p>
-        //   </div>
         <ChangedFile 
             fileName={modifiedFile}
             getSelectedChangedFile={this.props.getSelectedChangedFile}
             modificationType={'modify'}
-        />
+            addFilesToStagingArea={this.props.addFilesToStagingArea}
+            status={this.status}
+            />
       )}
       { status.deleted.length === 0 ? '' : status.deleted.map((deletedFile) => 
-    //   <div className='changedFiles-staging-area'>
-    //         <input type='checkbox'></input>
-    //         <p onClick={this.props.getSelectedChangedFile.bind(this, deletedFile, 'delete')}>{deletedFile}[-]</p>
-    //       </div>
             <ChangedFile 
                 fileName={deletedFile}
                 getSelectedChangedFile={this.props.getSelectedChangedFile}
                 modificationType={'delete'}
-            />
+                addFilesToStagingArea={this.props.addFilesToStagingArea}
+                status={this.status}
+                />
       )}
+      <CreateCommit 
+      makeCommit={this.props.makeCommit}
+      />
       </>
     );
   }

@@ -98,7 +98,7 @@ html {
   position: relative;
 }
 .commits-history {
-  width: 22.5%;
+  width: 40%;
   max-height: 59.5rem;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -187,4 +187,11 @@ html {
   width: 10em;
   margin-right: 6rem;
   margin-left: 1em;
+}
+
+.checkbox-and-changed-file {
+  display: flex;
+  flex-direction: row;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
