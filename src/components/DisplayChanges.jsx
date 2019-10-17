@@ -9,7 +9,7 @@ export class DisplayChanges extends Component {
       inputFormat: 'diff',
       showFiles: true,
       matching: 'lines',
-      outputFormat: 'side-by-side'
+      outputFormat: `${this.props.outputFormat}`
     };
     return <ReactGhLikeDiff className="diff-to-html" options={optionsD} diffString={diffText} />;
   }
