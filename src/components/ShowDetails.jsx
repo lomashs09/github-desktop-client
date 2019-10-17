@@ -44,16 +44,26 @@ export default class Show extends Component {
     this.setState({
       showHistory: !this.state.showHistory
     });
+  };
 
-    this.state.changesTriggered === 'green darken-2 white-text'
-      ? this.setState({
-          changesTriggered: 'white black-text',
-          historyTriggered: 'green darken-2 white-text'
-        })
-      : this.setState({
-          changesTriggered: 'green darken-2 white-text',
-          historyTriggered: 'white black-text'
-        });
+  clickedChangesButton = () => {
+    if (this.state.changesTriggered === 'white black-text') {
+      this.setState({
+        changesTriggered: 'green darken-2 white-text',
+        historyTriggered: 'white black-text'
+      });
+      this.toggleTabs();
+    }
+  };
+
+  clickedHistoryButton = () => {
+    if (this.state.historyTriggered === 'white black-text') {
+      this.setState({
+        changesTriggered: 'white black-text',
+        historyTriggered: 'green darken-2 white-text'
+      });
+      this.toggleTabs();
+    }
   };
 
   getSelectedCommit = commitHash => {
@@ -126,15 +136,15 @@ export default class Show extends Component {
               <a
                 className={`waves-effect waves-light btn changes-button + ${this.state.changesTriggered}`}
                 onClick={() => {
-                  this.toggleTabs();
+                  this.clickedChangesButton();
                 }}
               >
                 Changes
               </a>
               <a
-                class={`waves-effect waves-light btn changes-button + ${this.state.historyTriggered}`}
+                class={`waves-effect waves-light btn history-button + ${this.state.historyTriggered}`}
                 onClick={() => {
-                  this.toggleTabs();
+                  this.clickedHistoryButton();
                 }}
               >
                 History
