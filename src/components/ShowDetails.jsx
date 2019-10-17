@@ -60,7 +60,7 @@ export default class Show extends Component {
 
   getSelectedChangedFile = (fileName, modificationType) => {
     const git = require('simple-git')(this.props.addNewRepoFilePath);
-    modificationType === 'modify' ? git.raw(['diff'], (err, result) => this.setState({ changedFiles: [result] })) : git.raw(['diff', '--', '/dev/null', fileName], (err, result) => this.setState({ changedFiles: [result] }));
+    modificationType === 'modify' ? git.raw(['show'], (err, result) => this.setState({ changedFiles: [result] })) : git.raw(['diff', '--', '/dev/null', fileName], (err, result) => this.setState({ changedFiles: [result] }));
   }
 
   makeCommit = (commitMessage) => {

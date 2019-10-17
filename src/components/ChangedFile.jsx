@@ -57,7 +57,7 @@ export class ChangedFile extends Component {
                       </div>
                     </div>
                   );
-            } else {
+            } else if(this.props.modificationType === 'delete'){
                 return (
                     <div className='checkbox-and-changed-file'>
         <p>
@@ -73,7 +73,8 @@ export class ChangedFile extends Component {
                         <div className="col s12 m12">
                           <div className="card-panel white hoverable">
                             <input type='checkbox'></input>
-                            <span className="black-text" onClick={this.props.getSelectedChangedFile.bind(this, this.props.fileName, 'delete')}>{this.props.fileName}[-]</span>
+                            <span className="black-text" >{this.props.fileName}[-]</span>
+                            {/* onClick={this.props.getSelectedChangedFile.bind(this, this.props.fileName, 'delete')} */}
                           </div>
                         </div>
                       </div>

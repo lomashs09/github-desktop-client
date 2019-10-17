@@ -3,6 +3,7 @@ import { Diff2Html } from 'diff2html';
 
 export class DisplayChanges extends Component {
   render() {
+    console.log(this.props.changedFiles);
     const diffText = this.props.changedFiles[0];
     const outputHtml = Diff2Html.getPrettyHtml(diffText, {
       inputFormat: 'diff',
