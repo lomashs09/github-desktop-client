@@ -1,0 +1,7 @@
+user.name=<amoghwagh> user.email=amoghwagh@gmail.com color.ui=auto merge.conflictstyle=diff3 core.editor=code --wait 
+code.editor=code core.repositoryformatversion=0 core.filemode=true core.bare=false core.logallrefupdates=true 
+core.editor=. remote.old-origin.url=https://gitlab.com/amoghwagh/github-desktop-client.git 
+remote.old-origin.fetch=+refs/heads/*:refs/remotes/old-origin/* 
+remote.origin.url=https://gitlab.com/amoghwagh/github-desktop-client.git 
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/* branch.master.remote=origin branch.master.merge=refs/heads/master 
+code.editor=code

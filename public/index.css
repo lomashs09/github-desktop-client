@@ -103,7 +103,11 @@ html {
   position: relative;
 }
 .commits-history {
+<<<<<<< HEAD
   width: 40;
+=======
+  width: 30%;
+>>>>>>> 6bb48e87c4e571beb9eb46ae982a9732cfb42c8f
   min-width: 20%;
   max-height: 59.5rem;
   overflow-y: auto;
@@ -111,6 +115,10 @@ html {
   scrollbar-width: thin;
   border: 0.001em solid #333;
   box-shadow: 5px 0 5px -5px #333;
+}
+
+.staging-area {
+  width:100%;
 }
 
 .commits-staging-area {
@@ -194,7 +202,8 @@ html {
 
 .d2h-wrapper {
   font-size: 0.75rem;
-  width: 100%;
+  width: 98%;
+  margin-left: 1.25em;
   max-height: 43rem;
   overflow-y: auto;
 }
@@ -228,10 +237,22 @@ th {
   margin: 0.5em;
   width: 15%;
 }
+<<<<<<< HEAD
 
 .checkbox-and-changed-file {
   display: flex;
   flex-direction: row;
   margin-left: 2rem;
   margin-right: 2rem;
+<<<<<<< HEAD
 }
+=======
+}
+||||||| merged common ancestors
+=======
+
+.preloader-wrapper {
+  margin: auto;
+}
+>>>>>>> Amogh
+>>>>>>> 6bb48e87c4e571beb9eb46ae982a9732cfb42c8f

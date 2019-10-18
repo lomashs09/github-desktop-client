@@ -17,22 +17,18 @@ export class BranchModal extends Component {
             type="text"
             className="validate"
           />
-          <a
-            className="waves-effect waves-light btn-small blue darken-2 white-text"
-          >
+          <a className="waves-effect waves-light btn-small blue darken-2 white-text">
             <i className="material-icons right">add_circle</i>
             CREATE
           </a>
         </div>
-        <div className="input-field col s12">
-        </div>
+        <div className="input-field col s12" />
         <div className="modal-footer">
           <a
             className="modal-close waves-effect waves-green btn-flat"
             onClick={() => {
               this.props.toggleOverlay();
               this.props.toggleModalClass();
-              
             }}
           >
             CLOSE
@@ -42,7 +38,7 @@ export class BranchModal extends Component {
             onClick={() => {
               this.props.toggleOverlay();
               this.props.toggleModalClass();
-              this.props.updateCommits(this.state.selectedBranch)
+              this.props.updateCommits(this.state.selectedBranch);
             }}
           >
             OK
