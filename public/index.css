@@ -103,54 +103,14 @@ html {
   position: relative;
 }
 .commits-history {
-<<<<<<< HEAD
-<<<<<<< HEAD
   width: 30%;
-||||||| merged common ancestors
-<<<<<<< HEAD
-  width: 30%;
-=======
-  <<<<<<<headwidth: 30%;
->>>>>>> Amogh-Soumya
-||||||| merged common ancestors
-<<<<<<< HEAD
-  width: 30%;
-=======
-  width: 40;
->>>>>>> 73d79946514a2d88213f1ed99aaf34743d980a48
   min-width: 20%;
-<<<<<<< HEAD
-<<<<<<< HEAD
   max-height: 59.5rem;
-||||||| merged common ancestors
-||||||| merged common ancestors
-  width: 22.5%;
-=======
-  width: 40%;
->>>>>>> soumya
-||||||| merged common ancestors
-||||||| merged common ancestors
-  width: 22.5%;
-=======
-  width: 40%;
->>>>>>> soumya
-=======
->>>>>>> 73d79946514a2d88213f1ed99aaf34743d980a48
-  max-height: 59.5rem;
-=======
-  |||||||mergedcommonancestorswidth: 22.5%;
-  =======width: 40%;
-  >>>>>>>soumyamax-height: 59.5rem;
->>>>>>> Amogh-Soumya
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
   border: 0.001em solid #333;
   box-shadow: 5px 0 5px -5px #333;
-}
-
-.staging-area {
-  width:100%;
 }
 
 .commits-staging-area {
@@ -234,15 +194,8 @@ html {
 
 .d2h-wrapper {
   font-size: 0.75rem;
-<<<<<<< HEAD
-  width: 98%;
-  margin-left: 1.25em;
-||||||| merged common ancestors
-  width: 100%;
-=======
   margin: 0 1.25em;
   width: 98%;
->>>>>>> Amogh-Soumya
   max-height: 43rem;
   overflow-y: auto;
 }
@@ -276,14 +229,12 @@ th {
   margin: 0.5em;
   width: 15%;
 }
-<<<<<<< HEAD
 
 .checkbox-and-changed-file {
   width: 100%;
   display: flex;
   flex-direction: row;
 }
-<<<<<<< HEAD
 
 .collection-changedFile {
   width: 100%;
@@ -296,16 +247,3 @@ th {
 .file-name {
   cursor: pointer;
 }
-||||||| merged common ancestors
-=======
-
-.preloader-wrapper {
-  margin: auto;
-}
->>>>>>> Amogh
-||||||| merged common ancestors
-=======
-.selected-branch{
-  font-weight: bold;
-}
->>>>>>> 73d79946514a2d88213f1ed99aaf34743d980a48
