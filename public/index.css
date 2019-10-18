@@ -104,6 +104,7 @@ html {
 }
 .commits-history {
 <<<<<<< HEAD
+<<<<<<< HEAD
   width: 30%;
 ||||||| merged common ancestors
 <<<<<<< HEAD
@@ -111,7 +112,14 @@ html {
 =======
   <<<<<<<headwidth: 30%;
 >>>>>>> Amogh-Soumya
+||||||| merged common ancestors
+<<<<<<< HEAD
+  width: 30%;
+=======
+  width: 40;
+>>>>>>> 73d79946514a2d88213f1ed99aaf34743d980a48
   min-width: 20%;
+<<<<<<< HEAD
 <<<<<<< HEAD
   max-height: 59.5rem;
 ||||||| merged common ancestors
@@ -120,6 +128,14 @@ html {
 =======
   width: 40%;
 >>>>>>> soumya
+||||||| merged common ancestors
+||||||| merged common ancestors
+  width: 22.5%;
+=======
+  width: 40%;
+>>>>>>> soumya
+=======
+>>>>>>> 73d79946514a2d88213f1ed99aaf34743d980a48
   max-height: 59.5rem;
 =======
   |||||||mergedcommonancestorswidth: 22.5%;
@@ -267,6 +283,7 @@ th {
   display: flex;
   flex-direction: row;
 }
+<<<<<<< HEAD
 
 .collection-changedFile {
   width: 100%;
@@ -286,3 +303,9 @@ th {
   margin: auto;
 }
 >>>>>>> Amogh
+||||||| merged common ancestors
+=======
+.selected-branch{
+  font-weight: bold;
+}
+>>>>>>> 73d79946514a2d88213f1ed99aaf34743d980a48
