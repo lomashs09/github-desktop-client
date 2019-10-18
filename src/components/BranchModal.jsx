@@ -11,6 +11,9 @@ export class BranchModal extends Component {
     newBranch: '',
     mergeFromBranch: ''
   };
+  updateLoadingState=()=>{
+    this.setState({successMessage:''})
+  }
   pushRepo = () => {
     let git = require('simple-git')(filePath);
     git.listRemote(['--get-url'], (err, data) => {
@@ -29,8 +32,8 @@ export class BranchModal extends Component {
       }
     });
   };
+
   pullRepo = () => {
-    console.log(this.state.branch);
     let git = require('simple-git')(filePath);
     git.listRemote(['--get-url'], (err, data) => {
       if (!err) {
@@ -40,17 +43,18 @@ export class BranchModal extends Component {
       }
     });
     this.setState({ successMessage: 'pulling...' });
-    git.pull(['-u', 'origin', this.state.selectedBranch], (err, results) => {
+    git.pull('origin', 'master',(err, results) => {
       this.setState({ successMessage: 'pulled succesfully !' });
       if (!err) {
         console.log(results);
       }
-    });
+    })
   };
+
   onInputChange = e => {
     this.setState({ newBranch: e.target.value });
   };
-  selectMergeFromBranch = e => {
+  BranchToPullFrom = e => {
     this.setState({ mergeFromBranch: e.target.value });
   };
   onChange = async e => {
@@ -70,19 +74,18 @@ export class BranchModal extends Component {
   mergeBranch = () => {
     let git = require('simple-git')(filePath);
     this.setState({ successMessage: 'merging in progress...' });
-    console.log(this.state.mergeFromBranch);
-    console.log(this.state.selectedBranch);
     git
       .mergeFromTo(this.state.mergeFromBranch, this.state.selectedBranch, (err, result) =>
-        err ? console.log(err) : console.log(result)
+        err ? this.setState({ successMessage: 'Oops, Merge conflicts occured!' }) : this.setState({ successMessage: 'Merged Successfully !' })
       )
-      .merge((err, res) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(res);
-        }
-      });
+      // .merge((err, res) => {
+      //   if (err) {
+      //     console.log(err);
+      //   } else {
+      //     this.setState({ successMessage: 'Merged Successfully !' });
+      //     console.log(res);
+      //   }
+      // });
   };
   createNewBranch = () => {
     const git = require('simple-git')(filePath);
@@ -146,6 +149,7 @@ export class BranchModal extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
+                this.updateLoadingState();
               }}
             >
               CLOSE
@@ -156,6 +160,7 @@ export class BranchModal extends Component {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
                 this.props.updateCommits(this.state.selectedBranch);
+                this.updateLoadingState();
               }}
             >
               OK
@@ -198,6 +203,7 @@ export class BranchModal extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
+                this.updateLoadingState();
               }}
             >
               CLOSE
@@ -208,6 +214,7 @@ export class BranchModal extends Component {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
                 this.props.updateCommits(this.state.selectedBranch);
+                this.updateLoadingState();
               }}
             >
               OK
@@ -224,8 +231,11 @@ export class BranchModal extends Component {
           <span className="new-branch-text">Before Pulling Set the Remote using SSH</span>
           <br />
           <br />
+          <p>
+            Pull into: <span className="selected-branch">{this.state.selectedBranch}</span>
+          </p>
           <div className="input-field col s12">
-            <select onChange={this.onChange} className="choose-branch">
+            <select onChange={this.BranchToPullFrom} className="choose-branch">
               <option value="" disabled selected>
                 Choose your branch to pull into
               </option>
@@ -250,6 +260,7 @@ export class BranchModal extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
+                this.updateLoadingState();
               }}
             >
               CLOSE
@@ -259,6 +270,7 @@ export class BranchModal extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
+                this.updateLoadingState();
                 this.props.updateCommits(this.state.selectedBranch);
               }}
             >
@@ -276,12 +288,11 @@ export class BranchModal extends Component {
           <span className="new-branch-text">Before Merging Set the Remote using SSH</span>
           <br />
           <br />
-          <br />
           <p>
             Merge into: <span className="selected-branch">{this.state.selectedBranch}</span>
           </p>
           <div className="input-field col s12">
-            <select onChange={this.selectMergeFromBranch} className="choose-branch">
+            <select onChange={this.BranchToPullFrom} className="choose-branch">
               <option value="" disabled selected>
                 Choose Branch to Merge
               </option>
@@ -306,6 +317,7 @@ export class BranchModal extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
+                this.updateLoadingState();
               }}
             >
               CLOSE
@@ -316,6 +328,7 @@ export class BranchModal extends Component {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
                 this.props.updateCommits(this.state.selectedBranch);
+                this.updateLoadingState();
               }}
             >
               OK
