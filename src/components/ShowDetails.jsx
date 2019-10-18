@@ -4,7 +4,6 @@ import CommitHistory from './CommitHistory';
 import CommitMessageOverview from './CommitMessageOverview';
 import DisplayChanges from './DisplayChanges';
 import CreateCommits from './CreateCommits';
-import StagingAreaChanges from './StagingAreaChanges';
 import BranchModal from './BranchModal';
 
 var filePath;
@@ -145,6 +144,7 @@ export default class Show extends Component {
       ? (filePath = `./${filename}`)
       : (filePath = this.props.addNewRepoFilePath);
     const git = require('simple-git')(filePath);
+    git.status((err, status) => this.setState({ gitStatus: status }))
     git.log((err, log) => {
       if (log === null) {
         this.setState({ commitHistory: ['No commits yet'] });
@@ -155,7 +155,7 @@ export default class Show extends Component {
         });
       }
     });
-    git.status((err, status) => this.setState({ gitStatus: status }))
+    // git.status((err, status) => this.setState({ gitStatus: status }))
     // console.log(this.state.gitStatus);
   }
   
