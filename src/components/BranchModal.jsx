@@ -260,7 +260,7 @@ export class BranchModal extends Component {
     return (
       <div id="modal1" className={`modal + ${this.props.modalDisplayClass}`}>
         <div className="modal-content white">
-          <h4>Pull from repo</h4>
+          <h4>Merge</h4>
         </div>
         <span className="new-branch-text">Before Merging Set the Remote using SSH</span><br /><br /><br />
         <p>Merge into: <span className='selected-branch'>{this.state.selectedBranch}</span></p>
