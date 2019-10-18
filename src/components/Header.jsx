@@ -10,14 +10,19 @@ export default class Header extends Component {
             <span className="logo-text">GitHub</span>
           </a>
           <ul id="nav-mobile" className="left">
-            <li>
+            <li
+              onClick={() => {
+                this.props.toggleOverlay();
+                this.props.toggleModalClassEditor();
+              }}
+            >
               <a>Current Repository</a>
             </li>
             <li
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
-                this.props.modalToDisplay('branch-modal')
+                this.props.modalToDisplay('branch-modal');
               }}
             >
               <a>Branch</a>
@@ -26,7 +31,7 @@ export default class Header extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
-                this.props.modalToDisplay('publish-modal')
+                this.props.modalToDisplay('publish-modal');
               }}
             >
               <a>Publish Repository</a>

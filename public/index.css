@@ -103,20 +103,18 @@ html {
   position: relative;
 }
 .commits-history {
-<<<<<<< HEAD
   width: 30%;
   min-width: 20%;
-||||||| merged common ancestors
-  width: 22.5%;
-=======
-  width: 40%;
->>>>>>> soumya
   max-height: 59.5rem;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
   border: 0.001em solid #333;
   box-shadow: 5px 0 5px -5px #333;
+}
+
+.staging-area {
+  width:100%;
 }
 
 .commits-staging-area {
@@ -200,7 +198,8 @@ html {
 
 .d2h-wrapper {
   font-size: 0.75rem;
-  width: 100%;
+  width: 98%;
+  margin-left: 1.25em;
   max-height: 43rem;
   overflow-y: auto;
 }
@@ -234,6 +233,7 @@ th {
   margin: 0.5em;
   width: 15%;
 }
+<<<<<<< HEAD
 
 .checkbox-and-changed-file {
   display: flex;
@@ -241,3 +241,10 @@ th {
   margin-left: 2rem;
   margin-right: 2rem;
 }
+||||||| merged common ancestors
+=======
+
+.preloader-wrapper {
+  margin: auto;
+}
+>>>>>>> Amogh
