@@ -157,7 +157,7 @@ html {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bolder;
   font-size: 1.5em;
-  margin: 0.3em;
+  margin: 0.5em;
 }
 
 .commit-sub-details {
@@ -237,14 +237,31 @@ th {
   flex-direction: row;
 }
 
+.checkbox-and-changed-file .collection-item {
+  display: flex;
+}
+
 .collection-changedFile {
   width: 100%;
 }
 
 .commit-button {
-  width: 100%;
+  width: 98%;
+  align-self: center;
 }
 
 .file-name {
   cursor: pointer;
+  font-size: 1.1em;
+}
+
+.staging-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.filename-span {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }

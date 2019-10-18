@@ -35,14 +35,19 @@ export class ChangedFile extends Component {
               )}
               <span></span>
             </label>
-            <span
-              className="file-name"
-              onClick={this.props.getSelectedChangedFile.bind(this, this.props.fileName, 'add')}
-            >
-              {' '}
-              {this.props.fileName}{' '}
-            </span>
-            <span className="changed-type"> [+]</span>
+            <div className="filename-span">
+              <span
+                className="file-name"
+                onClick={this.props.getSelectedChangedFile.bind(this, this.props.fileName, 'add')}
+              >
+                {' '}
+                {this.props.fileName}{' '}
+              </span>
+              <span className="changed-type">
+                {' '}
+                <i class="material-icons">add_box</i>
+              </span>
+            </div>
           </li>
         );
       } else if (this.props.modificationType === 'modify') {
@@ -70,14 +75,22 @@ export class ChangedFile extends Component {
 
               <span></span>
             </label>
-            <span
-              className="file-name"
-              onClick={this.props.getSelectedChangedFile.bind(this, this.props.fileName, 'modify')}
-            >
-              {' '}
-              {this.props.fileName}{' '}
-            </span>
-            <span className="changed-type">[M]</span>
+            <div className="filename-span">
+              <span
+                className="file-name"
+                onClick={this.props.getSelectedChangedFile.bind(
+                  this,
+                  this.props.fileName,
+                  'modify'
+                )}
+              >
+                {' '}
+                {this.props.fileName}{' '}
+              </span>
+              <span className="changed-type">
+                <i class="material-icons">edit</i>
+              </span>
+            </div>
           </li>
         );
       } else if (this.props.modificationType === 'delete') {
@@ -104,7 +117,6 @@ export class ChangedFile extends Component {
                   />
                 )}
 
-                {/* <input type="checkbox" onClick={() => {this.toggle(); this.props.addFilesToStagingArea(this.props.fileName, this.state.checked)}}/> */}
                 <span></span>
               </label>
             </p>{' '}
@@ -113,7 +125,6 @@ export class ChangedFile extends Component {
                 <div className="card-panel white hoverable">
                   <input type="checkbox"></input>
                   <span className="black-text">{this.props.fileName}[-]</span>
-                  {/* onClick={this.props.getSelectedChangedFile.bind(this, this.props.fileName, 'delete')} */}
                 </div>
               </div>
             </div>
