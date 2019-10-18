@@ -25,7 +25,7 @@ export class CreateCommit extends Component {
           </div>
         </form>
       </div>
-      <a class="waves-effect waves-light btn" onClick={this.props.makeCommit.bind(this, this.state.commitMessage)}>Commit</a>
+      <a class="waves-effect waves-light btn blue darken-2 commit-button" onClick={this.props.makeCommit.bind(this, this.state.commitMessage)}>Commit</a>
     </>
     );
   }

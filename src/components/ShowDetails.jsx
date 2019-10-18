@@ -179,12 +179,6 @@ export default class Show extends Component {
         });
       }
     });
-    // git.status((err,status) => console.log(status))
-
-    // git.status((err, status) => this.setState({ gitStatus: status }));
-
-    console.log('Imma unicorn');
-    // git.status((err, status) =>  console.log(`This should RUN ${status}`));
   }
 
   render() {

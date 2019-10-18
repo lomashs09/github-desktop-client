@@ -82,7 +82,7 @@ export class CommitHistory extends Component {
         return <Commits history={history} />;
       } else {
         return (
-          <React.fragment>
+          <React.Fragment>
             <div>
               <select onChange={this.onChange} class="browser-default">
                 <option value="" disabled selected>
@@ -101,7 +101,7 @@ export class CommitHistory extends Component {
                 getSelectedCommit={this.props.getSelectedCommit}
               />
             ))}
-          </React.fragment>
+          </React.Fragment>
         );
       }
     } else {
@@ -128,7 +128,7 @@ export class CommitHistory extends Component {
         return <Commits history={history} />;
       } else {
         return (
-          <>
+          <React.Fragment>
             <div>
               <select onChange={this.onChange} class="browser-default">
                 <option value="" disabled selected>
@@ -148,7 +148,7 @@ export class CommitHistory extends Component {
                 getSelectedCommit={this.props.getSelectedCommit}
               />
             ))}
-          </>
+          </React.Fragment>
         );
       }
     }
