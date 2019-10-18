@@ -144,6 +144,8 @@ export default class Show extends Component {
       ? (filePath = `./${filename}`)
       : (filePath = this.props.addNewRepoFilePath);
     const git = require('simple-git')(filePath);
+    git.status((err, status) => this.setState({ gitStatus: status }))
+
     git.log((err, log) => {
       if (log === null) {
         this.setState({ commitHistory: ['No commits yet'],filePath:filePath });
@@ -154,7 +156,6 @@ export default class Show extends Component {
         });
       }
     });
-    git.status((err, status) => this.setState({ gitStatus: status }))
   }
   
   render() {

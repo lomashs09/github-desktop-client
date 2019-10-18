@@ -41,6 +41,15 @@ export default class Header extends Component {
             >
               <a>Pull</a>
             </li>
+            <li
+              onClick={() => {
+                this.props.toggleOverlay();
+                this.props.toggleModalClass();
+                this.props.modalToDisplay('merge-modal')
+              }}
+            >
+              <a>Merge</a>
+            </li>
           </ul>
         </div>
       </nav>

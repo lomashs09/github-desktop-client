@@ -235,3 +235,6 @@ th {
   margin-left: 2rem;
   margin-right: 2rem;
 }
+.selected-branch{
+  font-weight: bold;
+}
