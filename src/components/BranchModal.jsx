@@ -11,7 +11,6 @@ export class BranchModal extends Component {
     newBranch: ''
   };
   pushRepo =()=>{
-    console.log('branch:',this.state.selectedBranch)
     let git = require('simple-git')(filePath);
   git
     .listRemote(['--get-url'], (err, data) => {
@@ -23,12 +22,25 @@ export class BranchModal extends Component {
           this.setState({successMessage:'Please Add Remote Before Push'})
         }
     });
-    this.setState({successMessage:'pushing...'})
+    this.setState({successMessage:'pulling...'})
     git.push(['-u', 'origin', this.state.selectedBranch],(err,results)=>{
-      this.setState({successMessage:'pushed succesfully !'})
+      this.setState({successMessage:'pulled succesfully !'})
       if(!err){
       console.log(results)
     }})
+  }
+  pullRepo = () =>{
+    console.log(this.state.branch)
+    let git = require('simple-git')(filePath);
+    git
+    .listRemote(['--get-url'], (err, data) => {
+        if (!err) {
+            console.log(data);
+        }
+        else{
+          this.setState({successMessage:'Please Add Remote Before Push'})
+        }
+    });
   }
   onInputChange = e => {
     this.setState({ newBranch: e.target.value });
@@ -180,13 +192,24 @@ export class BranchModal extends Component {
     return (
       <div id="modal1" className={`modal + ${this.props.modalDisplayClass}`}>
         <div className="modal-content white">
-          <h4>Publish</h4>
+          <h4>Pull from repo</h4>
         </div>
-        <span className="new-branch-text">Before Pushing Set the Remote using SSH</span><br /><br />
+        <span className="new-branch-text">Before Pulling Set the Remote using SSH</span><br /><br />
+        <div className="input-field col s12">
+          <select onChange={this.onChange} className="choose-branch">
+            <option value="" disabled selected>
+              Choose your branch to pull into
+            </option>
+            {this.state.branches.map(branch => (
+              <option>{branch}</option>
+            ))}
+          </select>
+        </div>
+        
         {' '}
         <div className="input-field col s8 branch-name-input center-align">
           <a
-            onClick={this.pushRepo}
+            onClick={this.pullRepo}
             className="waves-effect waves-light btn-small blue darken-2 white-text"
           >
             <i className="material-icons right">add_circle</i>
@@ -194,16 +217,7 @@ export class BranchModal extends Component {
           </a>
           <p >{this.state.successMessage}</p>
         </div>
-        <div className="input-field col s12">
-          <select onChange={this.onChange} className="choose-branch">
-            <option value="" disabled selected>
-              Choose your branch
-            </option>
-            {this.state.branches.map(branch => (
-              <option>{branch}</option>
-            ))}
-          </select>
-        </div>
+
         <div className="modal-footer">
           <a
             className="modal-close waves-effect waves-green btn-flat"
