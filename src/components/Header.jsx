@@ -17,7 +17,9 @@ export default class Header extends Component {
                 this.props.toggleModalClassEditor();
               }}
             >
-              <a>Current Repository</a>
+              <a>
+                <i className="material-icons">home</i>
+              </a>
             </li>
             <li
               onClick={() => {
@@ -41,7 +43,7 @@ export default class Header extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
-                this.props.modalToDisplay('pull-modal')
+                this.props.modalToDisplay('pull-modal');
               }}
             >
               <a>Pull</a>
@@ -50,7 +52,7 @@ export default class Header extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
-                this.props.modalToDisplay('merge-modal')
+                this.props.modalToDisplay('merge-modal');
               }}
             >
               <a>Merge</a>
