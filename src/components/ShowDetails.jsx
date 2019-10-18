@@ -171,7 +171,7 @@ export default class Show extends Component {
 
     git.log((err, log) => {
       if (log === null) {
-        this.setState({ commitHistory: ['No commits yet']});
+        this.setState({ commitHistory: ['No commits yet'] });
       } else {
         this.setState({
           commitHistory: [...log.all.map(commit => commit)],
@@ -182,11 +182,9 @@ export default class Show extends Component {
     // git.status((err,status) => console.log(status))
 
     // git.status((err, status) => this.setState({ gitStatus: status }));
-        
 
-    console.log('Imma unicorn')
+    console.log('Imma unicorn');
     // git.status((err, status) =>  console.log(`This should RUN ${status}`));
-
   }
 
   render() {
@@ -208,7 +206,7 @@ export default class Show extends Component {
       );
     } else {
       console.log('Control comes here');
-      console.log(this.state.filePath)
+      console.log(this.state.filePath);
       return (
         <section className={`${this.props.repoDetailsDisplayClass}`}>
           <Header
@@ -259,11 +257,6 @@ export default class Show extends Component {
                   filePath={this.state.filePath}
                   selectedBranch={this.state.selectedBranch}
                 />
-                <OpenEditorModal
-                  toggleOverlayEditorModal={this.toggleOverlay}
-                  toggleModalClassEditor={this.toggleModalClassEditor}
-                  modalDisplayClassEditor={this.state.modalDisplayClassEditor}
-                />
               </div>
               <div className="commit-details">
                 {this.state.showHistory ? (
@@ -300,11 +293,9 @@ export default class Show extends Component {
                 }}
               />
             </section>
-          ) : 
-          this.state.gitStatus[0] === 'Loading data...' ? (
-            ''// console.log(this.state.gitStatus)
-          ) : 
-          (
+          ) : this.state.gitStatus[0] === 'Loading data...' ? (
+            '' // console.log(this.state.gitStatus)
+          ) : (
             <section className="show-details">
               <div className="commits-history">
                 <a
