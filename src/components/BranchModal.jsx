@@ -8,7 +8,8 @@ export class BranchModal extends Component {
     selectedBranch: 'master',
     commits: '',
     filePath: '',
-    newBranch: ''
+    newBranch: '',
+    mergeFromBranch:''
   };
   pushRepo =()=>{
     let git = require('simple-git')(filePath);
@@ -51,6 +52,9 @@ export class BranchModal extends Component {
   onInputChange = e => {
     this.setState({ newBranch: e.target.value });
   };
+  selectMergeFromBranch = (e)=>{
+    this.setState({branchFromMerge:e.target.value})
+  }
   onChange = async e => {
     if (this.props.filePath) {
       if(this.props.modal!=='merge-modal'){
@@ -262,7 +266,7 @@ export class BranchModal extends Component {
         <p>Merge into: <span className='selected-branch'>{this.state.selectedBranch}</span></p>
 
         <div className="input-field col s12">
-          <select onChange={this.onChange} className="choose-branch">
+          <select onChange={this.selectMergeFromBranch} className="choose-branch">
             <option value="" disabled selected>
               Choose Branch to Merge
             </option>
