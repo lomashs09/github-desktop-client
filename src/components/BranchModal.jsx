@@ -22,9 +22,9 @@ export class BranchModal extends Component {
           this.setState({successMessage:'Please Add Remote Before Push'})
         }
     });
-    this.setState({successMessage:'pulling...'})
+    this.setState({successMessage:'pushing...'})
     git.push(['-u', 'origin', this.state.selectedBranch],(err,results)=>{
-      this.setState({successMessage:'pulled succesfully !'})
+      this.setState({successMessage:'pushed succesfully !'})
       if(!err){
       console.log(results)
     }})
@@ -38,9 +38,15 @@ export class BranchModal extends Component {
             console.log(data);
         }
         else{
-          this.setState({successMessage:'Please Add Remote Before Push'})
+          this.setState({successMessage:'Please Add Remote Before Pull'})
         }
-    });
+    })
+    this.setState({successMessage:'pulling...'})
+    git.pull(['-u', 'origin', this.state.selectedBranch],(err,results)=>{
+      this.setState({successMessage:'pulled succesfully !'})
+      if(!err){
+      console.log(results)
+    }})
   }
   onInputChange = e => {
     this.setState({ newBranch: e.target.value });
