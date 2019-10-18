@@ -61,8 +61,11 @@ export class BranchModal extends Component {
       await this.setState({ filePath: nextprops.filePath, commits:nextprops.history });
     }
     filePath = this.state.filePath;
-    const git = require('simple-git')(this.state.filePath);
-    git.branchLocal((err, branches) => this.setState({ branches: branches.all }));
+          const git = require('simple-git')(filePath);
+          git.branchLocal((err, branches) => this.setState({ branches: branches.all }));
+    
+    // console.log(this.props.filePath)
+
   }
   render() {
     if(this.props.modal ==='branch-modal'){
