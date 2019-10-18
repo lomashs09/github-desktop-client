@@ -31,7 +31,6 @@ export class BranchModal extends Component {
     }})
   }
   pullRepo = () =>{
-    console.log(this.state.branch)
     let git = require('simple-git')(filePath);
     git
     .listRemote(['--get-url'], (err, data) => {
@@ -49,13 +48,30 @@ export class BranchModal extends Component {
       console.log(results)
     }})
   }
+
+  mergeBranch = () =>{
+    let git = require('simple-git')(filePath);
+    this.setState({successMessage:'merging in progress...'})
+    git.mergeFromTo(this.state.mergeFromBranch, this.state.selectedBranch, (err, result) => err ? console.log(err) :console.log(result));
+    // git.pull(['-u', 'origin', this.state.selectedBranch],(err,results)=>{
+    //   this.setState({successMessage:'pulled succesfully !'})
+    //   if(!err){
+    //   console.log(results)
+    // }})
+
+
+    //merge:	
+  }
+
   onInputChange = e => {
     this.setState({ newBranch: e.target.value });
   };
+
   selectMergeFromBranch = (e)=>{
     console.log(e.target.value)
     this.setState({branchFromMerge:e.target.value})
   }
+
   onChange = async e => {
     if (this.props.filePath) {
       if(this.props.modal!=='merge-modal'){
@@ -261,13 +277,13 @@ export class BranchModal extends Component {
     return (
       <div id="modal1" className={`modal + ${this.props.modalDisplayClass}`}>
         <div className="modal-content white">
-          <h4>Pull from repo</h4>
+          <h4>Merge branch</h4>
         </div>
         <span className="new-branch-text">Before Merging Set the Remote using SSH</span><br /><br /><br />
         <p>Merge into: <span className='selected-branch'>{this.state.selectedBranch}</span></p>
 
         <div className="input-field col s12">
-          <select onChange={this.selectMergeFromBranch} className="choose-branch">
+        <select onChange={this.selectMergeFromBranch} className="choose-branch">
             <option value="" disabled selected>
               Choose Branch to Merge
             </option>
@@ -280,7 +296,7 @@ export class BranchModal extends Component {
         {' '}
         <div className="input-field col s8 branch-name-input center-align">
           <a
-            onClick={this.pullRepo}
+            onClick={this.mergeBranch}
             className="waves-effect waves-light btn-small blue darken-2 white-text"
           >
             <i className="material-icons right">add_circle</i>
