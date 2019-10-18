@@ -5,13 +5,14 @@ import CommitMessageOverview from './CommitMessageOverview';
 import DisplayChanges from './DisplayChanges';
 import CreateCommits from './CreateCommits';
 import BranchModal from './BranchModal';
+import OpenEditorModal from './OpenEditorModal';
 
 var filePath;
-
 export default class Show extends Component {
   state = {
     modalOverlayClass: '',
     modalDisplayClass: '',
+    modalDisplayClassEditor: '',
     commitHistory: ['Loading data...'],
     changedFiles: ['Loading data...'],
     selectedCommit: ['Loading data...'],
@@ -26,10 +27,19 @@ export default class Show extends Component {
     modal:'',
     checkboxStatus: []
   };
-
   modalToDisplay = (modalName) =>{
     this.setState({modal:modalName})
   }
+
+  toggleModalClassEditor = () => {
+    this.state.modalDisplayClassEditor === ''
+      ? this.setState({
+          modalDisplayClassEditor: 'modal-show'
+        })
+      : this.setState({
+          modalDisplayClassEditor: ''
+        });
+  };
 
   toggleOverlay = () => {
     this.state.modalOverlayClass === ''
@@ -40,7 +50,6 @@ export default class Show extends Component {
           modalOverlayClass: ''
         });
   };
-
   toggleModalClass = () => {
     this.state.modalDisplayClass === ''
       ? this.setState({
@@ -50,13 +59,11 @@ export default class Show extends Component {
           modalDisplayClass: ''
         });
   };
-
   toggleTabs = () => {
     this.setState({
       showHistory: !this.state.showHistory
     });
   };
-
   clickedChangesButton = () => {
     if (this.state.changesTriggered === 'white black-text') {
       this.setState({
@@ -66,7 +73,6 @@ export default class Show extends Component {
       this.toggleTabs();
     }
   };
-
   clickedHistoryButton = () => {
     if (this.state.historyTriggered === 'white black-text') {
       this.setState({
@@ -76,17 +82,14 @@ export default class Show extends Component {
       this.toggleTabs();
     }
   };
-
   changeOutputFormat = e => {
     this.setState({
       outputFormat: e.target.value
     });
   };
-
   updateCommits = (changedBranch) =>{
     this.setState({selectedBranch:changedBranch})
     }
-
   getSelectedCommit = commitHash => {
     let filename;
     let filePath;
@@ -102,31 +105,26 @@ export default class Show extends Component {
       this.setState({ changedFiles: [result], selectedCommit: clickedCommit,filePath:filePath })
     );
   };
-
-
   getSelectedChangedFile = (fileName, modificationType) => {
     const git = require('simple-git')(this.props.addNewRepoFilePath);
     modificationType === 'modify' ? git.raw(['diff'], (err, result) => this.setState({ changedFiles: [result] })) : git.raw(['diff', '--', '/dev/null', fileName], (err, result) => this.setState({ changedFiles: [result] }));
   }
-
   makeCommit = (commitMessage) => {
     const git = require('simple-git')(this.props.addNewRepoFilePath);
     if(commitMessage === '') {
       alert("Commit message can't be empty");
     } else {
-      git.commit(commitMessage, (err, res) => console.log(res));	
+      git.commit(commitMessage, (err, res) => console.log(res)); 
     }
   }
-
   addFilesToStagingArea = (fileName, isChecked) => {
     const git = require('simple-git')(this.props.addNewRepoFilePath);
     if(isChecked === true) {
-      git.add([fileName], (err, result) => console.log(result));	
+      git.add([fileName], (err, result) => console.log(result)); 
     } else {
       git.reset([fileName], (err,result) => console.log(result));
     }
   }
-
   async componentDidMount() {
     if (this.props.selectedModal === 'clone-repo') {
       const git = require('simple-git');
@@ -173,6 +171,7 @@ export default class Show extends Component {
             toggleModalClass={this.toggleModalClass}
             modalDisplayClass={this.state.modalDisplayClass}
             modalToDisplay = {this.modalToDisplay}
+            toggleModalClassEditor={this.toggleModalClassEditor}
           />
           <BranchModal
             toggleOverlay={this.toggleOverlay}
@@ -184,7 +183,11 @@ export default class Show extends Component {
             updateCommits = {this.updateCommits}
             modal={this.state.modal}
           />
-
+             <OpenEditorModal
+            toggleOverlayEditorModal={this.toggleOverlay}
+            toggleModalClassEditor={this.toggleModalClassEditor}
+            modalDisplayClassEditor={this.state.modalDisplayClassEditor}
+          />
 {this.state.showHistory ? (
   <section className="show-details">
   <div className="commits-history">
@@ -239,12 +242,14 @@ export default class Show extends Component {
   </div>
   
   <div
-    className={`modal-overlay  + ${this.state.modalOverlayClass}`}
-    onClick={() => {
-      this.toggleOverlay();
-      this.toggleModalClass();
-    }}
-  />
+                className={`modal-overlay  + ${this.state.modalOverlayClass}`}
+                onClick={() => {
+                  this.toggleOverlay();
+                  this.state.modalDisplayClassEditor === ''
+                    ? this.toggleModalClass()
+                    : this.toggleModalClassEditor();
+                }}
+              />
 </section>
 ) : (
   this.state.gitStatus[0] === 'Loading data...' ? ('') : 
@@ -305,12 +310,14 @@ export default class Show extends Component {
     
   </div>
   <div
-    className={`modal-overlay  + ${this.state.modalOverlayClass}`}
-    onClick={() => {
-      this.toggleOverlay();
-      this.toggleModalClass();
-    }}
-  />
+                className={`modal-overlay  + ${this.state.modalOverlayClass}`}
+                onClick={() => {
+                  this.toggleOverlay();
+                  this.state.modalDisplayClassEditor === ''
+                    ? this.toggleModalClass()
+                    : this.toggleModalClassEditor();
+                }}
+              />
   
 </section>
 )) }
