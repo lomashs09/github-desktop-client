@@ -130,7 +130,6 @@ export default class Show extends Component {
   async componentDidMount() {
     if (this.props.selectedModal === 'clone-repo') {
       const git = require('simple-git');
-      console.log('Cloning a Repo');
       await git()
         .silent(true)
         .clone(this.props.repoToCloneUrl)
@@ -147,7 +146,7 @@ export default class Show extends Component {
     git.status((err, status) => this.setState({ gitStatus: status }))
     git.log((err, log) => {
       if (log === null) {
-        this.setState({ commitHistory: ['No commits yet'] });
+        this.setState({ commitHistory: ['No commits yet'],filePath:filePath });
       } else {
         this.setState({
           commitHistory: [...log.all.map(commit => commit)],
@@ -160,7 +159,6 @@ export default class Show extends Component {
   }
   
   render() {
-    console.log(this.state.checkboxStatus);
     if ((this.state.commitHistory[0] === 'Loading data...')) {
       return (
         <React.Fragment>
@@ -237,7 +235,9 @@ export default class Show extends Component {
         outputFormat={this.state.outputFormat}
       />
     </div>
+    
   </div>
+  
   <div
     className={`modal-overlay  + ${this.state.modalOverlayClass}`}
     onClick={() => {
@@ -295,12 +295,14 @@ export default class Show extends Component {
         </option>
         <option value="line-by-line">Line by Line</option>
       </select>
+      
       <DisplayChanges
         className="commit-messages"
         changedFiles={this.state.changedFiles}
         outputFormat={this.state.outputFormat}
       />
     </div>
+    
   </div>
   <div
     className={`modal-overlay  + ${this.state.modalOverlayClass}`}
@@ -309,6 +311,7 @@ export default class Show extends Component {
       this.toggleModalClass();
     }}
   />
+  
 </section>
 )) }
         </section>
