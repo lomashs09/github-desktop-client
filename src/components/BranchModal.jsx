@@ -124,7 +124,7 @@ export class BranchModal extends Component {
       </div>
     );
   }
-  else{
+  else if (this.props.modal ==='publish-modal'){
     return (
       <div id="modal1" className={`modal + ${this.props.modalDisplayClass}`}>
         <div className="modal-content white">
@@ -139,6 +139,58 @@ export class BranchModal extends Component {
           >
             <i className="material-icons right">add_circle</i>
             Push
+          </a>
+          <p >{this.state.successMessage}</p>
+        </div>
+        <div className="input-field col s12">
+          <select onChange={this.onChange} className="choose-branch">
+            <option value="" disabled selected>
+              Choose your branch
+            </option>
+            {this.state.branches.map(branch => (
+              <option>{branch}</option>
+            ))}
+          </select>
+        </div>
+        <div className="modal-footer">
+          <a
+            className="modal-close waves-effect waves-green btn-flat"
+            onClick={() => {
+              this.props.toggleOverlay();
+              this.props.toggleModalClass();
+              
+            }}
+          >
+            CLOSE
+          </a>
+          <a
+            className="modal-close waves-effect waves-green btn-flat"
+            onClick={() => {
+              this.props.toggleOverlay();
+              this.props.toggleModalClass();
+              this.props.updateCommits(this.state.selectedBranch)
+            }}
+          >
+            OK
+          </a>
+        </div>
+      </div>
+    );
+  }else{
+    return (
+      <div id="modal1" className={`modal + ${this.props.modalDisplayClass}`}>
+        <div className="modal-content white">
+          <h4>Publish</h4>
+        </div>
+        <span className="new-branch-text">Before Pushing Set the Remote using SSH</span><br /><br />
+        {' '}
+        <div className="input-field col s8 branch-name-input center-align">
+          <a
+            onClick={this.pushRepo}
+            className="waves-effect waves-light btn-small blue darken-2 white-text"
+          >
+            <i className="material-icons right">add_circle</i>
+            Pull
           </a>
           <p >{this.state.successMessage}</p>
         </div>
