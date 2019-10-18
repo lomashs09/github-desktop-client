@@ -4,7 +4,6 @@ import CommitHistory from './CommitHistory';
 import CommitMessageOverview from './CommitMessageOverview';
 import DisplayChanges from './DisplayChanges';
 import CreateCommits from './CreateCommits';
-import StagingAreaChanges from './StagingAreaChanges';
 import BranchModal from './BranchModal';
 import OpenEditorModal from './OpenEditorModal';
 
