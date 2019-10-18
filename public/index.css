@@ -103,15 +103,11 @@ html {
   position: relative;
 }
 .commits-history {
-<<<<<<< HEAD
-  width: 30%;
+  <<<<<<<headwidth: 30%;
   min-width: 20%;
-||||||| merged common ancestors
-  width: 22.5%;
-=======
-  width: 40%;
->>>>>>> soumya
-  max-height: 59.5rem;
+  |||||||mergedcommonancestorswidth: 22.5%;
+  =======width: 40%;
+  >>>>>>>soumyamax-height: 59.5rem;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
@@ -200,7 +196,8 @@ html {
 
 .d2h-wrapper {
   font-size: 0.75rem;
-  width: 100%;
+  margin: 0 1.25em;
+  width: 98%;
   max-height: 43rem;
   overflow-y: auto;
 }
@@ -236,8 +233,19 @@ th {
 }
 
 .checkbox-and-changed-file {
+  width: 100%;
   display: flex;
   flex-direction: row;
-  margin-left: 2rem;
-  margin-right: 2rem;
+}
+
+.collection-changedFile {
+  width: 100%;
+}
+
+.commit-button {
+  width: 100%;
+}
+
+.file-name {
+  cursor: pointer;
 }

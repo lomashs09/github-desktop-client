@@ -4,7 +4,6 @@ import CommitHistory from './CommitHistory';
 import CommitMessageOverview from './CommitMessageOverview';
 import DisplayChanges from './DisplayChanges';
 import CreateCommits from './CreateCommits';
-import StagingAreaChanges from './StagingAreaChanges';
 import BranchModal from './BranchModal';
 
 var filePath;
@@ -18,19 +17,19 @@ export default class Show extends Component {
     selectedCommit: ['Loading data...'],
     gitStatus: ['Loading data...'],
     selectedCommit: ['Loading data...'],
-    filePath:'',
+    filePath: '',
     showHistory: false,
     changesTriggered: 'green darken-2 white-text',
     historyTriggered: 'white black-text',
     outputFormat: 'side-by-side',
-    selectedBranch:'',
-    modal:'',
+    selectedBranch: '',
+    modal: '',
     checkboxStatus: []
   };
 
-  modalToDisplay = (modalName) =>{
-    this.setState({modal:modalName})
-  }
+  modalToDisplay = modalName => {
+    this.setState({ modal: modalName });
+  };
 
   toggleOverlay = () => {
     this.state.modalOverlayClass === ''
@@ -84,9 +83,9 @@ export default class Show extends Component {
     });
   };
 
-  updateCommits = (changedBranch) =>{
-    this.setState({selectedBranch:changedBranch})
-    }
+  updateCommits = changedBranch => {
+    this.setState({ selectedBranch: changedBranch });
+  };
 
   getSelectedCommit = commitHash => {
     let filename;
@@ -100,33 +99,36 @@ export default class Show extends Component {
     const clickedCommit = this.state.commitHistory.filter(commit => commitHash === commit.hash);
     const git = require('simple-git')(filePath);
     git.raw(['show', commitHash], (err, result) =>
-      this.setState({ changedFiles: [result], selectedCommit: clickedCommit,filePath:filePath })
+      this.setState({ changedFiles: [result], selectedCommit: clickedCommit, filePath: filePath })
     );
   };
 
-
   getSelectedChangedFile = (fileName, modificationType) => {
     const git = require('simple-git')(this.props.addNewRepoFilePath);
-    modificationType === 'modify' ? git.raw(['diff'], (err, result) => this.setState({ changedFiles: [result] })) : git.raw(['diff', '--', '/dev/null', fileName], (err, result) => this.setState({ changedFiles: [result] }));
-  }
+    modificationType === 'modify'
+      ? git.raw(['diff'], (err, result) => this.setState({ changedFiles: [result] }))
+      : git.raw(['diff', '--', '/dev/null', fileName], (err, result) =>
+          this.setState({ changedFiles: [result] })
+        );
+  };
 
-  makeCommit = (commitMessage) => {
+  makeCommit = commitMessage => {
     const git = require('simple-git')(this.props.addNewRepoFilePath);
-    if(commitMessage === '') {
+    if (commitMessage === '') {
       alert("Commit message can't be empty");
     } else {
-      git.commit(commitMessage, (err, res) => console.log(res));	
+      git.commit(commitMessage, (err, res) => console.log(res));
     }
-  }
+  };
 
   addFilesToStagingArea = (fileName, isChecked) => {
     const git = require('simple-git')(this.props.addNewRepoFilePath);
-    if(isChecked === true) {
-      git.add([fileName], (err, result) => console.log(result));	
+    if (isChecked === true) {
+      git.add([fileName], (err, result) => console.log(result));
     } else {
-      git.reset([fileName], (err,result) => console.log(result));
+      git.reset([fileName], (err, result) => console.log(result));
     }
-  }
+  };
 
   async componentDidMount() {
     if (this.props.selectedModal === 'clone-repo') {
@@ -151,17 +153,16 @@ export default class Show extends Component {
       } else {
         this.setState({
           commitHistory: [...log.all.map(commit => commit)],
-          filePath:filePath
+          filePath: filePath
         });
       }
     });
-    git.status((err, status) => this.setState({ gitStatus: status }))
-    // console.log(this.state.gitStatus);
+    git.status((err, status) => this.setState({ gitStatus: status }));
   }
-  
+
   render() {
     console.log(this.state.checkboxStatus);
-    if ((this.state.commitHistory[0] === 'Loading data...')) {
+    if (this.state.commitHistory[0] === 'Loading data...') {
       return (
         <React.Fragment>
           <p>{this.state.commitHistory[0]}</p>
@@ -174,7 +175,7 @@ export default class Show extends Component {
             toggleOverlay={this.toggleOverlay}
             toggleModalClass={this.toggleModalClass}
             modalDisplayClass={this.state.modalDisplayClass}
-            modalToDisplay = {this.modalToDisplay}
+            modalToDisplay={this.modalToDisplay}
           />
           <BranchModal
             toggleOverlay={this.toggleOverlay}
@@ -183,136 +184,135 @@ export default class Show extends Component {
             history={this.state.commitHistory}
             getSelectedCommit={this.getSelectedCommit}
             filePath={this.state.filePath}
-            updateCommits = {this.updateCommits}
+            updateCommits={this.updateCommits}
             modal={this.state.modal}
           />
 
-{this.state.showHistory ? (
-  <section className="show-details">
-  <div className="commits-history">
-  <a
-      className={`waves-effect waves-light btn changes-button + ${this.state.changesTriggered}`}
-      onClick={() => {
-        this.clickedChangesButton();
-      }}
-    >
-      Changes
-    </a>
-    <a
-      class={`waves-effect waves-light btn history-button + ${this.state.historyTriggered}`}
-      onClick={() => {
-        this.clickedHistoryButton();
-      }}
-    >
-      History
-    </a>
-    <CommitHistory
-      history={this.state.commitHistory}
-      getSelectedCommit={this.getSelectedCommit}
-      filePath={this.state.filePath}
-      selectedBranch={this.state.selectedBranch}
-    />
-  </div>
-  <div className="commit-details">
-  {this.state.showHistory ? (
-    <div className="commit-message-overview">
-      <CommitMessageOverview selectedCommit={this.state.selectedCommit} />
-    </div>
-    ) : null}
-    <div className="display-changes">
-    <select
-        className="select-output-format"
-        onChange={e => {
-          this.changeOutputFormat(e);
-        }}
-      >
-        <option value="side-by-side" selected>
-          Side by Side
-        </option>
-        <option value="line-by-line">Line by Line</option>
-      </select>
-      <DisplayChanges
-        className="commit-messages"
-        changedFiles={this.state.changedFiles}
-        outputFormat={this.state.outputFormat}
-      />
-    </div>
-  </div>
-  <div
-    className={`modal-overlay  + ${this.state.modalOverlayClass}`}
-    onClick={() => {
-      this.toggleOverlay();
-      this.toggleModalClass();
-    }}
-  />
-</section>
-) : (
-  this.state.gitStatus[0] === 'Loading data...' ? ('') : 
-    (<section className="show-details">
-  <div className="commits-history">
-  <a
-      className={`waves-effect waves-light btn changes-button + ${this.state.changesTriggered}`}
-      onClick={() => {
-        this.clickedChangesButton();
-      }}
-    >
-      Changes
-    </a>
-    <a
-      class={`waves-effect waves-light btn history-button + ${this.state.historyTriggered}`}
-      onClick={() => {
-        this.clickedHistoryButton();
-      }}
-    >
-      History
-    </a>
-       <div className="commits-history">
-         {/* <StagingAreaChanges 
-         /> */}
-        <CreateCommits
-        status={this.state.gitStatus}
-        getSelectedChangedFile={this.getSelectedChangedFile}
-        addFilesToStagingArea={this.addFilesToStagingArea}
-        makeCommit={this.makeCommit}
-        />
-       </div>
-  </div>
-  <div className="commit-details">
-  {this.state.showHistory ? (
-    <div className="commit-message-overview">
-      <CommitMessageOverview selectedCommit={this.state.selectedCommit} />
-    </div>
-    ) : null}
-    <div className="display-changes">
-    <select
-        className="select-output-format"
-        onChange={e => {
-          this.changeOutputFormat(e);
-        }}
-      >
-        <option value="side-by-side" selected>
-          Side by Side
-        </option>
-        <option value="line-by-line">Line by Line</option>
-      </select>
-      <DisplayChanges
-        className="commit-messages"
-        changedFiles={this.state.changedFiles}
-        outputFormat={this.state.outputFormat}
-      />
-    </div>
-  </div>
-  <div
-    className={`modal-overlay  + ${this.state.modalOverlayClass}`}
-    onClick={() => {
-      this.toggleOverlay();
-      this.toggleModalClass();
-    }}
-  />
-</section>
-)) }
+          {this.state.showHistory ? (
+            <section className="show-details">
+              <div className="commits-history">
+                <a
+                  className={`waves-effect waves-light btn changes-button + ${this.state.changesTriggered}`}
+                  onClick={() => {
+                    this.clickedChangesButton();
+                  }}
+                >
+                  Changes
+                </a>
+                <a
+                  class={`waves-effect waves-light btn history-button + ${this.state.historyTriggered}`}
+                  onClick={() => {
+                    this.clickedHistoryButton();
+                  }}
+                >
+                  History
+                </a>
+                <CommitHistory
+                  history={this.state.commitHistory}
+                  getSelectedCommit={this.getSelectedCommit}
+                  filePath={this.state.filePath}
+                  selectedBranch={this.state.selectedBranch}
+                />
+              </div>
+              <div className="commit-details">
+                {this.state.showHistory ? (
+                  <div className="commit-message-overview">
+                    <CommitMessageOverview selectedCommit={this.state.selectedCommit} />
+                  </div>
+                ) : null}
+                <div className="display-changes">
+                  <select
+                    className="select-output-format"
+                    onChange={e => {
+                      this.changeOutputFormat(e);
+                    }}
+                  >
+                    <option value="side-by-side" selected>
+                      Side by Side
+                    </option>
+                    <option value="line-by-line">Line by Line</option>
+                  </select>
+                  <DisplayChanges
+                    className="commit-messages"
+                    changedFiles={this.state.changedFiles}
+                    outputFormat={this.state.outputFormat}
+                  />
+                </div>
+              </div>
+              <div
+                className={`modal-overlay  + ${this.state.modalOverlayClass}`}
+                onClick={() => {
+                  this.toggleOverlay();
+                  this.toggleModalClass();
+                }}
+              />
+            </section>
+          ) : this.state.gitStatus[0] === 'Loading data...' ? (
+            ''
+          ) : (
+            <section className="show-details">
+              <div className="commits-history">
+                <a
+                  className={`waves-effect waves-light btn changes-button + ${this.state.changesTriggered}`}
+                  onClick={() => {
+                    this.clickedChangesButton();
+                  }}
+                >
+                  Changes
+                </a>
+                <a
+                  class={`waves-effect waves-light btn history-button + ${this.state.historyTriggered}`}
+                  onClick={() => {
+                    this.clickedHistoryButton();
+                  }}
+                >
+                  History
+                </a>
+                <div className="commits-history">
+                  <CreateCommits
+                    status={this.state.gitStatus}
+                    getSelectedChangedFile={this.getSelectedChangedFile}
+                    addFilesToStagingArea={this.addFilesToStagingArea}
+                    makeCommit={this.makeCommit}
+                  />
+                </div>
+              </div>
+              <div className="commit-details">
+                {this.state.showHistory ? (
+                  <div className="commit-message-overview">
+                    <CommitMessageOverview selectedCommit={this.state.selectedCommit} />
+                  </div>
+                ) : null}
+                <div className="display-changes">
+                  <select
+                    className="select-output-format"
+                    onChange={e => {
+                      this.changeOutputFormat(e);
+                    }}
+                  >
+                    <option value="side-by-side" selected>
+                      Side by Side
+                    </option>
+                    <option value="line-by-line">Line by Line</option>
+                  </select>
+                  <DisplayChanges
+                    className="commit-messages"
+                    changedFiles={this.state.changedFiles}
+                    outputFormat={this.state.outputFormat}
+                  />
+                </div>
+              </div>
+              <div
+                className={`modal-overlay  + ${this.state.modalOverlayClass}`}
+                onClick={() => {
+                  this.toggleOverlay();
+                  this.toggleModalClass();
+                }}
+              />
+            </section>
+          )}
         </section>
       );
-    } 
+    }
   }
 }
