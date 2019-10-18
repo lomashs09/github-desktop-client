@@ -101,11 +101,12 @@ html {
   display: flex;
   flex-direction: row;
   position: relative;
+  height: 63.5rem;
 }
 .commits-history {
   width: 30%;
   min-width: 20%;
-  max-height: 59.5rem;
+  max-height: 61rem;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
