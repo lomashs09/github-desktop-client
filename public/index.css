@@ -265,3 +265,8 @@ th {
   display: flex;
   justify-content: space-between;
 }
+
+.input-field {
+  margin: auto;
+  margin-top: 0.5em;
+}
