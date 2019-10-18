@@ -277,8 +277,8 @@ export class BranchModal extends Component {
           <br />
           <br />
           <br />
-          <p>
-            Merge into: <span className="selected-branch">{this.state.selectedBranch}</span>
+          <p className="merge-branch-name">
+            Merge into: <span className="selected-branch"><span className="branch-name">{this.state.selectedBranch}</span></span>
           </p>
           <div className="input-field col s12">
             <select onChange={this.selectMergeFromBranch} className="choose-branch">

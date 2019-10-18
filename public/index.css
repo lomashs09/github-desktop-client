@@ -269,3 +269,12 @@ th {
 .input-field {
   margin: 0.5em;
 }
+
+.merge-branch-name {
+  width: 98%;
+  margin: auto;
+}
+
+.branch-name {
+  font-weight: bold;
+}
