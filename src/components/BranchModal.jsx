@@ -53,6 +53,7 @@ export class BranchModal extends Component {
     this.setState({ newBranch: e.target.value });
   };
   selectMergeFromBranch = (e)=>{
+    console.log(e.target.value)
     this.setState({branchFromMerge:e.target.value})
   }
   onChange = async e => {
