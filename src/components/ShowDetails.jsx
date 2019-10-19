@@ -152,8 +152,6 @@ export default class Show extends Component {
         });
       }
     });
-    // git.status((err, status) => this.setState({ gitStatus: status }))
-    // console.log(this.state.gitStatus);
   }
   
   render() {

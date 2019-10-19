@@ -103,7 +103,7 @@ html {
   position: relative;
 }
 .commits-history {
-  width: 30%;
+  width: 40;
   min-width: 20%;
   max-height: 59.5rem;
   overflow-y: auto;
@@ -233,18 +233,17 @@ th {
   margin: 0.5em;
   width: 15%;
 }
-<<<<<<< HEAD
-
 .checkbox-and-changed-file {
   display: flex;
   flex-direction: row;
   margin-left: 2rem;
   margin-right: 2rem;
 }
-||||||| merged common ancestors
-=======
 
 .preloader-wrapper {
   margin: auto;
 }
->>>>>>> Amogh
+
+.selected-branch{
+  font-weight: bold;
+}

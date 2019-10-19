@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+// eslint-disable-next-line react/prefer-stateless-function
 export default class Header extends Component {
   render() {
     return (
@@ -35,6 +36,24 @@ export default class Header extends Component {
               }}
             >
               <a>Publish Repository</a>
+            </li>
+            <li
+              onClick={() => {
+                this.props.toggleOverlay();
+                this.props.toggleModalClass();
+                this.props.modalToDisplay('pull-modal')
+              }}
+            >
+              <a>Pull</a>
+            </li>
+            <li
+              onClick={() => {
+                this.props.toggleOverlay();
+                this.props.toggleModalClass();
+                this.props.modalToDisplay('merge-modal')
+              }}
+            >
+              <a>Merge</a>
             </li>
           </ul>
         </div>
