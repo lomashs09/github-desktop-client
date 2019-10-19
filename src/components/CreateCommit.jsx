@@ -4,21 +4,27 @@ import React, { Component } from 'react';
 export class CreateCommit extends Component {
   state = {
     commitMessage: '',
-    buttonActive: true
+    btnClassName: 'waves-effect waves-light btn blue darken-2 commit-button'
   };
-
   setCommitMessage = event => {
     this.setState({
       commitMessage: event.target.value,
     });
   };
 
-  componentDidMount() {
-    this.props.mergeConflictsExist ? this.setState({ buttonActive: false }) : this.setState({ buttonActive: true })
+  componentDidUpdate(prevProps) {
+    if(prevProps.mergeConflictsExist !== this.props.mergeConflictsExist){
+      if(this.props.mergeConflictsExist) {
+        this.setState({ btnClassName: 'waves-effect waves-light btn blue darken-2 commit-button disabled' });
+      } else {
+        this.setState({ btnClassName: 'waves-effect waves-light btn blue darken-2 commit-button' });
+      }
+    }
   }
 
   render() {
-    if (this.state.buttonActive) {
+      console.log(this.props.mergeConflictsExist)
+      console.log(this.state.btnClassName)
       return (
         <>
           <form class="col s12">
@@ -35,38 +41,13 @@ export class CreateCommit extends Component {
           </form>
   
           <a
-            class="waves-effect waves-light btn blue darken-2 commit-button"
+            class={this.state.btnClassName}
             onClick={this.props.makeCommit.bind(this, this.state.commitMessage)}
           >
             Commit
           </a>
         </>
       )
-    } else {
-      return (
-        <>
-          <form class="col s12">
-            <div class="row">
-              <div class="input-field col s12">
-                <textarea
-                  id="textarea1"
-                  class="materialize-textarea"
-                  onChange={this.setCommitMessage}
-                ></textarea>
-                <label for="textarea1">Commit Message (Required)</label>
-              </div>
-            </div>
-          </form>
-  
-          <a
-            class="waves-effect waves-light btn blue darken-2 commit-button disabled"
-            onClick={this.props.makeCommit.bind(this, this.state.commitMessage)}
-          >
-            Commit
-          </a>
-        </>
-      )
-    }
   }
 }
 

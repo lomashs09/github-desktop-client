@@ -143,7 +143,8 @@ export default class Show extends Component {
       }
     } else {
       alert('You still have unresolved merge conflicts! Please fix all conflicts and then commit the changes.')
-      this.setState({ mergeConflictsExist: true });
+      this.setState({ mergeConflictsExist: true, showHistory: false });
+      // console.log(this.state)
       //Disable the commit btn
       //Uncheck the checkbox
     }
@@ -184,7 +185,6 @@ export default class Show extends Component {
   }
 
   render() {
-    console.log(this.state.gitStatus);
     if (this.state.commitHistory[0] === 'Loading data...') {
       return (
         <React.Fragment>
@@ -192,6 +192,7 @@ export default class Show extends Component {
         </React.Fragment>
       );
     } else {
+      console.log(`This is it =======> ${this.state.showHistory}`)
       return (
         <section className={`${this.props.repoDetailsDisplayClass}`}>
           <Header
