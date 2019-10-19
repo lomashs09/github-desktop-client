@@ -327,3 +327,5 @@ export default class Show extends Component {
     }
   }
 }
+
+// git diff -S "<<<<<<< HEAD" -S "=======" -S ">>>>>>> $(git name-rev --name-only MERGE_HEAD)" HEAD
