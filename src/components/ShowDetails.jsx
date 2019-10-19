@@ -122,14 +122,8 @@ export default class Show extends Component {
       git.commit(commitMessage, (err, res) => console.log(res));
     }
   };
-  // addFilesToStagingArea = (fileName, isChecked) => {
-  //   const git = require('simple-git')(this.props.addNewRepoFilePath);
-  //   if (isChecked === true) {
-  //     git.add([fileName], (err, result) => console.log(result));
-  //   } else {
-  //     git.reset([fileName], (err, result) => console.log(result));
-  //   }
-  // };
+
+  
   addFilesToStagingArea = (fileName, isChecked) => {
     const git = require('simple-git')(this.props.addNewRepoFilePath);
     
