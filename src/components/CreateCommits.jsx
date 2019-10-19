@@ -11,6 +11,18 @@ export class CreateCommits extends Component {
       <>
         <div className="checkbox-and-changed-file">
           <ul className="collection collection-changedFile">
+          {status.conflicted.length === 0
+              ? ''
+              : status.conflicted.map(conflictedFile => (
+                <ChangedFile
+                    fileName={conflictedFile}
+                    getSelectedChangedFile={this.props.getSelectedChangedFile}
+                    modificationType="modify" //later changed it's type to 'conflicted'
+                    addFilesToStagingArea={this.props.addFilesToStagingArea}
+                    status={this.props.status}
+                    mergeConflictsExist={this.props.mergeConflictsExist}
+                  />
+                ))}
             {status.not_added.length === 0
               ? ''
               : status.not_added.map(newFile => (
@@ -47,7 +59,7 @@ export class CreateCommits extends Component {
           </ul>
         </div>
 
-        <CreateCommit makeCommit={this.props.makeCommit} />
+        <CreateCommit makeCommit={this.props.makeCommit} mergeConflictsExist={this.props.mergeConflictsExist}/>
       </>
     );
   }

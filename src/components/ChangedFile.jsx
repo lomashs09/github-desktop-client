@@ -4,13 +4,14 @@ export class ChangedFile extends Component {
     checked: true
   };
 
-  toggle = () => {
+  toggle = (mergeConflictsExist) => {
     this.setState({ checked: !this.state.checked });
   };
 
   render() {
     if (this.props.status) {
       const staged = this.props.status.staged;
+      const mergeConflictsExist = this.props.mergeConflictsExist;
       if (this.props.modificationType === 'add') {
         return (
           <li class="collection-item">
@@ -20,7 +21,7 @@ export class ChangedFile extends Component {
                   type="checkbox"
                   checked={this.state.checked}
                   onClick={() => {
-                    this.toggle();
+                    this.toggle(mergeConflictsExist);
                     this.props.addFilesToStagingArea(this.props.fileName, !this.state.checked);
                   }}
                 />
@@ -28,7 +29,7 @@ export class ChangedFile extends Component {
                 <input
                   type="checkbox"
                   onClick={() => {
-                    this.toggle();
+                    this.toggle(mergeConflictsExist);
                     this.props.addFilesToStagingArea(this.props.fileName, this.state.checked);
                   }}
                 />
@@ -59,7 +60,7 @@ export class ChangedFile extends Component {
                   type="checkbox"
                   checked={this.state.checked}
                   onClick={() => {
-                    this.toggle();
+                    this.toggle(mergeConflictsExist);
                     this.props.addFilesToStagingArea(this.props.fileName, !this.state.checked);
                   }}
                 />
@@ -67,7 +68,7 @@ export class ChangedFile extends Component {
                 <input
                   type="checkbox"
                   onClick={() => {
-                    this.toggle();
+                    this.toggle(mergeConflictsExist);
                     this.props.addFilesToStagingArea(this.props.fileName, this.state.checked);
                   }}
                 />
@@ -103,7 +104,7 @@ export class ChangedFile extends Component {
                     type="checkbox"
                     checked={this.state.checked}
                     onClick={() => {
-                      this.toggle();
+                      this.toggle(mergeConflictsExist);
                       this.props.addFilesToStagingArea(this.props.fileName, !this.state.checked);
                     }}
                   />
@@ -111,7 +112,7 @@ export class ChangedFile extends Component {
                   <input
                     type="checkbox"
                     onClick={() => {
-                      this.toggle();
+                      this.toggle(mergeConflictsExist);
                       this.props.addFilesToStagingArea(this.props.fileName, this.state.checked);
                     }}
                   />

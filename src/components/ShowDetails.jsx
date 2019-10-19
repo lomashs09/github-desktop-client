@@ -25,7 +25,8 @@ export default class Show extends Component {
     outputFormat: 'side-by-side',
     selectedBranch: '',
     modal: '',
-    checkboxStatus: []
+    checkboxStatus: [],
+    mergeConflictsExist: false
   };
   modalToDisplay = modalName => {
     this.setState({ modal: modalName });
@@ -121,14 +122,36 @@ export default class Show extends Component {
       git.commit(commitMessage, (err, res) => console.log(res));
     }
   };
+  // addFilesToStagingArea = (fileName, isChecked) => {
+  //   const git = require('simple-git')(this.props.addNewRepoFilePath);
+  //   if (isChecked === true) {
+  //     git.add([fileName], (err, result) => console.log(result));
+  //   } else {
+  //     git.reset([fileName], (err, result) => console.log(result));
+  //   }
+  // };
   addFilesToStagingArea = (fileName, isChecked) => {
     const git = require('simple-git')(this.props.addNewRepoFilePath);
-    if (isChecked === true) {
-      git.add([fileName], (err, result) => console.log(result));
+    
+    git.raw(['diff', '-S', '<<<<<<< HEAD', 'HEAD'], (err, result) => {
+    if(result === null) {
+      this.setState({ mergeConflictsExist: false });
+      if (isChecked === true) {
+        git.add([fileName], (err, result) => console.log(result));
+      } else {
+        git.reset([fileName], (err, result) => console.log(result));
+      }
     } else {
-      git.reset([fileName], (err, result) => console.log(result));
+      alert('You still have unresolved merge conflicts! Please fix all conflicts and then commit the changes.')
+      this.setState({ mergeConflictsExist: true });
+      //Disable the commit btn
+      //Uncheck the checkbox
     }
+    });
+    
+    
   };
+
   async componentDidMount() {
     if (this.props.selectedModal === 'clone-repo') {
       const git = require('simple-git');
@@ -161,6 +184,7 @@ export default class Show extends Component {
   }
 
   render() {
+    console.log(this.state.gitStatus);
     if (this.state.commitHistory[0] === 'Loading data...') {
       return (
         <React.Fragment>
@@ -282,6 +306,7 @@ export default class Show extends Component {
                     getSelectedChangedFile={this.getSelectedChangedFile}
                     addFilesToStagingArea={this.addFilesToStagingArea}
                     makeCommit={this.makeCommit}
+                    mergeConflictsExist={this.state.mergeConflictsExist}
                   />
                 </div>
               </div>
