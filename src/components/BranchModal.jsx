@@ -23,7 +23,7 @@ export class BranchModal extends Component {
     });
     this.setState({ successMessage: 'pushing...' });
     git.push(['-u', 'origin', this.state.selectedBranch], (err, results) => {
-      this.setState({ successMessage: 'pushed succesfully !' });
+      this.setState({ successMessage: 'pushed successfully !' });
       if (!err) {
         console.log(results);
       }
@@ -41,7 +41,7 @@ export class BranchModal extends Component {
     });
     this.setState({ successMessage: 'pulling...' });
     git.pull(['-u', 'origin', this.state.selectedBranch], (err, results) => {
-      this.setState({ successMessage: 'pulled succesfully !' });
+      this.setState({ successMessage: 'pulled successfully !' });
       if (!err) {
         console.log(results);
       }
@@ -56,7 +56,6 @@ export class BranchModal extends Component {
   onChange = async e => {
     if (this.props.filePath) {
       if (this.props.modal !== 'merge-modal') {
-        console.log('hello world');
         const git = require('simple-git')(this.state.filePath);
         await this.setState({ selectedBranch: e.target.value });
         git.checkout(this.state.selectedBranch).then(() => {
@@ -69,9 +68,7 @@ export class BranchModal extends Component {
   };
   mergeBranch = () => {
     let git = require('simple-git')(filePath);
-    this.setState({ successMessage: 'merging in progress...' });
-    console.log(this.state.mergeFromBranch);
-    console.log(this.state.selectedBranch);
+    this.setState({ successMessage: 'merging in progress...' });  
     git
       .mergeFromTo(this.state.mergeFromBranch, this.state.selectedBranch, (err, result) =>
         err ? console.log(err) : console.log(result)
@@ -278,7 +275,10 @@ export class BranchModal extends Component {
           <br />
           <br />
           <p className="merge-branch-name">
-            Merge into: <span className="selected-branch"><span className="branch-name">{this.state.selectedBranch}</span></span>
+            Merge into:{' '}
+            <span className="selected-branch">
+              <span className="branch-name">{this.state.selectedBranch}</span>
+            </span>
           </p>
           <div className="input-field col s12">
             <select onChange={this.selectMergeFromBranch} className="choose-branch">

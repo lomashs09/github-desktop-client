@@ -176,6 +176,7 @@ export default class Show extends Component {
             modalDisplayClass={this.state.modalDisplayClass}
             modalToDisplay={this.modalToDisplay}
             toggleModalClassEditor={this.toggleModalClassEditor}
+            
           />
           <BranchModal
             toggleOverlay={this.toggleOverlay}
