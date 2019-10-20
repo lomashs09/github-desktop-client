@@ -18,7 +18,7 @@ export default class OpenEditorModal extends Component {
       <div id="modal1" className={`modal + ${this.props.modalDisplayClassEditor}`}>
         <div className="modal-content merge-section-content">
           <h4>Merge Conflict Occured</h4>
-          <h5>Open in Editor to fix the conflict</h5>
+          <h5>Open in Editor to Fix the Conflict</h5>
           <a
             className="waves-effect waves-light btn blue darken-2 open-editor-btn"
             onClick={() => {

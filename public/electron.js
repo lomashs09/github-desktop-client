@@ -25,7 +25,7 @@ function createWindow() {
       nodeIntegration: true
     },
     show: false,
-    resizable: false,
+    resizable: true,
     height: maxiSize.height,
     width: maxiSize.width,
     icon: `${__dirname}/assets/electron-logo.png`
