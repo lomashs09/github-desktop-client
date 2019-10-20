@@ -16,10 +16,11 @@ export default class OpenEditorModal extends Component {
   render() {
     return (
       <div id="modal1" className={`modal + ${this.props.modalDisplayClassEditor}`}>
-        <div className="modal-content">
+        <div className="modal-content merge-section-content">
           <h4>Merge Conflict Occured</h4>
-          <p>Open in Editor to fix conflict</p>
-          <button
+          <h5>Open in Editor to fix the conflict</h5>
+          <a
+            className="waves-effect waves-light btn blue darken-2 open-editor-btn"
             onClick={() => {
               ipcRenderer.send('Repo', {
                 type: 'OPEN_EDITOR',
@@ -27,13 +28,17 @@ export default class OpenEditorModal extends Component {
               });
             }}
           >
-            Open in Editor
-          </button>
-          <DisplayChanges
-            className="commit-messages"
-            changedFiles={this.props.mergedFileChanges}
-            outputFormat={this.props.outputFormat}
-          />
+            <i className="material-icons right">description</i>
+            Open in the Editor
+          </a>
+
+          <div className="conflict-show-changes">
+            <DisplayChanges
+              className="commit-messages"
+              changedFiles={this.props.mergedFileChanges}
+              outputFormat={this.props.outputFormat}
+            />
+          </div>
         </div>
         <div className="modal-footer">
           <a

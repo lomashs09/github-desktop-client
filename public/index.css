@@ -278,3 +278,18 @@ th {
 .branch-name {
   font-weight: bold;
 }
+
+.conflict-show-changes {
+  margin: 1em 0;
+}
+
+.merge-section-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.open-editor-btn {
+  width: 25%;
+  align-self: center;
+  margin: 1em 0;
+}
