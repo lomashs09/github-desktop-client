@@ -22,7 +22,8 @@ export default class OpenEditorModal extends Component {
           <button
             onClick={() => {
               ipcRenderer.send('Repo', {
-                type: 'OPEN_EDITOR'
+                type: 'OPEN_EDITOR',
+                path: this.props.filePath
               });
             }}
           >

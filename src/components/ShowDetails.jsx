@@ -225,6 +225,7 @@ export default class Show extends Component {
             modalDisplayClassEditor={this.state.modalDisplayClassEditor}
             mergedFileChanges={this.state.mergedFileChanges}
             outputFormat={'side-by-side'}
+            filePath={this.state.filePath}
           />
           {this.state.showHistory ? (
             <section className="show-details">
