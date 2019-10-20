@@ -26,7 +26,8 @@ export default class Show extends Component {
     selectedBranch: '',
     modal: '',
     checkboxStatus: [],
-    mergeConflictsExist: false
+    mergeConflictsExist: false,
+    mergedFileChanges: ['Loading data...']
   };
   modalToDisplay = modalName => {
     this.setState({ modal: modalName });
@@ -126,25 +127,31 @@ export default class Show extends Component {
   
   addFilesToStagingArea = (fileName, isChecked) => {
     const git = require('simple-git')(this.props.addNewRepoFilePath);
-    
+
     git.raw(['diff', '-S', '<<<<<<< HEAD', 'HEAD'], (err, result) => {
-    if(result === null) {
-      this.setState({ mergeConflictsExist: false });
-      if (isChecked === true) {
-        git.add([fileName], (err, result) => console.log(result));
+      if (result === null) {
+        this.setState({ mergeConflictsExist: false });
+        if (isChecked === true) {
+          git.add([fileName], (err, result) => console.log(result));
+        } else {
+          git.reset([fileName], (err, result) => console.log(result));
+        }
       } else {
-        git.reset([fileName], (err, result) => console.log(result));
+        this.toggleOverlay();
+        this.toggleModalClassEditor();
+
+        this.setState({
+          mergedFileChanges: [result],
+          mergeConflictsExist: true,
+          showHistory: false
+        });
+        // alert('You still have unresolved merge conflicts! Please fix all conflicts and then commit the changes.')
+        // this.setState({ mergeConflictsExist: true, showHistory: false });
+        // console.log(this.state)
+        //Disable the commit btn
+        //Uncheck the checkbox
       }
-    } else {
-      alert('You still have unresolved merge conflicts! Please fix all conflicts and then commit the changes.')
-      this.setState({ mergeConflictsExist: true, showHistory: false });
-      // console.log(this.state)
-      //Disable the commit btn
-      //Uncheck the checkbox
-    }
     });
-    
-    
   };
 
   async componentDidMount() {
@@ -186,7 +193,7 @@ export default class Show extends Component {
         </React.Fragment>
       );
     } else {
-      console.log(`This is it =======> ${this.state.showHistory}`)
+      console.log(`This is it =======> ${this.state.showHistory}`);
       return (
         <section className={`${this.props.repoDetailsDisplayClass}`}>
           <Header
@@ -195,7 +202,6 @@ export default class Show extends Component {
             modalDisplayClass={this.state.modalDisplayClass}
             modalToDisplay={this.modalToDisplay}
             toggleModalClassEditor={this.toggleModalClassEditor}
-            
           />
           <BranchModal
             toggleOverlay={this.toggleOverlay}
@@ -211,6 +217,9 @@ export default class Show extends Component {
             toggleOverlayEditorModal={this.toggleOverlay}
             toggleModalClassEditor={this.toggleModalClassEditor}
             modalDisplayClassEditor={this.state.modalDisplayClassEditor}
+            mergedFileChanges={this.state.mergedFileChanges}
+            outputFormat={'side-by-side'}
+            filePath={this.state.filePath}
           />
           {this.state.showHistory ? (
             <section className="show-details">
