@@ -5,6 +5,7 @@ import 'react-gh-like-diff/lib/diff2html.min.css';
 export class DisplayChanges extends Component {
   render() {
     const diffText = this.props.changedFiles[0];
+    console.log(this.props.changedFiles)
     const optionsD = {
       inputFormat: 'diff',
       showFiles: true,

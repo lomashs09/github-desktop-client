@@ -11,13 +11,8 @@ export default class Header extends Component {
             <span className="logo-text">GitHub</span>
           </a>
           <ul id="nav-mobile" className="left">
-            <li
-              onClick={() => {
-                this.props.toggleOverlay();
-                this.props.toggleModalClassEditor();
-              }}
-            >
-              <a>
+            <li>
+              <a href="./">
                 <i className="material-icons">home</i>
               </a>
             </li>

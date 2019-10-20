@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { ipcRenderer } from 'electron';
 
+import DisplayChanges from './DisplayChanges';
+
 export default class OpenEditorModal extends Component {
   componentDidMount() {
     ipcRenderer.on('openedEditor', (event, arg) => {
@@ -26,6 +28,11 @@ export default class OpenEditorModal extends Component {
           >
             Open in Editor
           </button>
+          <DisplayChanges
+            className="commit-messages"
+            changedFiles={this.props.mergedFileChanges}
+            outputFormat={this.props.outputFormat}
+          />
         </div>
         <div className="modal-footer">
           <a
