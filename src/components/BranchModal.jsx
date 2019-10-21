@@ -9,7 +9,7 @@ export class BranchModal extends Component {
     commits: '',
     filePath: '',
     newBranch: '',
-    mergeFromBranch: ''
+    pullFromBranch: ''
   };
   updateLoadingState=()=>{
     this.setState({successMessage:''})
@@ -55,7 +55,7 @@ export class BranchModal extends Component {
     this.setState({ newBranch: e.target.value });
   };
   BranchToPullFrom = e => {
-    this.setState({ mergeFromBranch: e.target.value });
+    this.setState({ pullFromBranch: e.target.value });
   };
   onChange = async e => {
     if (this.props.filePath) {
