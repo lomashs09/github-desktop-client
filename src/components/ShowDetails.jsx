@@ -58,9 +58,17 @@ export default class Show extends Component {
         });
   };
   toggleTabs = () => {
-    this.setState({
-      showHistory: !this.state.showHistory
-    });
+    // this.setState({
+    //   showHistory: !this.state.showHistory
+    // });
+    const git = require('simple-git')(this.props.addNewRepoFilePath);
+    if (this.state.showHistory === true) {
+      git.status((err, status) => this.setState({ gitStatus: status, showHistory: !this.state.showHistory }));
+    } else {
+      this.setState({
+        showHistory: !this.state.showHistory
+      });
+    }
   };
   clickedChangesButton = () => {
     if (this.state.changesTriggered === 'white black-text') {
@@ -72,6 +80,7 @@ export default class Show extends Component {
     }
   };
   clickedHistoryButton = () => {
+
     if (this.state.historyTriggered === 'white black-text') {
       this.setState({
         changesTriggered: 'white black-text',
@@ -170,6 +179,7 @@ export default class Show extends Component {
     });
   }
   render() {
+    console.log(this.state.gitStatus)
     if (this.state.commitHistory[0] === 'Loading data...') {
       return (
         <React.Fragment>
