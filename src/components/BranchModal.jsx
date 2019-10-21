@@ -5,7 +5,7 @@ export class BranchModal extends Component {
   state = {
     successMessage: '',
     branches: [],
-    selectedBranch: 'master',
+    selectedBranch: '',
     commits: '',
     filePath: '',
     newBranch: '',
@@ -33,7 +33,6 @@ export class BranchModal extends Component {
     });
   };
   pullRepo = () => {
-    console.log(this.state.branch);
     let git = require('simple-git')(filePath);
     git.listRemote(['--get-url'], (err, data) => {
       if (!err) {
@@ -61,10 +60,20 @@ export class BranchModal extends Component {
     if (this.props.filePath) {
       if (this.props.modal !== 'merge-modal') {
         const git = require('simple-git')(this.state.filePath);
-        await this.setState({ selectedBranch: e.target.value });
-        git.checkout(this.state.selectedBranch).then(() => {
+        // await this.setState({ selectedBranch: e.target.value });
+        let branch = e.target.value
+        git.checkout(branch,(err,res)=>{
+          if(err){
+            this.setState({successMessage:"Cannot change branch. Commit file changes before proceeding"})
+          }
+        }).then(() => {
           git.log(async (err, results) => {
-            await this.setState({ commits: results.all });
+            if(err){
+              console.log(err)
+            }
+            else{
+              await this.setState({commits:results.all, selectedBranch: branch});
+            }
           });
         });
       }
@@ -83,7 +92,9 @@ export class BranchModal extends Component {
     const git = require('simple-git')(filePath);
     git.checkoutBranch(this.state.newBranch, 'master', (err, results) => {
       if (err) {
+        this.setState({successMessage:err})
         console.log('The following error Ocurred:', err);
+        // this.setState({successMessage:'Please commit before creating new Branch'})
       } else {
         this.setState({ successMessage: 'Branch created successfully' });
         var joined = this.state.branches.concat(this.state.newBranch);
@@ -99,7 +110,7 @@ export class BranchModal extends Component {
 
   async componentWillReceiveProps(nextprops) {
     if (this.state.commits === '') {
-      await this.setState({ filePath: nextprops.filePath, commits: nextprops.history });
+      await this.setState({ filePath: nextprops.filePath, commits: nextprops.history,selectedBranch:this.props.currentBranch});
     }
     filePath = this.state.filePath;
     const git = require('simple-git')(filePath);
@@ -113,6 +124,12 @@ export class BranchModal extends Component {
           <div className="modal-content white">
             <h4>BRANCHES</h4>
           </div>
+          <h5 className="merge-branch-name input-field col s12">
+            Current Branch:{' '}
+            <span className="selected-branch">
+              <span className="branch-name">{this.state.selectedBranch}</span>
+            </span>
+          </h5><br />
           <span className="new-branch-text">Create New Branch</span>
           <div className="input-field col s8 branch-name-input">
             <input
@@ -131,7 +148,6 @@ export class BranchModal extends Component {
             </a>
             <p>{this.state.successMessage}</p>
           </div>
-          <p>You can also push the Branches</p>
           <div className="input-field col s12">
             <select onChange={this.onChange} className="choose-branch">
               <option value="" disabled selected>
