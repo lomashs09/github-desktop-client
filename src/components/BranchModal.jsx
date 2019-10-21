@@ -9,7 +9,10 @@ export class BranchModal extends Component {
     commits: '',
     filePath: '',
     newBranch: '',
-    mergeFromBranch: ''
+    pullFromBranch: ''
+  };
+  BranchToPullFrom = e => {
+    this.setState({ pullFromBranch: e.target.value });
   };
   updateLoadingState = () => {
     this.setState({ successMessage: '' });
@@ -42,7 +45,7 @@ export class BranchModal extends Component {
       }
     });
     this.setState({ successMessage: 'pulling...' });
-    git.pull(['-u', 'origin', this.state.selectedBranch], (err, results) => {
+    git.pull(['-u', 'origin', this.state.pullFromBranch], (err, results) => {
       
       if (!err) {
         console.log(results);
@@ -57,7 +60,7 @@ export class BranchModal extends Component {
     this.setState({ newBranch: e.target.value });
   };
   selectMergeFromBranch = e => {
-    this.setState({ mergeFromBranch: e.target.value });
+    this.setState({ pullFromBranch: e.target.value });
   };
 
   onChange = async e => {
@@ -85,7 +88,7 @@ export class BranchModal extends Component {
   mergeBranch = () => {
     let git = require('simple-git')(filePath);
     this.setState({ successMessage: 'merging in progress...' });
-    git.mergeFromTo(this.state.mergeFromBranch, this.state.selectedBranch, (err, result) =>
+    git.mergeFromTo(this.state.pullFromBranch, this.state.selectedBranch, (err, result) =>
       err
         ? this.setState({ successMessage: 'Oops, Merge conflicts occured!' })
         : this.setState({ successMessage: 'Merged Successfully !' })
@@ -260,7 +263,7 @@ export class BranchModal extends Component {
           <br />
           <br />
           <div className="input-field col s12">
-            <select onChange={this.onChange} className="choose-branch">
+            <select onChange={this.BranchToPullFrom} className="choose-branch">
               <option value="" disabled selected>
                 Choose your branch to pull from
               </option>
