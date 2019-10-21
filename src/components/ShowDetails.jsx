@@ -6,7 +6,6 @@ import DisplayChanges from './DisplayChanges';
 import CreateCommits from './CreateCommits';
 import BranchModal from './BranchModal';
 import OpenEditorModal from './OpenEditorModal';
-
 var filePath;
 export default class Show extends Component {
   state = {
@@ -31,7 +30,6 @@ export default class Show extends Component {
   modalToDisplay = modalName => {
     this.setState({ modal: modalName });
   };
-
   toggleModalClassEditor = () => {
     this.state.modalDisplayClassEditor === ''
       ? this.setState({
@@ -41,7 +39,6 @@ export default class Show extends Component {
           modalDisplayClassEditor: ''
         });
   };
-
   toggleOverlay = () => {
     this.state.modalOverlayClass === ''
       ? this.setState({
@@ -122,11 +119,9 @@ export default class Show extends Component {
       git.commit(commitMessage, (err, res) =>res);
     }
   };
-
   
   addFilesToStagingArea = (fileName, isChecked) => {
     const git = require('simple-git')(this.props.addNewRepoFilePath);
-
     git.raw(['diff', '-S', '<<<<<<< HEAD', 'HEAD'], (err, result) => {
       if (result === null) {
         this.setState({ mergeConflictsExist: false });
@@ -138,7 +133,6 @@ export default class Show extends Component {
       } else {
         this.toggleOverlay();
         this.toggleModalClassEditor();
-
         this.setState({
           mergedFileChanges: [result],
           mergeConflictsExist: true,
@@ -147,7 +141,6 @@ export default class Show extends Component {
       }
     });
   };
-
   async componentDidMount() {
     if (this.props.selectedModal === 'clone-repo') {
       const git = require('simple-git');
@@ -176,9 +169,8 @@ export default class Show extends Component {
       }
     });
   }
-
   render() {
-    if (this.state.commitHistory[0] === 'Loading data') {
+    if (this.state.commitHistory[0] === 'Loading data...') {
       return (
         <React.Fragment>
           <p>{this.state.commitHistory[0]}</p>
@@ -322,7 +314,6 @@ export default class Show extends Component {
                     </option>
                     <option value="line-by-line">Line by Line</option>
                   </select>
-
                   <DisplayChanges
                     className="commit-messages"
                     changedFiles={this.state.changedFiles}
