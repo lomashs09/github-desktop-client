@@ -127,6 +127,7 @@ export default class Show extends Component {
       alert("Commit message can't be empty");
     } else {
       git.commit(commitMessage, (err, res) => alert('Commit Successful'));
+      git.status((err, status) => this.setState({ gitStatus: status }));
     }
   };
   addFilesToStagingArea = (fileName, isChecked) => {
