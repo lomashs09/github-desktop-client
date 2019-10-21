@@ -43,9 +43,13 @@ export class BranchModal extends Component {
     });
     this.setState({ successMessage: 'pulling...' });
     git.pull(['-u', 'origin', this.state.selectedBranch], (err, results) => {
-      this.setState({ successMessage: 'pulled successfully !' });
+      
       if (!err) {
         console.log(results);
+        this.setState({ successMessage: 'pulled successfully !' });
+      }
+      else{
+        this.setState({ successMessage: err});
       }
     });
   };
@@ -60,7 +64,6 @@ export class BranchModal extends Component {
     if (this.props.filePath) {
       if (this.props.modal !== 'merge-modal') {
         const git = require('simple-git')(this.state.filePath);
-        // await this.setState({ selectedBranch: e.target.value });
         let branch = e.target.value
         git.checkout(branch,(err,res)=>{
           if(err){
@@ -93,8 +96,6 @@ export class BranchModal extends Component {
     git.checkoutBranch(this.state.newBranch, 'master', (err, results) => {
       if (err) {
         this.setState({successMessage:err})
-        console.log('The following error Ocurred:', err);
-        // this.setState({successMessage:'Please commit before creating new Branch'})
       } else {
         this.setState({ successMessage: 'Branch created successfully' });
         var joined = this.state.branches.concat(this.state.newBranch);
@@ -189,6 +190,12 @@ export class BranchModal extends Component {
           <div className="modal-content white">
             <h4>Publish</h4>
           </div>
+          <h5 className="merge-branch-name input-field col s12">
+            Current Branch:{' '}
+            <span className="selected-branch">
+              <span className="branch-name">{this.state.selectedBranch}</span>
+            </span>
+          </h5><br />
           <span className="new-branch-text">Before Pushing Set the Remote using SSH</span>
           <br />
           <br />{' '}
@@ -243,13 +250,19 @@ export class BranchModal extends Component {
           <div className="modal-content white">
             <h4>Pull from repo</h4>
           </div>
+          <h6 className="merge-branch-name input-field col s12">
+            Current Branch:{' '}
+            <span className="selected-branch">
+              <span className="branch-name">{this.state.selectedBranch}</span>
+            </span>
+          </h6><br />
           <span className="new-branch-text">Before Pulling Set the Remote using SSH</span>
           <br />
           <br />
           <div className="input-field col s12">
             <select onChange={this.onChange} className="choose-branch">
               <option value="" disabled selected>
-                Choose your branch to pull into
+                Choose your branch to pull from
               </option>
               {this.state.branches.map(branch => (
                 <option>{branch}</option>
