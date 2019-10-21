@@ -101,7 +101,7 @@ html {
   display: flex;
   flex-direction: row;
   position: relative;
-  height: 63.5rem;
+  height: 60.5rem;
 }
 .commits-history {
   width: 30%;
@@ -143,6 +143,7 @@ html {
   min-width: 80%;
   width: 100%;
   max-width: 50rem;
+  max-height: 60.5rem;
   overflow-y: auto;
 }
 
