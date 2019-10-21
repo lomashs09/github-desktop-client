@@ -236,9 +236,7 @@ th {
   width: 100%;
   display: flex;
   flex-direction: row;
-  margin-left: 2rem;
-  margin-right: 2rem;
-
+}
 
 .checkbox-and-changed-file .collection-item {
   display: flex;
