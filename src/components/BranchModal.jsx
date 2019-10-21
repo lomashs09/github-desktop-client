@@ -33,7 +33,6 @@ export class BranchModal extends Component {
     });
   };
   pullRepo = () => {
-    console.log(this.state.branch);
     let git = require('simple-git')(filePath);
     git.listRemote(['--get-url'], (err, data) => {
       if (!err) {
