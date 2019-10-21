@@ -12,13 +12,15 @@ export default class Header extends Component {
           </a>
           <ul id="nav-mobile" className="left">
             <li>
-              <a>Current Repository</a>
+              <a href="./">
+                <i className="material-icons">home</i>
+              </a>
             </li>
             <li
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
-                this.props.modalToDisplay('branch-modal')
+                this.props.modalToDisplay('branch-modal');
               }}
             >
               <a>Branch</a>
@@ -27,7 +29,7 @@ export default class Header extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
-                this.props.modalToDisplay('publish-modal')
+                this.props.modalToDisplay('publish-modal');
               }}
             >
               <a>Publish Repository</a>
@@ -36,7 +38,7 @@ export default class Header extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
-                this.props.modalToDisplay('pull-modal')
+                this.props.modalToDisplay('pull-modal');
               }}
             >
               <a>Pull</a>
@@ -45,7 +47,7 @@ export default class Header extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
-                this.props.modalToDisplay('merge-modal')
+                this.props.modalToDisplay('merge-modal');
               }}
             >
               <a>Merge</a>

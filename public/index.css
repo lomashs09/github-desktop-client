@@ -101,11 +101,42 @@ html {
   display: flex;
   flex-direction: row;
   position: relative;
+  height: 60.5rem;
 }
 .commits-history {
+<<<<<<< HEAD
+<<<<<<< HEAD
   width: 40;
+||||||| merged common ancestors
+||||||| merged common ancestors
+<<<<<<<<< Temporary merge branch 1
+  width: 40;
+||||||||| merged common ancestors
+=======
+>>>>>>> 6b8c77ad5328125c6113d9e2cb34996ad3e8d90d
+<<<<<<< HEAD
+<<<<<<< HEAD
+  width: 40;
+=======
+  width: 30%;
+<<<<<<< HEAD
+=======
+||||||| merged common ancestors
+=========
+=======
+>>>>>>> 6bb48e87c4e571beb9eb46ae982a9732cfb42c8f
+=======
+>>>>>>> 6b8c77ad5328125c6113d9e2cb34996ad3e8d90d
+  width: 30%;
+<<<<<<< HEAD
+>>>>>>> ad3dd03e25f841f2abe81b8749887d203dea4062
+||||||| merged common ancestors
+>>>>>>>>> Temporary merge branch 2
+=======
+>>>>>>> Lomash
+>>>>>>> 6b8c77ad5328125c6113d9e2cb34996ad3e8d90d
   min-width: 20%;
-  max-height: 59.5rem;
+  max-height: 61rem;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
@@ -142,6 +173,7 @@ html {
   min-width: 80%;
   width: 100%;
   max-width: 50rem;
+  max-height: 60.5rem;
   overflow-y: auto;
 }
 
@@ -156,7 +188,7 @@ html {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bolder;
   font-size: 1.5em;
-  margin: 0.3em;
+  margin: 0.5em;
 }
 
 .commit-sub-details {
@@ -194,7 +226,8 @@ html {
 
 .d2h-wrapper {
   font-size: 0.75rem;
-  width: 100%;
+  margin: 0 1.25em;
+  width: 98%;
   max-height: 43rem;
   overflow-y: auto;
 }
@@ -230,11 +263,98 @@ th {
 }
 
 .checkbox-and-changed-file {
+  width: 100%;
   display: flex;
   flex-direction: row;
+<<<<<<< HEAD
   margin-left: 2rem;
   margin-right: 2rem;
+<<<<<<< HEAD
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
 .selected-branch{
   font-weight: bold;
 }
+||||||| merged common ancestors
+=======
+||||||| merged common ancestors
+||||||| merged common ancestors
+<<<<<<<<< Temporary merge branch 1
+.selected-branch{
+  font-weight: bold;
+}
+||||||||| merged common ancestors
+=========
+||||||| merged common ancestors
+=======
+>>>>>>> 6b8c77ad5328125c6113d9e2cb34996ad3e8d90d
+=======
+=======
+>>>>>>> Lomash
+}
+
+.checkbox-and-changed-file .collection-item {
+  display: flex;
+}
+
+.collection-changedFile {
+  width: 100%;
+}
+
+.commit-button {
+  width: 98%;
+  align-self: center;
+}
+
+.file-name {
+  cursor: pointer;
+  font-size: 1.1em;
+}
+
+.staging-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.filename-span {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-field {
+  margin: 0.5em;
+}
+
+.merge-branch-name {
+  width: 98%;
+  margin: auto;
+}
+<<<<<<< HEAD
+>>>>>>> Amogh
+>>>>>>> ad3dd03e25f841f2abe81b8749887d203dea4062
+||||||| merged common ancestors
+>>>>>>> Amogh
+>>>>>>>>> Temporary merge branch 2
+=======
+
+.branch-name {
+  font-weight: bold;
+}
+
+.conflict-show-changes {
+  margin: 1em 0;
+}
+
+.merge-section-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.open-editor-btn {
+  width: 25%;
+  align-self: center;
+  margin: 1em 0;
+}
+>>>>>>> 6b8c77ad5328125c6113d9e2cb34996ad3e8d90d

@@ -26,7 +26,7 @@ export class BranchModal extends Component {
     });
     this.setState({ successMessage: 'pushing...' });
     git.push(['-u', 'origin', this.state.selectedBranch], (err, results) => {
-      this.setState({ successMessage: 'pushed succesfully !' });
+      this.setState({ successMessage: 'pushed successfully !' });
       if (!err) {
         console.log(results);
       }
@@ -60,7 +60,6 @@ export class BranchModal extends Component {
   onChange = async e => {
     if (this.props.filePath) {
       if (this.props.modal !== 'merge-modal') {
-        console.log('hello world');
         const git = require('simple-git')(this.state.filePath);
         await this.setState({ selectedBranch: e.target.value });
         git.checkout(this.state.selectedBranch).then(() => {
@@ -194,6 +193,7 @@ export class BranchModal extends Component {
               className="modal-close waves-effect waves-green btn-flat"
               onClick={() => {
                 this.props.toggleOverlay();
+                this.updateLoadingState();
                 this.props.toggleModalClass();
                 this.updateLoadingState();
               }}
@@ -205,6 +205,7 @@ export class BranchModal extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
+                this.updateLoadingState();
                 this.props.updateCommits(this.state.selectedBranch);
                 this.updateLoadingState();
               }}
@@ -250,6 +251,7 @@ export class BranchModal extends Component {
             <a
               className="modal-close waves-effect waves-green btn-flat"
               onClick={() => {
+                this.updateLoadingState();
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
                 this.updateLoadingState();
@@ -280,8 +282,12 @@ export class BranchModal extends Component {
           <span className="new-branch-text">Before Merging Set the Remote using SSH</span>
           <br />
           <br />
-          <p>
-            Merge into: <span className="selected-branch">{this.state.selectedBranch}</span>
+          <br />
+          <p className="merge-branch-name">
+            Merge into:{' '}
+            <span className="selected-branch">
+              <span className="branch-name">{this.state.selectedBranch}</span>
+            </span>
           </p>
           <div className="input-field col s12">
             <select onChange={this.BranchToPullFrom} className="choose-branch">
@@ -307,6 +313,7 @@ export class BranchModal extends Component {
             <a
               className="modal-close waves-effect waves-green btn-flat"
               onClick={() => {
+                this.updateLoadingState();
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
                 this.updateLoadingState();
@@ -317,6 +324,7 @@ export class BranchModal extends Component {
             <a
               className="modal-close waves-effect waves-green btn-flat"
               onClick={() => {
+                this.updateLoadingState();
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
                 this.props.updateCommits(this.state.selectedBranch);
