@@ -25,7 +25,7 @@ function createWindow() {
       nodeIntegration: true
     },
     show: false,
-    resizable: false,
+    resizable: true,
     height: maxiSize.height,
     width: maxiSize.width,
     icon: `${__dirname}/assets/electron-logo.png`
@@ -186,8 +186,8 @@ ipcMain.on('Repo', async (event, arg) => {
     }
   } else if (arg.type === 'OPEN_EDITOR') {
     try {
-      await exec('$(git config --global code.editor) .');
-      event.reply('openedEditor',"opened")
+      await exec(`$(git config --global core.editor) ${arg.path}`);
+      event.reply('openedEditor', 'opened');
     } catch (err) {
       dialog.showMessageBox({
         type: 'info',

@@ -82,17 +82,7 @@ export class CommitHistory extends Component {
         return <Commits history={history} />;
       } else {
         return (
-          <React.fragment>
-            <div>
-              <select onChange={this.onChange} class="browser-default">
-                <option value="" disabled selected>
-                  Choose your branch
-                </option>
-                {this.state.branches.map(branch => (
-                  <option>{branch}</option>
-                ))}
-              </select>
-            </div>
+          <React.Fragment>
             {history.map(commit => (
               <Commits
                 selectedBranch={this.state.selectedBranch}
@@ -101,7 +91,7 @@ export class CommitHistory extends Component {
                 getSelectedCommit={this.props.getSelectedCommit}
               />
             ))}
-          </React.fragment>
+          </React.Fragment>
         );
       }
     } else {
@@ -128,17 +118,7 @@ export class CommitHistory extends Component {
         return <Commits history={history} />;
       } else {
         return (
-          <>
-            <div>
-              <select onChange={this.onChange} class="browser-default">
-                <option value="" disabled selected>
-                  master
-                </option>
-                {this.state.branches.map(branch => (
-                  <option>{branch}</option>
-                ))}
-              </select>
-            </div>
+          <React.Fragment>
             {history.map(commit => (
               <Commits
                 onChange={this.onChange}
@@ -148,7 +128,7 @@ export class CommitHistory extends Component {
                 getSelectedCommit={this.props.getSelectedCommit}
               />
             ))}
-          </>
+          </React.Fragment>
         );
       }
     }
