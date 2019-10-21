@@ -74,15 +74,8 @@ export class BranchModal extends Component {
     this.setState({ successMessage: 'merging in progress...' });
     git
       .mergeFromTo(this.state.mergeFromBranch, this.state.selectedBranch, (err, result) =>
-        err ? console.log(err) : console.log(result)
+        err ? this.setState({ successMessage: 'Oops, Merge conflicts occured!' }) : this.setState({ successMessage: 'Merged Successfully !' })
       )
-      .merge((err, res) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(res);
-        }
-      });
   };
   createNewBranch = () => {
     const git = require('simple-git')(filePath);
