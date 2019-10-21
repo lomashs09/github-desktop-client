@@ -59,10 +59,8 @@ export default class Show extends Component {
         });
   };
   toggleTabs = () => {
-    // this.setState({
-    //   showHistory: !this.state.showHistory
-    // });
-    const git = require('simple-git')(this.props.addNewRepoFilePath);
+    // const git = require('simple-git')(this.props.addNewRepoFilePath);
+    const git = require('simple-git')(filePath);
     if (this.state.showHistory === true) {
       git.status((err, status) => this.setState({ gitStatus: status, showHistory: !this.state.showHistory }));
     } else {
@@ -173,6 +171,7 @@ export default class Show extends Component {
     this.props.repoToCloneUrl === undefined
       ? (filename = '')
       : (filename = this.props.repoToCloneUrl.split('/').pop());
+      console.log(filename);
     this.props.addNewRepoFilePath === undefined
       ? (filePath = `./${filename}`)
       : (filePath = this.props.addNewRepoFilePath);
