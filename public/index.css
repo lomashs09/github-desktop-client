@@ -297,3 +297,8 @@ th {
   align-self: center;
   margin: 1em 0;
 }
+
+.arrow-icon {
+  margin-left: 0 !important;
+  font-size: 20px !important;
+}
