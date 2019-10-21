@@ -4,18 +4,21 @@ import React, { Component } from 'react';
 export class CreateCommit extends Component {
   state = {
     commitMessage: '',
-    btnClassName: 'waves-effect waves-light btn blue darken-2 commit-button'
+    btnClassName: 'waves-effect waves-light btn blue darken-2 commit-button',
+    successMessage: ''
   };
   setCommitMessage = event => {
     this.setState({
-      commitMessage: event.target.value,
+      commitMessage: event.target.value
     });
   };
 
   componentDidUpdate(prevProps) {
-    if(prevProps.mergeConflictsExist !== this.props.mergeConflictsExist){
-      if(this.props.mergeConflictsExist) {
-        this.setState({ btnClassName: 'waves-effect waves-light btn blue darken-2 commit-button disabled' });
+    if (prevProps.mergeConflictsExist !== this.props.mergeConflictsExist) {
+      if (this.props.mergeConflictsExist) {
+        this.setState({
+          btnClassName: 'waves-effect waves-light btn blue darken-2 commit-button disabled'
+        });
       } else {
         this.setState({ btnClassName: 'waves-effect waves-light btn blue darken-2 commit-button' });
       }
@@ -23,29 +26,33 @@ export class CreateCommit extends Component {
   }
 
   render() {
-      return (
-        <>
-          <form class="col s12">
-            <div class="row">
-              <div class="input-field col s12">
-                <textarea
-                  id="textarea1"
-                  class="materialize-textarea"
-                  onChange={this.setCommitMessage}
-                ></textarea>
-                <label for="textarea1">Commit Message (Required)</label>
-              </div>
+    return (
+      <>
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea
+                id="textarea1"
+                class="materialize-textarea"
+                onChange={this.setCommitMessage}
+              ></textarea>
+              <label for="textarea1">Commit Message (Required)</label>
             </div>
-          </form>
-  
-          <a
-            class={this.state.btnClassName}
-            onClick={this.props.makeCommit.bind(this, this.state.commitMessage)}
-          >
-            Commit
-          </a>
-        </>
-      )
+          </div>
+        </form>
+
+        <a
+          class={this.state.btnClassName}
+          onClick={() => {
+            this.props.makeCommit.bind(this, this.state.commitMessage);
+            this.setState({ commitMessage: '' });
+          }}
+        >
+          Commit
+        </a>
+        <p>{this.state.successMessage}</p>
+      </>
+    );
   }
 }
 
