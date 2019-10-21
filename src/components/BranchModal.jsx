@@ -11,6 +11,9 @@ export class BranchModal extends Component {
     newBranch: '',
     mergeFromBranch: ''
   };
+  updateLoadingState=()=>{
+    this.setState({successMessage:''})
+  }
   pushRepo = () => {
     let git = require('simple-git')(filePath);
     git.listRemote(['--get-url'], (err, data) => {
@@ -143,6 +146,7 @@ export class BranchModal extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
+                this.updateLoadingState();
               }}
             >
               CLOSE
@@ -153,6 +157,7 @@ export class BranchModal extends Component {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
                 this.props.updateCommits(this.state.selectedBranch);
+                this.updateLoadingState();
               }}
             >
               OK
@@ -194,6 +199,7 @@ export class BranchModal extends Component {
               className="modal-close waves-effect waves-green btn-flat"
               onClick={() => {
                 this.props.toggleOverlay();
+                this.updateLoadingState();
                 this.props.toggleModalClass();
               }}
             >
@@ -204,6 +210,7 @@ export class BranchModal extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
+                this.updateLoadingState();
                 this.props.updateCommits(this.state.selectedBranch);
               }}
             >
@@ -245,6 +252,7 @@ export class BranchModal extends Component {
             <a
               className="modal-close waves-effect waves-green btn-flat"
               onClick={() => {
+                this.updateLoadingState();
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
               }}
@@ -256,6 +264,7 @@ export class BranchModal extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
+                this.updateLoadingState();
                 this.props.updateCommits(this.state.selectedBranch);
               }}
             >
@@ -304,6 +313,7 @@ export class BranchModal extends Component {
             <a
               className="modal-close waves-effect waves-green btn-flat"
               onClick={() => {
+                this.updateLoadingState();
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
               }}
@@ -313,6 +323,7 @@ export class BranchModal extends Component {
             <a
               className="modal-close waves-effect waves-green btn-flat"
               onClick={() => {
+                this.updateLoadingState();
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
                 this.props.updateCommits(this.state.selectedBranch);
