@@ -34,7 +34,9 @@ export class CreateCommit extends Component {
               <textarea
                 id="textarea1"
                 class="materialize-textarea"
+                value={this.state.commitMessage}
                 onChange={this.setCommitMessage}
+                value={this.state.commitMessage}
               ></textarea>
               <label for="textarea1">Commit Message (Required)</label>
             </div>
@@ -44,7 +46,8 @@ export class CreateCommit extends Component {
         <a
           class={this.state.btnClassName}
           onClick={() => {
-            this.props.makeCommit.bind(this, this.state.commitMessage);
+            this.props.makeCommit(this.state.commitMessage);
+            console.log(this.state.commitMessage);
             this.setState({ commitMessage: '' });
           }}
         >
