@@ -23,8 +23,6 @@ export class CreateCommit extends Component {
   }
 
   render() {
-      console.log(this.props.mergeConflictsExist)
-      console.log(this.state.btnClassName)
       return (
         <>
           <form class="col s12">
