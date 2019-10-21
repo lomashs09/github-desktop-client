@@ -5,6 +5,9 @@ const { BrowserWindow } = electron;
 const { Menu } = electron;
 const { ipcMain } = electron;
 
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+
 // Load remote compnent that contains the dialog dependency
 const { dialog } = electron;
 const fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
@@ -15,16 +18,19 @@ const isDev = require('electron-is-dev');
 let mainWindow;
 
 function createWindow() {
-  const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
+  const display = electron.screen.getPrimaryDisplay();
+  const maxiSize = display.workAreaSize;
   mainWindow = new BrowserWindow({
-    width,
-    height,
     webPreferences: {
       nodeIntegration: true
     },
-    resizable: false,
+    show: false,
+    resizable: true,
+    height: maxiSize.height,
+    width: maxiSize.width,
     icon: `${__dirname}/assets/electron-logo.png`
   });
+  mainWindow.maximize();
   mainWindow.loadURL(
     isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`
   );
@@ -144,6 +150,7 @@ function createWindow() {
 
   // Insert the menu
   Menu.setApplicationMenu(mainMenu);
+  mainWindow.show();
 }
 
 // Open Dialogue Box for add and create local Repository
@@ -175,6 +182,16 @@ ipcMain.on('Repo', async (event, arg) => {
       dialog.showMessageBox({
         type: 'info',
         message: 'Error! Failed to create folder'
+      });
+    }
+  } else if (arg.type === 'OPEN_EDITOR') {
+    try {
+      await exec(`$(git config --global code.editor) ${arg.path}`);
+      event.reply('openedEditor', 'opened');
+    } catch (err) {
+      dialog.showMessageBox({
+        type: 'info',
+        message: 'Error! Failed to open in Editor'
       });
     }
   }

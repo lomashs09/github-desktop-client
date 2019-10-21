@@ -23,7 +23,7 @@ export class BranchModal extends Component {
     });
     this.setState({ successMessage: 'pushing...' });
     git.push(['-u', 'origin', this.state.selectedBranch], (err, results) => {
-      this.setState({ successMessage: 'pushed succesfully !' });
+      this.setState({ successMessage: 'pushed successfully !' });
       if (!err) {
         console.log(results);
       }
@@ -41,7 +41,7 @@ export class BranchModal extends Component {
     });
     this.setState({ successMessage: 'pulling...' });
     git.pull(['-u', 'origin', this.state.selectedBranch], (err, results) => {
-      this.setState({ successMessage: 'pulled succesfully !' });
+      this.setState({ successMessage: 'pulled successfully !' });
       if (!err) {
         console.log(results);
       }
@@ -274,8 +274,11 @@ export class BranchModal extends Component {
           <br />
           <br />
           <br />
-          <p>
-            Merge into: <span className="selected-branch">{this.state.selectedBranch}</span>
+          <p className="merge-branch-name">
+            Merge into:{' '}
+            <span className="selected-branch">
+              <span className="branch-name">{this.state.selectedBranch}</span>
+            </span>
           </p>
           <div className="input-field col s12">
             <select onChange={this.selectMergeFromBranch} className="choose-branch">
