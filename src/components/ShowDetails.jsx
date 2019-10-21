@@ -17,7 +17,6 @@ export default class Show extends Component {
     changedFiles: ['Loading data...'],
     selectedCommit: ['Loading data...'],
     gitStatus: ['Loading data...'],
-    selectedCommit: ['Loading data...'],
     filePath: '',
     showHistory: false,
     changesTriggered: 'green darken-2 white-text',
@@ -120,7 +119,7 @@ export default class Show extends Component {
     if (commitMessage === '') {
       alert("Commit message can't be empty");
     } else {
-      git.commit(commitMessage, (err, res) => console.log(res));
+      git.commit(commitMessage, (err, res) =>res);
     }
   };
 
@@ -132,9 +131,9 @@ export default class Show extends Component {
       if (result === null) {
         this.setState({ mergeConflictsExist: false });
         if (isChecked === true) {
-          git.add([fileName], (err, result) => console.log(result));
+          git.add([fileName], (err, result) => result);
         } else {
-          git.reset([fileName], (err, result) => console.log(result));
+          git.reset([fileName], (err, result) => result);
         }
       } else {
         this.toggleOverlay();
@@ -186,7 +185,6 @@ export default class Show extends Component {
         </React.Fragment>
       );
     } else {
-      console.log(`This is it =======> ${this.state.showHistory}`);
       return (
         <section className={`${this.props.repoDetailsDisplayClass}`}>
           <Header
