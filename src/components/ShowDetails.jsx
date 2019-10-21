@@ -119,8 +119,7 @@ export default class Show extends Component {
     if (commitMessage === '') {
       alert("Commit message can't be empty");
     } else {
-      git.commit(commitMessage, (err, res) => res);
-      alert('Commit Successful');
+      git.commit(commitMessage, (err, res) => alert('Commit Successful'));
     }
   };
 

@@ -104,15 +104,7 @@ html {
   height: 60.5rem;
 }
 .commits-history {
-<<<<<<< HEAD
-<<<<<<< HEAD
   width: 40;
-=======
-  width: 30%;
->>>>>>> 6bb48e87c4e571beb9eb46ae982a9732cfb42c8f
-=======
-  width: 30%;
->>>>>>> Lomash
   min-width: 20%;
   max-height: 61rem;
   overflow-y: auto;
@@ -244,15 +236,9 @@ th {
   width: 100%;
   display: flex;
   flex-direction: row;
-<<<<<<< HEAD
   margin-left: 2rem;
   margin-right: 2rem;
-<<<<<<< HEAD
-}
-=======
-=======
->>>>>>> Lomash
-}
+
 
 .checkbox-and-changed-file .collection-item {
   display: flex;
