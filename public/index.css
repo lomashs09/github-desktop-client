@@ -101,24 +101,25 @@ html {
   display: flex;
   flex-direction: row;
   position: relative;
+  height: 60.5rem;
 }
 .commits-history {
+<<<<<<< HEAD
 <<<<<<< HEAD
   width: 40;
 =======
   width: 30%;
 >>>>>>> 6bb48e87c4e571beb9eb46ae982a9732cfb42c8f
+=======
+  width: 30%;
+>>>>>>> Lomash
   min-width: 20%;
-  max-height: 59.5rem;
+  max-height: 61rem;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
   border: 0.001em solid #333;
   box-shadow: 5px 0 5px -5px #333;
-}
-
-.staging-area {
-  width:100%;
 }
 
 .commits-staging-area {
@@ -150,6 +151,7 @@ html {
   min-width: 80%;
   width: 100%;
   max-width: 50rem;
+  max-height: 60.5rem;
   overflow-y: auto;
 }
 
@@ -164,7 +166,7 @@ html {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bolder;
   font-size: 1.5em;
-  margin: 0.3em;
+  margin: 0.5em;
 }
 
 .commit-sub-details {
@@ -202,8 +204,8 @@ html {
 
 .d2h-wrapper {
   font-size: 0.75rem;
+  margin: 0 1.25em;
   width: 98%;
-  margin-left: 1.25em;
   max-height: 43rem;
   overflow-y: auto;
 }
@@ -237,22 +239,74 @@ th {
   margin: 0.5em;
   width: 15%;
 }
-<<<<<<< HEAD
 
 .checkbox-and-changed-file {
+  width: 100%;
   display: flex;
   flex-direction: row;
+<<<<<<< HEAD
   margin-left: 2rem;
   margin-right: 2rem;
 <<<<<<< HEAD
 }
 =======
-}
-||||||| merged common ancestors
 =======
+>>>>>>> Lomash
+}
 
-.preloader-wrapper {
+.checkbox-and-changed-file .collection-item {
+  display: flex;
+}
+
+.collection-changedFile {
+  width: 100%;
+}
+
+.commit-button {
+  width: 98%;
+  align-self: center;
+}
+
+.file-name {
+  cursor: pointer;
+  font-size: 1.1em;
+}
+
+.staging-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.filename-span {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-field {
+  margin: 0.5em;
+}
+
+.merge-branch-name {
+  width: 98%;
   margin: auto;
 }
->>>>>>> Amogh
->>>>>>> 6bb48e87c4e571beb9eb46ae982a9732cfb42c8f
+
+.branch-name {
+  font-weight: bold;
+}
+
+.conflict-show-changes {
+  margin: 1em 0;
+}
+
+.merge-section-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.open-editor-btn {
+  width: 25%;
+  align-self: center;
+  margin: 1em 0;
+}
