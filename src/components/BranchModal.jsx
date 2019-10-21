@@ -11,9 +11,9 @@ export class BranchModal extends Component {
     newBranch: '',
     mergeFromBranch: ''
   };
-  updateLoadingState=()=>{
-    this.setState({successMessage:''})
-  }
+  updateLoadingState = () => {
+    this.setState({ successMessage: '' });
+  };
   pushRepo = () => {
     let git = require('simple-git')(filePath);
     git.listRemote(['--get-url'], (err, data) => {
@@ -56,6 +56,7 @@ export class BranchModal extends Component {
   selectMergeFromBranch = e => {
     this.setState({ mergeFromBranch: e.target.value });
   };
+
   onChange = async e => {
     if (this.props.filePath) {
       if (this.props.modal !== 'merge-modal') {
@@ -72,10 +73,11 @@ export class BranchModal extends Component {
   mergeBranch = () => {
     let git = require('simple-git')(filePath);
     this.setState({ successMessage: 'merging in progress...' });
-    git
-      .mergeFromTo(this.state.mergeFromBranch, this.state.selectedBranch, (err, result) =>
-        err ? this.setState({ successMessage: 'Oops, Merge conflicts occured!' }) : this.setState({ successMessage: 'Merged Successfully !' })
-      )
+    git.mergeFromTo(this.state.mergeFromBranch, this.state.selectedBranch, (err, result) =>
+      err
+        ? this.setState({ successMessage: 'Oops, Merge conflicts occured!' })
+        : this.setState({ successMessage: 'Merged Successfully !' })
+    );
   };
   createNewBranch = () => {
     const git = require('simple-git')(filePath);
@@ -89,6 +91,12 @@ export class BranchModal extends Component {
       }
     });
   };
+  componentDidMount() {
+    if (this.state.filePath === '') {
+      this.setState({ filePath: this.props.filePath });
+    }
+  }
+
   async componentWillReceiveProps(nextprops) {
     if (this.state.commits === '') {
       await this.setState({ filePath: nextprops.filePath, commits: nextprops.history });
@@ -97,6 +105,7 @@ export class BranchModal extends Component {
     const git = require('simple-git')(filePath);
     git.branchLocal((err, branches) => this.setState({ branches: branches.all }));
   }
+  
   render() {
     if (this.props.modal === 'branch-modal') {
       return (
