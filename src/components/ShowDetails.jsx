@@ -197,7 +197,7 @@ export default class Show extends Component {
       Changes
     </a>
     <a
-      class={`waves-effect waves-light btn history-button + ${this.state.historyTriggered}`}
+      className={`waves-effect waves-light btn history-button + ${this.state.historyTriggered}`}
       onClick={() => {
         this.clickedHistoryButton();
       }}

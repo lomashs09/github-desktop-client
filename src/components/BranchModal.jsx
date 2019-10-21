@@ -56,7 +56,6 @@ export class BranchModal extends Component {
   onChange = async e => {
     if (this.props.filePath) {
       if (this.props.modal !== 'merge-modal') {
-        console.log('hello world');
         const git = require('simple-git')(this.state.filePath);
         await this.setState({ selectedBranch: e.target.value });
         git.checkout(this.state.selectedBranch).then(() => {
@@ -70,8 +69,6 @@ export class BranchModal extends Component {
   mergeBranch = () => {
     let git = require('simple-git')(filePath);
     this.setState({ successMessage: 'merging in progress...' });
-    console.log(this.state.mergeFromBranch);
-    console.log(this.state.selectedBranch);
     git
       .mergeFromTo(this.state.mergeFromBranch, this.state.selectedBranch, (err, result) =>
         err ? console.log(err) : console.log(result)
