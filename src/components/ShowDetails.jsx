@@ -116,10 +116,10 @@ export default class Show extends Component {
     if (commitMessage === '') {
       alert("Commit message can't be empty");
     } else {
-      git.commit(commitMessage, (err, res) =>res);
+      git.commit(commitMessage, (err, res) => res);
+      alert('Commit Successful');
     }
   };
-  
   addFilesToStagingArea = (fileName, isChecked) => {
     const git = require('simple-git')(this.props.addNewRepoFilePath);
     git.raw(['diff', '-S', '<<<<<<< HEAD', 'HEAD'], (err, result) => {
@@ -337,4 +337,3 @@ export default class Show extends Component {
     }
   }
 }
-
