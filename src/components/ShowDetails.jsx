@@ -81,7 +81,6 @@ export default class Show extends Component {
     }
   };
   clickedHistoryButton = () => {
-
     if (this.state.historyTriggered === 'white black-text') {
       this.setState({
         changesTriggered: 'white black-text',
@@ -188,7 +187,6 @@ export default class Show extends Component {
     })
     git.status((err, status) => this.setState({ gitStatus: status }));
     git.log((err, log) => {
-      console.log(log)
       if (log === null) {
         this.setState({ commitHistory: ['No commits yet'], filePath: filePath });
       } else {
@@ -200,6 +198,7 @@ export default class Show extends Component {
     });
   }
   render() {
+    
     if (this.state.commitHistory[0] === 'Loading data...') {
       return (
         <React.Fragment>
