@@ -188,9 +188,9 @@ export default class Show extends Component {
     })
     git.status((err, status) => this.setState({ gitStatus: status }));
     git.log((err, log) => {
-      console.log(log)
       if (log === null) {
         this.setState({ commitHistory: ['No commits yet'], filePath: filePath });
+        console.log(this.state.commitHistory);
       } else {
         this.setState({
           commitHistory: [...log.all.map(commit => commit)],

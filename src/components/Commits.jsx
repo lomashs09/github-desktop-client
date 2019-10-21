@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 // eslint-disable-next-line react/prefer-stateless-function
 export class Commits extends Component {
   render() {
-    if (this.props.history === 'No commits yet') {
-      return <p />;
+    if (this.props.name === undefined) {
+      return <p className='no-commits-yet'>No commits yet.</p>;
     }
     return (
       <div>

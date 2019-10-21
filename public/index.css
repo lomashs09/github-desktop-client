@@ -302,3 +302,7 @@ th {
   margin-left: 0 !important;
   font-size: 20px !important;
 }
+
+.no-commits-yet {
+  text-align: center;
+}
