@@ -128,6 +128,16 @@ export default class Show extends Component {
     } else {
       git.commit(commitMessage, (err, res) => alert('Commit Successful'));
       git.status((err, status) => this.setState({ gitStatus: status }));
+      git.log((err, log) => {
+        if (log === null) {
+          this.setState({ commitHistory: ['No commits yet'], filePath: filePath });
+        } else {
+          this.setState({
+            commitHistory: [...log.all.map(commit => commit)],
+            filePath: filePath
+          });
+        }
+      });
     }
   };
   addFilesToStagingArea = (fileName, isChecked) => {
