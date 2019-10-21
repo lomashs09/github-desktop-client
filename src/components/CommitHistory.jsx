@@ -129,16 +129,6 @@ export class CommitHistory extends Component {
       } else {
         return (
           <React.Fragment>
-            <div>
-              <select onChange={this.onChange} class="browser-default">
-                <option value="" disabled selected>
-                  master
-                </option>
-                {this.state.branches.map(branch => (
-                  <option>{branch}</option>
-                ))}
-              </select>
-            </div>
             {history.map(commit => (
               <Commits
                 onChange={this.onChange}
