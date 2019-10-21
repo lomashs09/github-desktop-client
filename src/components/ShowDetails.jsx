@@ -26,7 +26,8 @@ export default class Show extends Component {
     modal: '',
     checkboxStatus: [],
     mergeConflictsExist: false,
-    mergedFileChanges: ['Loading data...']
+    mergedFileChanges: ['Loading data...'],
+    currentBranch:''
   };
   modalToDisplay = modalName => {
     this.setState({ modal: modalName });
@@ -164,8 +165,18 @@ export default class Show extends Component {
       ? (filePath = `./${filename}`)
       : (filePath = this.props.addNewRepoFilePath);
     const git = require('simple-git')(filePath);
+    git.branch((err,result)=>{
+      if(!err){
+        if(result.current!==''){
+        this.setState({currentBranch:result.current})
+        }else{
+          this.setState({currentBranch:'No Branch'})
+        }
+      }
+    })
     git.status((err, status) => this.setState({ gitStatus: status }));
     git.log((err, log) => {
+      console.log(log)
       if (log === null) {
         this.setState({ commitHistory: ['No commits yet'], filePath: filePath });
       } else {
@@ -178,7 +189,7 @@ export default class Show extends Component {
   }
 
   render() {
-    if (this.state.commitHistory[0] === 'Loading data...') {
+    if (this.state.commitHistory[0] === 'Loading data...' ||this.state.currentBranch==='') {
       return (
         <React.Fragment>
           <p>{this.state.commitHistory[0]}</p>
@@ -203,6 +214,7 @@ export default class Show extends Component {
             filePath={this.state.filePath}
             updateCommits={this.updateCommits}
             modal={this.state.modal}
+            currentBranch = {this.state.currentBranch}
           />
           <OpenEditorModal
             toggleOverlayEditorModal={this.toggleOverlay}
