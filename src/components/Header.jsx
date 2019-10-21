@@ -23,7 +23,10 @@ export default class Header extends Component {
                 this.props.modalToDisplay('branch-modal');
               }}
             >
-              <a>Branch</a>
+              <a>
+                Branch
+                <i className="material-icons right arrow-icon">arrow_drop_down</i>
+              </a>
             </li>
             <li
               onClick={() => {
@@ -32,7 +35,10 @@ export default class Header extends Component {
                 this.props.modalToDisplay('publish-modal');
               }}
             >
-              <a>Publish Repository</a>
+              <a>
+                Publish Repository
+                <i className="material-icons right arrow-icon">arrow_drop_down</i>
+              </a>
             </li>
             <li
               onClick={() => {
@@ -41,7 +47,10 @@ export default class Header extends Component {
                 this.props.modalToDisplay('pull-modal');
               }}
             >
-              <a>Pull</a>
+              <a>
+                Pull
+                <i className="material-icons right arrow-icon">arrow_drop_down</i>
+              </a>
             </li>
             <li
               onClick={() => {
@@ -50,7 +59,10 @@ export default class Header extends Component {
                 this.props.modalToDisplay('merge-modal');
               }}
             >
-              <a>Merge</a>
+              <a>
+                Merge
+<i className="material-icons right arrow-icon">arrow_drop_down</i>
+              </a>
             </li>
           </ul>
         </div>
