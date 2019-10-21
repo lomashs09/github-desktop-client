@@ -189,7 +189,6 @@ export default class Show extends Component {
     });
   }
   render() {
-    console.log(this.state.gitStatus)
     if (this.state.commitHistory[0] === 'Loading data...') {
       return (
         <React.Fragment>
