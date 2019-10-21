@@ -35,6 +35,7 @@ export class CreateCommit extends Component {
                 id="textarea1"
                 class="materialize-textarea"
                 onChange={this.setCommitMessage}
+                value={this.state.commitMessage}
               ></textarea>
               <label for="textarea1">Commit Message (Required)</label>
             </div>
