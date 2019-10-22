@@ -63,6 +63,7 @@ class HomePage extends Component {
               repoToClonePath={this.repoToClonePath}
               createNewRepoFilePath={this.createNewRepoFilePath}
               setNewRepoDetails={this.setNewRepoDetails}
+              repoToCloneUrl = {this.state.repoToCloneUrl}
             />
             <a
               className="git-actions-button waves-effect waves-light btn-large grey lighten-2 black-text"

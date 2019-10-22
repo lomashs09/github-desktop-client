@@ -9,12 +9,14 @@ export default class AddRepoModal extends Component {
   state = {
     path: 'Click on choose to add path...',
     newRepoName: '',
-    addReadmeCheckboxState: false
+    addReadmeCheckboxState: false,
+    errMessage: ''
   };
+  setErrMessage = () => this.setState({ errMessage: '' });
+
   onChange = e => {
     this.props.repoToClonePath(e.target.value);
   };
-
   setNewRepoName = e => {
     this.setState({
       newRepoName: e.target.value
@@ -69,6 +71,7 @@ export default class AddRepoModal extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
+                this.setErrMessage();
               }}
             >
               CLOSE
@@ -103,6 +106,7 @@ export default class AddRepoModal extends Component {
                 />
               </form>
             </ul>
+            <p>{this.state.errMessage}</p>
           </div>
           <div className="modal-footer">
             <a
@@ -110,6 +114,7 @@ export default class AddRepoModal extends Component {
               onClick={() => {
                 this.props.toggleOverlay();
                 this.props.toggleModalClass();
+                this.setErrMessage();
               }}
             >
               CLOSE
@@ -117,9 +122,15 @@ export default class AddRepoModal extends Component {
             <a
               className="add-repo waves-effect waves-green btn-flat blue darken-2 white-text"
               onClick={() => {
-                this.props.toggleOverlay();
-                this.props.toggleModalClass();
-                this.props.setRepoDetailsDisplayClass();
+                console.log(this.props.repoToCloneUrl);
+                if (this.props.repoToCloneUrl !== '') {
+                  this.props.toggleOverlay();
+                  this.props.toggleModalClass();
+                  this.props.setRepoDetailsDisplayClass();
+                  this.setErrMessage();
+                } else {
+                  this.setState({ errMessage: 'please enter valid url ' });
+                }
               }}
             >
               CLONE REPOSITORY
