@@ -34,7 +34,7 @@
     "@rescripts/cli": "0.0.12",
     "@rescripts/rescript-env": "0.0.10",
     "concurrently": "^5.0.0",
-    "electron": "^6.0.12",
+    "electron": "^9.4.0",
     "electron-builder": "^21.2.0",
     "electron-is-dev": "^1.1.0",
     "eslint": "^6.1.0",
